@@ -7,9 +7,10 @@ Panduan praktis ini menjelaskan alur produksi video **dari sudut pandang Anda se
 ## 1. Mulai Cepat (1 Chat Baru = 1 Proyek)
 
 - **Buka percakapan (chat) baru** setiap kali memulai proyek video baru (`projects/01-...`, `projects/02-...`, dst.). Tujuannya agar konteks bersih, kuota hemat, dan seluruh skill studio langsung termuat utuh sejak awal.
-- **Anda boleh mulai dari ide mentah 1–2 kalimat** maupun dokumen/kode lengkap — Anda **tidak perlu menulis naskah VO dari nol**.
+- **Anda boleh mulai dari ide mentah 1–2 kalimat** maupun dokumen/kode/referensi lengkap — Anda **tidak perlu menulis naskah VO dari nol**.
+- **Durasi dan rasio TIDAK wajib diisi manual di awal:** Jika belum Anda sebutkan di pesan pembuka, agent otomatis menanyakannya saat sesi `/grill-me` (lengkap dengan rekomendasi yang cocok untuk topik/bahan/platform Anda). Sebaliknya, jika sudah Anda tentukan sejak awal, agent tidak akan menanyakannya ulang.
 - **Contoh pesan pembuka yang disarankan:**
-  > *"Gunakan `/motion-studio-workflow`. Saya ingin membuat video explainer ~60 detik rasio 9:16 tentang [topik] untuk [audiens]. Bahan yang sudah ada: [URL / ID file / catatan poin / aset logo]."*
+  > *"Gunakan `/motion-studio-workflow`. Saya ingin membuat video explainer tentang [topik] untuk [audiens] *(opsional: ~60 detik, rasio 9:16)*. Bahan yang sudah ada: [URL / ID file / catatan poin / aset logo]."*
 
 ---
 
@@ -40,7 +41,7 @@ flowchart TD
 Jika Anda menyerahkan dokumen atau kode sumber besar, agent otomatis memprosesnya lewat subagent `research` terpisah supaya chat utama tetap ringan. Lalu agent mewawancarai Anda satu pertanyaan per giliran mengenai:
 - **Gaya Visual & Bahasa Gerak DULU (sebelum memilih engine):** Agent memberi 3–4 opsi gaya lintas-engine beserta **tautan galeri video demo asli (`https://lemomo-ai.github.io/lemo-opuscar/`)** sehingga Anda **bisa menonton langsung referensi videonya**, bukan sekadar membayangkan dari teks.
 - **Voice Direction Mendetail:** Bukan cuma memilih suara pria/wanita, melainkan juga **nuansa/emosi** (hangat, antusias Reels, dokumenter berwibawa), **variasi tempo & jeda hening**, penekanan kata kunci, dan **gaya subtitle** (kinetik editorial *burn-in* vs `.srt` saja).
-- **Format, Aset & Persetujuan Mode:** Rasio (`16:9` / `9:16`), target durasi, izin *labeled placeholder* bila aset belum siap, perlu tidaknya **Gate #2 (Stills → Live Preview)**, serta konfirmasi rekomendasi Mode A/B/C.
+- **Format, Durasi, Aset & Persetujuan Mode:** Rasio (`16:9` / `9:16`) dan target durasi *(otomatis ditanyakan di sini beserta rekomendasi kontekstual apabila belum Anda sebutkan di pesan awal)*, izin *labeled placeholder* bila aset belum siap, perlu tidaknya **Gate #2 (Stills → Live Preview)**, serta konfirmasi rekomendasi Mode A/B/C.
 
 ### Gate #1 (Wajib) — Pilih Cerita, Cek Anti-Jipling & Setujui Draf VO
 - Agent menyajikan `STORYLINES.md` / `TREATMENT.md` lengkap dengan **Tabel Adaptasi Konteks** (menjamin gaya referensi dimodifikasi mengikuti topik Anda dan tidak menjadi slide presentasi atau jiplakan mentah), plus draf naskah VO frasa mikro yang sudah dipoles `humanizer`.
@@ -71,7 +72,38 @@ Jika Anda menyerahkan dokumen atau kode sumber besar, agent otomatis memprosesny
 
 ---
 
-## 4. Checklist Input Mandiri Wajib dari Anda
+## 4. Jalur Input Lanjutan: Referensi Video & Artikel
+
+Selain memulai dari ide mentah atau dokumen internal, Anda juga bisa memulai proyek dari **video referensi media sosial** maupun **artikel panjang daring**. Folder `projects/**/ref/` dan `projects/**/source/` sudah otomatis masuk `.gitignore`, sehingga file pihak ketiga aman tersimpan lokal tanpa pernah ikut ter-push ke GitHub publik.
+
+### A. Dari Referensi Motion Video (TikTok / IG / FB / YouTube)
+
+- **Cara paling stabil menyerahkan bahan:** Simpan videonya sebagai file lokal di `projects/NN-slug/ref/ref.mp4` lalu sebutkan lokasinya. Anda boleh juga mengirim link publik (YouTube/TikTok publik dicoba unduh via `yt-dlp`), tetapi link IG/FB/TikTok yang terhalang *login wall* atau *bot check* tidak bisa dibypass agent sehingga perlu Anda unduh manual ke `ref/ref.mp4`.
+- **Pilih salah satu dari 3 jalur lokal (100% gratis):**
+
+| Tujuan Anda | Yang Dilakukan Studio | Yang Perlu Anda Sampaikan |
+| :--- | :--- | :--- |
+| **1. Ambil STYLE-nya saja** *(topik baru milik Anda)* | Membaca ritme shot, palet, tipografi, dan transisi ke `STYLE_REF.md` (tetap lewat Tabel Anti-Jipling agar relevan topik Anda). | Topik baru Anda + bagian gaya apa yang paling ingin dipertahankan atau diganti. |
+| **2. Ambil KONTEN-nya saja** *(gaya visual baru)* | Transkrip audio (`faster-whisper`) + ekstraksi fakta teks layar lewat subagent `research` → `FACTS.md` (`≤ 5 KB`), lalu pilihkan style baru di `/grill-me`. | Sudut pandang adaptasi & target audiens Anda. |
+| **3. Ambil KEDUANYA** *(Adaptasi / Lokalisasi)* | Menggabungkan struktur/beat dari transkrip + *grammar* visual ke dalam kode deterministik baru dalam bahasa/brand Anda. | Batas adaptasi (brand/contoh diganti milik Anda; karya publik tidak boleh menyalin mentah wajah/suara/naskah asli). |
+
+- **Batasan jujur:** Jalur lokal sangat akurat untuk motion graphics, *kinetic typography*, explainer 2D/vektor, infografis, UI demo, dan 3D geometris — tetapi tidak bisa *re-shoot live-action* manusia secara lokal. *(Skill berbayar HyperFrames Pro `reverse-any-video` & `style-sampling` tetap ada di workspace, namun jalur lokal ini adalah default gratisnya).*
+- **Contoh pesan pembuka:**
+  > *"Gunakan `/motion-studio-workflow`. Saya simpan video referensi di `projects/02-slug/ref/ref.mp4`. Saya mau **ambil style motion & ritmenya saja** untuk menjelaskan [topik saya], nanti tolong rekomendasikan durasi & rasionya di grill-me."*
+
+### B. Dari Tulisan / Artikel Panjang (Medium / Substack / Blog)
+
+- **Cara paling stabil menyerahkan bahan:** *Copy-paste* isi artikel ke `projects/NN-slug/source/article.md` (atau simpan sebagai PDF lewat *Save as PDF* di folder `source/`), plus 1–2 gambar grafik/diagram kunci bila ada. URL publik 100% terbuka boleh langsung ditempel, tetapi jika terkena *Member-Only paywall* atau *Cloudflare*, agent akan meminta salinan teks/PDF-nya.
+- **Cara studio mengolahnya:** Subagent `research` menyaring artikel panjang (1.000–4.000 kata) menjadi `FACTS.md` (`≤ 5 KB`) tanpa membebani chat utama. Lalu di sesi `/grill-me`, bila belum Anda tentukan di awal, agent membantu memilih format adaptasi sekaligus durasi & rasionya:
+  - **Single Short (`9:16`, 45–75 detik):** Mengambil 1 *hook* + 1 *insight* terkuat (paling pas untuk Reels/TikTok/Shorts).
+  - **Mini-Series (2–3 Episode Pendek):** Memecah artikel mendalam menjadi beberapa part terpisah.
+  - **Explainer Utuh (`16:9`, 90–150 detik):** Rangkuman terstruktur (*Problem → Mekanisme → Implikasi*).
+- **Contoh pesan pembuka:**
+  > *"Gunakan `/motion-studio-workflow`. Saya tertarik mengubah artikel yang saya simpan di `projects/03-slug/source/article.md` menjadi video explainer. Tolong bedah poin terkuatnya lalu kita tentukan format, durasi, dan stylenya di sesi tanya jawab."*
+
+---
+
+## 5. Checklist Input Mandiri Wajib dari Anda
 
 Hal-hal berikut **hanya bisa datang dari Anda** (agent dilarang mengarang):
 
@@ -84,7 +116,7 @@ Hal-hal berikut **hanya bisa datang dari Anda** (agent dilarang mengarang):
 
 ---
 
-## 5. Cara Memberi Revisi agar Cepat & Hemat Token
+## 6. Cara Memberi Revisi agar Cepat & Hemat Token
 
 | Tahap | Contoh Catatan Revisi yang Efektif |
 | :--- | :--- |
@@ -96,7 +128,7 @@ Hal-hal berikut **hanya bisa datang dari Anda** (agent dilarang mengarang):
 
 ---
 
-## 6. Tips Manajemen Chat & Kuota
+## 7. Tips Manajemen Chat & Kuota
 
 - Ketik **`/compact`** tepat setelah **Gate #1 + Audisi Audio** atau setelah **Gate #2A (Stills)** disetujui — di titik itu seluruh fakta dan keputusan sudah aman tersimpan di `FACTS.md`, `BRIEF.md`, dan `TREATMENT.md`/`SPEC.md`.
 - Jika suatu proyek mengalami **pivot total gaya/engine** di tengah jalan, **jangan memaksakan di chat yang sama** — buka chat baru agar percakapan mulai dari konteks bersih bermodalkan `FACTS.md` & `BRIEF.md` yang sudah ada.

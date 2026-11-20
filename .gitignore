@@ -25,6 +25,10 @@ archive/
 sipelita-demo/
 projects/**/output/
 
+# Local-only raw third-party reference videos/frames and full copy-pasted articles/PDFs
+projects/**/ref/
+projects/**/source/
+
 # Caches, temporary directories, test artifacts, logs, and OS files
 .tmp-*
 **/.cache/

@@ -29,7 +29,7 @@ Skill ini adalah SOP orkestrasi utama untuk memproduksi video motion graphics di
    - **Wajib Anjurkan `/compact`:** Setelah **Gate #1 + Audisi Audio** selesai atau setelah **Gate #2A (Stills)** disetujui (saat `FACTS.md`, `SPEC.md`/`TREATMENT.md` sudah tersimpan di disk), atau jika percakapan mendekati ~120–150 step, anjurkan user mengetik `/compact` agar panggilan LLM di tahap coding & QA tetap ringan. Jika suatu saat terjadi **pivot total engine**, mulai **chat baru** membawa `BRIEF.md` & `FACTS.md`.
 6. **Kebijakan Aset, Fakta & Kebersihan Repo Publik:**
    - Agent **dilarang keras** mengarang angka/klaim fakta atau menggambar logo resmi palsu secara diam-diam. Jika aset/angka resmi belum tersedia dan user mengizinkan lanjut dulu, gunakan *labeled placeholder* / angka `[ilustratif]` yang dicatat di `SPEC.md`/`BRIEF.md` dan `REVIEW.md`, lalu **konfirmasi ulang sebelum render final (Gate #3)**.
-   - Output render (`*.mp4`, `*.webm`), audio mentah (`*.wav`, `*.mp3`), `output/`, `.venv/`, dan `node_modules/` selalu masuk `.gitignore`.
+   - Output render (`*.mp4`, `*.webm`), audio mentah (`*.wav`, `*.mp3`), `output/`, `projects/**/ref/`, `projects/**/source/`, `.venv/`, dan `node_modules/` selalu masuk `.gitignore`. Video/frame referensi pihak ketiga maupun salinan artikel/PDF penuh tetap lokal; hanya catatan hasil distilasi orisinal (`FACTS.md`, `STYLE_REF.md`) yang di-track Git.
    - Seluruh `README.md` proyek atau dokumen yang akan di-commit wajib memakai variabel lingkungan portabel **`%USERPROFILE%`** / **`$env:USERPROFILE`** (bukan path username Windows lokal mentah).
    - Bukti visual untuk dokumentasi GitHub berupa `preview/poster.png` + `preview/contact-sheet.png` ringan (`±300–600 KB`).
 
@@ -70,9 +70,23 @@ Engine di workspace bekerja sebagai satu ekosistem terpadu, bukan jalur yang ter
 2. **Wawancara Interaktif Singkat (`ask_question`, 1 pertanyaan per giliran, opsi `(Recommended)` di posisi 1):**
    - **Gaya Visual & Bahasa Gerak DULU (Sebelum Pilih Mode):** Sajikan **3–4 kandidat gaya lintas-ekosistem** (minimal **2 gaya konkret dari 99 gaya `lemo-opuscar`** lengkap dengan **tautan galeri video demo asli `https://lemomo-ai.github.io/lemo-opuscar/`** + nama Inggris/slug-nya, dan **1 opsi `HyperFrames`/`Hybrid`**). Tanyakan pula pantangan visual user (mis. *"jangan terasa seperti slide presentasi"*).
    - **Voice Direction Lengkap:** Tanyakan **(a) Jenis suara** (`id-ID-ArdiNeural` / `id-ID-GadisNeural` / rekaman sendiri / tanpa VO), **(b) Nuansa & energi** (*conversational* hangat / antusias Reels / dokumenter berwibawa / formal), **(c) Dinamika tempo & jeda dramatis**, dan **(d) Gaya subtitle** (kinetik editorial *burn-in* vs `.srt` saja; *burn-in* direkomendasikan untuk `9:16`).
-   - **Format, Durasi, Aset & Gate #2:** Rasio (`16:9` / `9:16`), target durasi, izin *labeled placeholder* bila aset belum lengkap, dan apakah mengaktifkan **Gate #2 (Stills → Live Preview)**.
+   - **Format, Durasi, Aset & Gate #2:** Rasio (`16:9` / `9:16`), target durasi, izin *labeled placeholder* bila aset belum lengkap, dan apakah mengaktifkan **Gate #2 (Stills → Live Preview)**. **Durasi & rasio tidak wajib diisi manual oleh user di pesan pembuka** — jika belum disebutkan, tanyakan di `/grill-me` dengan opsi `(Recommended)` yang kontekstual (mengikuti referensi video atau opsi format distilasi artikel); jika sudah disebutkan user di awal, **jangan tanyakan ulang**.
    - **Konfirmasi Rekomendasi Mode (A / B / C):** Berikan 1 rekomendasi final berdasarkan gaya yang sudah dipilih user. (Untuk Mode B gaya bertanda `✦`, jalankan `core/image/gen_image.py --check` dan konfirmasi generator gambar).
-3. **Keluaran:** `projects/NN-slug/BRIEF.md` + `FACTS.md`. *(Jika user secara eksplisit meminta "skip wawancara", lewati langsung ke Tahap 1 dengan menyatakan asumsi secara terbuka).*
+3. **Keluaran:** `projects/NN-slug/BRIEF.md` + `FACTS.md` *(serta `STYLE_REF.md` bila memakai referensi video)*. *(Jika user secara eksplisit meminta "skip wawancara", lewati langsung ke Tahap 1 dengan menyatakan asumsi secara terbuka).*
+
+#### Jalur Input Lanjutan (Referensi Video & Artikel)
+
+1. **Referensi Video (TikTok / IG / FB / YouTube):**
+   - **Cara terima:** Utamakan file lokal `projects/NN-slug/ref/ref.mp4` (bebas *login wall*/*bot-check*, otomatis di-ignore Git). Jika user memberi URL publik, boleh coba unduh dengan `lemo-opuscar\.venv\Scripts\python.exe -m yt_dlp` (`BypassSandbox: true`); jika diblokir login atau CAPTCHA, **jangan pernah bypass** — minta user mengunduh manual ke `ref/ref.mp4`.
+   - **3 Jalur Lokal 100% Gratis:**
+     - **Style saja *(topik baru milik user)*:** Ikuti kontrak `From a reference` (`hyperframes/references/look.md`) — pakai `ffprobe` + `ffmpeg` untuk membuat 1–2 contact sheet keyframe (`ref/ref-sheet.jpg`), catat *grammar* visual & ritme (durasi shot, rasio cut, hex palet, ukuran/bobot tipografi, arah gerak masuk-keluar, tekstur) ke **`STYLE_REF.md`**, dan tetap susun Tabel Adaptasi Konteks (*Anti-Jipling*). Pada Mode A/C boleh memakai `snapshot --at <t,...> --against ref/ref.mp4` saat audit.
+     - **Konten saja *(style studio baru)*:** Ekstrak audio (`ffmpeg`) → transkrip lokal via **`faster-whisper`** (`lemo-opuscar/.venv`) + baca 1 contact sheet bila ada teks/angka penting di layar → delegasikan ke subagent `research` untuk memadatkannya menjadi **`FACTS.md` (`≤ 5 KB`)** → lanjut `/grill-me` memilih style studio baru + `humanizer`.
+     - **Keduanya *(Adaptasi / Lokalisasi)*:** Gabungkan ekstraksi `STYLE_REF.md` (termasuk *beat timing*) + `FACTS.md`; patuhi etika hak cipta (jangan menyalin mentah wajah, suara, logo, atau naskah kreator lain untuk publikasi publik — tulis ulang sudut pandang & ganti aset orisinal).
+   - **Batasan jujur:** Akurat untuk motion graphics, *kinetic typography*, explainer 2D/vektor, UI demo, infografis, dan 3D geometris. Tidak dapat melakukan *re-shoot live-action* manusia secara lokal (`reverse-any-video` dan `style-sampling` tersedia di workspace sebagai fitur berbayar HyperFrames Pro; jalur lokal ini adalah default 100% gratis).
+
+2. **Artikel / Tulisan Panjang (Medium / Substack / Blog):**
+   - **Cara terima:** Utamakan salinan lokal `projects/NN-slug/source/article.md` (atau `.txt` / `.pdf` via *Save as PDF*) beserta gambar grafik kunci bila ingin divisualisasikan ulang. Jika URL 100% publik, boleh diproses lewat subagent `research` / `search_web`; jika terhalang *Member-Only paywall* atau *Cloudflare/CAPTCHA*, **jangan pernah bypass** — minta user salin teks atau simpan PDF ke `source/`.
+   - **Distilasi Editorial:** Wajib delegasikan pembacaan penuh ke subagent `research` → **`FACTS.md` (`≤ 5 KB`)** berisi tesis utama, 3–5 argumen/data terkuat, metafora terbaik penulis, dan kredit sumber/tautan asal. Pada `/grill-me`, bila user belum menentukan format, tawarkan 3 pilihan adaptasi kontekstual: *Single Short (`9:16`, 45–75 detik — direkomendasikan untuk 1 insight paling tajam)*, *Mini-Series (2–3 episode pendek)*, atau *Explainer Utuh (`16:9`, 90–150 detik)*.
 
 ### Tahap 1 — Cerita, Kontrak Anti-Slideware/Anti-Jipling & Draf Naskah (**GATE #1 — WAJIB**)
 - **Skills aktif:** `hyperframes` (`references/story.md`, `references/spec.md`) atau `lemo-opuscar` (`AGENTS.md`, `DIRECTOR.md`), `frontend-design` (Mode A/C), `humanizer`.
@@ -167,11 +181,14 @@ projects/NN-slug/
 ├── README.md          # Dokumentasi final proyek & cara render ulang ($env:USERPROFILE)
 ├── FACTS.md           # Ringkasan fakta terverifikasi dari riset terisolasi (≤ 5 KB)
 ├── BRIEF.md           # Kesepakatan Tahap 0 (Gaya, Voice Direction, Mode, Gate)
+├── STYLE_REF.md       # Opsional: grammar visual & ritme cut dari referensi video lokal
 ├── STORYLINES.md      # Mode A/C: 3 kandidat storyline (Gate #1)
 ├── TREATMENT.md       # Mode B: treatment, Tabel Anti-Jipling, shot list, cue map
 ├── SPEC.md            # Mode A/C: spesifikasi angka eksak, BANNED & daftar placeholder
 ├── STORYBOARD.md      # Opsional (Gate #2A): daftar shot & audio tiap frame
 ├── REVIEW.md          # Hasil audit visual & teknis pra-render (Gate #3)
+├── ref/               # Opsional (lokal saja, diabaikan .gitignore): ref.mp4 & frame referensi
+├── source/            # Opsional (lokal saja, diabaikan .gitignore): salinan article.md / PDF & gambar sumber
 ├── boards/            # Opsional: contact-sheet.jpg, model-sheet.jpg, storyboard.html, stills/
 ├── voice/             # lines.json, dur.json, schedule.json, words.json, cues.json, audition.wav (.wav/.mp3 di-ignore)
 ├── assets/            # Font lokal, logo SVG/PNG resmi, audio BGM/SFX lokal
