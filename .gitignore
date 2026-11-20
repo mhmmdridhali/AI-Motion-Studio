@@ -1,0 +1,37 @@
+# Dependencies & Python virtual environments
+**/node_modules/
+**/.venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Upstream Lemo-Opuscar library (reproducible via setup.sh; avoids tracking 3,000+ vendor files)
+lemo-opuscar/
+
+# Rendered videos, generated audio, and binary TTS/model files (documentation & code only on GitHub)
+*.mp4
+*.webm
+*.mov
+*.mkv
+*.avi
+*.wav
+*.mp3
+*.flac
+*.m4a
+*.ogg
+*.onnx
+*.bin
+archive/
+sipelita-demo/
+projects/**/output/
+
+# Caches, temporary directories, test artifacts, logs, and OS files
+.tmp-*
+**/.cache/
+**/.lines-cache/
+**/.espeak-ng-data/
+**/test-results/
+**/.hyperframes/
+*.log
+.DS_Store
+Thumbs.db

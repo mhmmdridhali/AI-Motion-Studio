@@ -1,0 +1,7 @@
+{
+  "name": "hyperframes-local",
+  "private": true,
+  "dependencies": {
+    "hyperframes": "^0.9.70"
+  }
+}
