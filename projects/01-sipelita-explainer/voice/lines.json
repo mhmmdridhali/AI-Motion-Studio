@@ -1,0 +1,20 @@
+[
+  {"id":"01a","shot":1,"voice":"id-ID-ArdiNeural","rate":"-3%","pitch":"+3Hz","text":"Pernah bingung waktu data siswa madrasah bermasalah?","say":"Pernah bingung waktu data siswa madrasah bermasalah?","keywords":["data","siswa"]},
+  {"id":"01b","shot":1,"voice":"id-ID-ArdiNeural","rate":"+11%","pitch":"-2Hz","text":"Chat WhatsApp tenggelam.","say":"Chat WhatsApp tenggelam.","keywords":["tenggelam"]},
+  {"id":"01c","shot":1,"voice":"id-ID-ArdiNeural","rate":"+13%","pitch":"+1Hz","text":"Link formulir terpencar di mana-mana.","say":"Link formulir terpencar di mana-mana.","keywords":["terpencar"]},
+  {"id":"01d","shot":1,"voice":"id-ID-ArdiNeural","rate":"+4%","pitch":"+4Hz","text":"Statusnya? Harus tanya ulang terus!","say":"Statusnya? Harus tanya ulang terus!","keywords":["tanya","ulang"]},
+  {"id":"02a","shot":2,"voice":"id-ID-ArdiNeural","rate":"-2%","pitch":"+2Hz","text":"Nah, sekarang beda.","say":"Nah, sekarang beda.","keywords":["sekarang","beda"],"pre":0.65},
+  {"id":"02b","shot":2,"voice":"id-ID-ArdiNeural","rate":"-4%","pitch":"-1Hz","text":"Seksi Pendidikan Madrasah Kemenag Kabupaten Banjar menghadirkan SI-PELITA:","say":"Seksi Pendidikan Madrasah Kemenag Kabupaten Banjar menghadirkan Si Pelita:","keywords":["SI-PELITA:"]},
+  {"id":"02c","shot":2,"voice":"id-ID-ArdiNeural","rate":"+3%","pitch":"+3Hz","text":"inovasi layanan perbaikan data satu pintu!","say":"inovasi layanan perbaikan data satu pintu!","keywords":["satu","pintu!"]},
+  {"id":"03a","shot":3,"voice":"id-ID-ArdiNeural","rate":"+8%","pitch":"+2Hz","text":"Kendala EMIS, VervalPD, sampai laporan kolektif banyak siswa,","say":"Kendala Emis, Verval P D, sampai laporan kolektif banyak siswa,","keywords":["EMIS,","VervalPD,","kolektif"]},
+  {"id":"03b","shot":3,"voice":"id-ID-ArdiNeural","rate":"+5%","pitch":"+4Hz","text":"semua terhimpun rapi dengan tiket otomatis dan anti-duplikasi!","say":"semua terhimpun rapi dengan tiket otomatis dan anti-duplikasi!","keywords":["tiket","otomatis","anti-duplikasi!"]},
+  {"id":"04a","shot":4,"voice":"id-ID-ArdiNeural","rate":"+1%","pitch":"+1Hz","text":"Mau cek progres? Cukup pakai nomor WhatsApp.","say":"Mau cek progres? Cukup pakai nomor WhatsApp.","keywords":["nomor","WhatsApp."]},
+  {"id":"04b","shot":4,"voice":"id-ID-ArdiNeural","rate":"+2%","pitch":"+5Hz","text":"Berkas kurang atau keliru? Tenang!","say":"Berkas kurang atau keliru? Tenang!","keywords":["Tenang!"]},
+  {"id":"04c","shot":4,"voice":"id-ID-ArdiNeural","rate":"+7%","pitch":"+1Hz","text":"Tinggal klik Perbaiki Data di tiket yang sama, tanpa ketik ulang!","say":"Tinggal klik Perbaiki Data di tiket yang sama, tanpa ketik ulang!","keywords":["Perbaiki","Data","tanpa","ketik","ulang!"]},
+  {"id":"05a","shot":5,"voice":"id-ID-ArdiNeural","rate":"-4%","pitch":"-1Hz","text":"Hasilnya nyata.","say":"Hasilnya nyata.","keywords":["Hasilnya","nyata."],"pre":0.70},
+  {"id":"05b","shot":5,"voice":"id-ID-ArdiNeural","rate":"-3%","pitch":"+2Hz","text":"Ratusan laporan tercatat terbuka dengan penyelesaian di atas 95%!","say":"Ratusan laporan tercatat terbuka dengan penyelesaian di atas sembilan puluh lima persen!","keywords":["Ratusan","laporan","95%!"]},
+  {"id":"06a","shot":6,"voice":"id-ID-ArdiNeural","rate":"-3%","pitch":"+1Hz","text":"Operator madrasah di Kabupaten Banjar sudah merasakannya sendiri:","say":"Operator madrasah di Kabupaten Banjar sudah merasakannya sendiri:","keywords":["Operator","madrasah"]},
+  {"id":"06b","shot":6,"voice":"id-ID-ArdiNeural","rate":"+4%","pitch":"+4Hz","text":"prosesnya cepat, tanpa ribet, dan langsung ditangani!","say":"prosesnya cepat, tanpa ribet, dan langsung ditangani!","keywords":["tanpa","ribet,","langsung","ditangani!"]},
+  {"id":"07a","shot":7,"voice":"id-ID-ArdiNeural","rate":"-5%","pitch":"-1Hz","text":"SI-PELITA.","say":"Si Pelita.","keywords":["SI-PELITA."]},
+  {"id":"07b","shot":7,"voice":"id-ID-ArdiNeural","rate":"-6%","pitch":"-2Hz","text":"Inovasi pelayanan data siswa dari Kantor Kementerian Agama Kabupaten Banjar.","say":"Inovasi pelayanan data siswa dari Kantor Kementerian Agama Kabupaten Banjar.","keywords":["Kementerian","Agama","Kabupaten","Banjar."]}
+]

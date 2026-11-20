@@ -1,0 +1,20 @@
+SI-PELITA Explainer (9:16 Vertical Motion Graphics, 64.09s)
+Pengelola Layanan: Seksi Pendidikan Madrasah, Kantor Kementerian Agama Kabupaten Banjar
+
+Tipografi
+- Jost Variable Font (SIL Open Font License 1.1)
+  Sumber: Indestructible Type / Google Fonts (fonts/OFL.txt)
+
+Aset Institusi
+- Logo Resmi Kementerian Agama RI (assets/logo-kemenag.png, 708x635 RGBA PNG)
+  Sumber resmi: portal header SI-PELITA / cms2023.kemenag.go.id
+  Hak cipta milik Kementerian Agama Republik Indonesia
+
+Sulih Suara (Voice-Over)
+- Microsoft Edge Neural TTS, suara Bahasa Indonesia id-ID-ArdiNeural via edge-tts
+  Penggunaan komersial mengikuti ketentuan layanan Microsoft Speech
+
+Musik & Tata Suara
+- Skor orisinal D Mayor 108 BPM (kalimba, harp, nylon_guitar, upright_bass_pizz) dan foley prosedural
+  Disintesis secara lokal menggunakan lemo-opuscar/core/audio/pluck.py dan sfx.py
+  Mastering loudness: ffmpeg two-pass loudnorm (-14 LUFS, true peak <= -1 dBTP)

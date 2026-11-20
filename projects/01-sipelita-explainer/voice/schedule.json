@@ -1,0 +1,183 @@
+{
+ "fps": 60,
+ "total": 64.09,
+ "shots": [
+  {
+   "shot": 1,
+   "start": 0.0,
+   "end": 10.104,
+   "dur": 10.104,
+   "chapter": "01 · KENDALA LAMA"
+  },
+  {
+   "shot": 2,
+   "start": 10.104,
+   "end": 19.623,
+   "dur": 9.519,
+   "chapter": "02 · INOVASI LAYANAN"
+  },
+  {
+   "shot": 3,
+   "start": 19.623,
+   "end": 28.742,
+   "dur": 9.119,
+   "chapter": "03 · SATU PINTU TERPADU"
+  },
+  {
+   "shot": 4,
+   "start": 28.742,
+   "end": 40.083,
+   "dur": 11.341,
+   "chapter": "04 · LACAK DAN PERBAIKI"
+  },
+  {
+   "shot": 5,
+   "start": 40.083,
+   "end": 47.192,
+   "dur": 7.109,
+   "chapter": "05 · BUKTI NYATA"
+  },
+  {
+   "shot": 6,
+   "start": 47.192,
+   "end": 55.411,
+   "dur": 8.219,
+   "chapter": "06 · SUARA OPERATOR"
+  },
+  {
+   "shot": 7,
+   "start": 55.411,
+   "end": 64.094,
+   "dur": 8.683,
+   "chapter": "07 · SI-PELITA"
+  }
+ ],
+ "voice": [
+  {
+   "id": "01a",
+   "shot": 1,
+   "start": 0.35,
+   "dur": 2.544,
+   "end": 2.894
+  },
+  {
+   "id": "01b",
+   "shot": 1,
+   "start": 3.194,
+   "dur": 1.12,
+   "end": 4.314
+  },
+  {
+   "id": "01c",
+   "shot": 1,
+   "start": 4.614,
+   "dur": 1.786,
+   "end": 6.399
+  },
+  {
+   "id": "01d",
+   "shot": 1,
+   "start": 6.699,
+   "dur": 2.855,
+   "end": 9.554
+  },
+  {
+   "id": "02a",
+   "shot": 2,
+   "start": 10.754,
+   "dur": 1.673,
+   "end": 12.427
+  },
+  {
+   "id": "02b",
+   "shot": 2,
+   "start": 12.727,
+   "dur": 3.954,
+   "end": 16.681
+  },
+  {
+   "id": "02c",
+   "shot": 2,
+   "start": 16.981,
+   "dur": 2.192,
+   "end": 19.173
+  },
+  {
+   "id": "03a",
+   "shot": 3,
+   "start": 19.973,
+   "dur": 4.028,
+   "end": 24.001
+  },
+  {
+   "id": "03b",
+   "shot": 3,
+   "start": 24.301,
+   "dur": 3.042,
+   "end": 27.342
+  },
+  {
+   "id": "04a",
+   "shot": 4,
+   "start": 29.092,
+   "dur": 3.176,
+   "end": 32.268
+  },
+  {
+   "id": "04b",
+   "shot": 4,
+   "start": 32.568,
+   "dur": 2.874,
+   "end": 35.442
+  },
+  {
+   "id": "04c",
+   "shot": 4,
+   "start": 35.742,
+   "dur": 3.142,
+   "end": 38.883
+  },
+  {
+   "id": "05a",
+   "shot": 5,
+   "start": 40.783,
+   "dur": 1.085,
+   "end": 41.869
+  },
+  {
+   "id": "05b",
+   "shot": 5,
+   "start": 42.169,
+   "dur": 4.123,
+   "end": 46.292
+  },
+  {
+   "id": "06a",
+   "shot": 6,
+   "start": 47.542,
+   "dur": 3.348,
+   "end": 50.89
+  },
+  {
+   "id": "06b",
+   "shot": 6,
+   "start": 51.19,
+   "dur": 3.12,
+   "end": 54.311
+  },
+  {
+   "id": "07a",
+   "shot": 7,
+   "start": 55.761,
+   "dur": 0.888,
+   "end": 56.649
+  },
+  {
+   "id": "07b",
+   "shot": 7,
+   "start": 56.949,
+   "dur": 4.145,
+   "end": 61.094
+  }
+ ]
+}

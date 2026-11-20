@@ -28,8 +28,9 @@ Informasi spesifikasi perangkat, aturan kerja workspace, dan konfigurasi lokal l
 
 | No | Proyek | Mode / Engine | Durasi & Format | Status | Folder / Referensi |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| `00` | **SI-PELITA Kemenag Kab. Banjar** *(Arsip Awal)* | Video-Demo + HyperFrames Explainer | 1080p @ 60 FPS | Selesai | *(Arsip lokal — dikecualikan dari repo publik)* |
-| `01` | *Proyek Pertama Studio* | — | — | Siap dimulai | [projects/](projects/README.md) |
+| `00` | **SI-PELITA Kemenag Kab. Banjar** *(Arsip Awal)* | Video-Demo + HyperFrames Explainer | 1080p @ 60 FPS | Selesai | *(Arsip lokal - dikecualikan dari repo publik)* |
+| `01` | **SI-PELITA Mobile Explainer** *(Inovasi Kemenag Kab. Banjar)* | Mode B: Lemo-Opuscar (`stick-explainer` + Geometric Shapes) | `1080x1920 (9:16) @ 60 FPS` · `64.1s` | Selesai | [projects/01-sipelita-explainer/](projects/01-sipelita-explainer/README.md) |
+| `02` | *Proyek Berikutnya* | - | - | Siap dimulai | [projects/](projects/README.md) |
 
 ---
 

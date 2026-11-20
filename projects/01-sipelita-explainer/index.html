@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><title>SI-PELITA Stick-figure Explainer</title>
+<style>html,body{margin:0;background:#F4F1EA;overflow:hidden}canvas{display:block}</style>
+</head><body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script src="src/rig.js"></script>
+<script src="src/subtitles.js"></script>
+<script src="src/scenes.js"></script>
+<script>
+(async () => {
+  const q = new URLSearchParams(location.search), mode = q.get('mode'), proof = q.get('proof');
+  const font = new FontFace('Jost', 'url(fonts/Jost-Variable.ttf)', { weight: '100 900' });
+  await font.load(); document.fonts.add(font);
+  [SCHED, CL] = await Promise.all([fetch('voice/schedule.json').then(r => r.json()), fetch('voice/words.json').then(r => r.json())]);
+  LOGO = new Image(); LOGO.src = 'assets/logo-kemenag.png'; await LOGO.decode();
+  buildAll(mode);
+  if (mode === 'sheet') { window.DUR = 1; window.render = () => renderSheet(); }
+  else {
+    window.DUR = proof ? SCHED.shots[2].end : SCHED.total;
+    window.render = t => renderFrame(t);
+    window.EV = EVT.filter(e => e.t <= window.DUR + 1e-6).sort((a, b) => a.t - b.t);
+    window.TEXTS = t => { TXT = []; window.render(t); const o = TXT; TXT = null; return o.filter(o => o.x1 > 0 && o.x0 < W && o.y1 > 0 && o.y0 < H); };
+  }
+  window.render(0); window.READY = true;
+})();
+</script>
+</body></html>
