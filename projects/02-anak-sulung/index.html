@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Perjalanan Anak Dalam Rumah (I) — Anak Sulung</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #141416;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    canvas {
+      height: 96vh;
+      aspect-ratio: 9 / 16;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      background: #F6EFE2;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="c" width="1080" height="1920"></canvas>
+  <script type="module">
+    import { makeRiso, INK, PAPER } from './src/riso.js';
+    import { W, H, plate, g } from './src/draw.js';
+    import { shot1, shot2, shot3, shot4, shot5, shot6 } from './src/scenes.js';
+    import { setSubtitles, drawSubtitles } from './src/subtitles.js';
+    import { hash } from './src/lib.js';
+
+    const out = document.getElementById('c');
+    const print = makeRiso(out, W, H);
+
+    // Load fonts & audio metadata
+    const font = new FontFace('Jost', 'url(fonts/Jost-Variable.ttf)', { weight: '100 900' });
+    await font.load();
+    document.fonts.add(font);
+
+    const [sched, lines, words] = await Promise.all([
+      fetch('voice/schedule.json').then(r => r.json()),
+      fetch('voice/lines.json').then(r => r.json()),
+      fetch('voice/words.json').then(r => r.json())
+    ]);
+
+    setSubtitles(sched, words);
+    window.DUR = sched.total;
+
+    // Beats where misregistration kicks occur (on shot cuts)
+    const KICKS = [
+      [11.45, 8],
+      [19.41, 10],
+      [25.87, 8],
+      [39.04, 12],
+      [46.81, 9]
+    ];
+
+    function getMisregistration(t) {
+      const shotIdx = Math.floor(t / 8);
+      const base = [[0, 0], [3.2, -2.5], [-2.8, 3.0]];
+      const off = base.map((b, i) => [
+        b[0] + (hash(shotIdx * 5 + i) - 0.5) * (i ? 2.5 : 0.8),
+        b[1] + (hash(shotIdx * 7 + i + 20) - 0.5) * (i ? 2.5 : 0.8)
+      ]);
+      for (const [tk, amp] of KICKS) {
+        const x = t - tk;
+        if (x >= 0 && x <= 0.45) {
+          const e = Math.exp(-x * 12) * Math.cos(x * 32);
+          for (let i = 0; i < 3; i++) {
+            off[i][0] += amp * e * (i === 1 ? 1 : -0.7);
+            off[i][1] += amp * e * (i === 2 ? 1 : -0.5);
+          }
+        }
+      }
+      return off;
+    }
+
+    window.render = function(t) {
+      t = Math.max(0, Math.min(window.DUR, t));
+      
+      // Determine active shot
+      if (t < 11.453) {
+        shot1(t, 11.453);
+      } else if (t < 19.406) {
+        shot2(t, 7.953);
+      } else if (t < 25.865) {
+        shot3(t, 6.459);
+      } else if (t < 39.036) {
+        shot4(t, 13.171);
+      } else if (t < 46.809) {
+        shot5(t, 7.773);
+      } else {
+        shot6(t, 12.576);
+      }
+
+      // Draw kinetic Swiss Editorial subtitles (Shots 1-5 only; Shot 6 uses full editorial quote card)
+      if (t < 46.809) {
+        drawSubtitles(t, 1720);
+      }
+
+      // Render separation plate through WebGL2 Risograph shader
+      const off = getMisregistration(t);
+      const seed = Math.floor(t * 12); // 12 FPS grain boiling step
+      print(plate, {
+        seed,
+        sheet: Math.floor(t / 6),
+        off,
+        boil: 0.35,
+        grain: 1.0
+      });
+    };
+
+    // Text reading-time check contract (readcheck.mjs)
+    window.TEXTS = function(t) {
+      const items = [];
+      if (t >= 0.5 && t <= 11.0) {
+        items.push({ id: 'title1', text: 'PERJALANAN ANAK DALAM RUMAH', x0: 200, y0: 160, x1: 880, y1: 210 });
+        items.push({ id: 'title2', text: 'I. Anak Sulung: Kuat Karena Harus', x0: 100, y0: 210, x1: 980, y1: 260 });
+      } else if (t >= 11.5 && t <= 19.0) {
+        items.push({ id: 'title3', text: 'TRIAL VERSION OF PARENTING', x0: 150, y0: 290, x1: 930, y1: 360 });
+      } else if (t >= 19.5 && t <= 25.5) {
+        items.push({ id: 'title4', text: 'SUDAH SAMPAI MANA?', x0: 200, y0: 180, x1: 880, y1: 240 });
+      } else if (t >= 26.0 && t <= 38.5) {
+        items.push({ id: 'title5', text: 'TAKUT MENGECEWAKAN orang-orang yang mereka cintai', x0: 100, y0: 150, x1: 980, y1: 260 });
+      } else if (t >= 39.2 && t <= 46.5) {
+        items.push({ id: 'title6', text: 'PONDASI SEKALIGUS ATAP', x0: 150, y0: 160, x1: 930, y1: 220 });
+        items.push({ id: 'title7', text: 'PONDASI TEMPAT KELUARGA BERTUMPU', x0: 100, y0: 1480, x1: 980, y1: 1560 });
+      } else if (t >= 47.0 && t <= 59.0) {
+        items.push({ id: 'title8', text: 'Kamu berhak lelah. Boleh gagal. Dan layak dirayakan karena tetap bertahan.', x0: 80, y0: 480, x1: 1000, y1: 960 });
+      }
+      return items;
+    };
+
+    // Initial frame render
+    window.render(0);
+    window.READY = true;
+  </script>
+</body>
+</html>

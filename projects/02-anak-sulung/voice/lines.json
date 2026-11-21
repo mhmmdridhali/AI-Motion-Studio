@@ -1,0 +1,92 @@
+[
+  {
+    "id": "line-01",
+    "shot": 1,
+    "text": "Katanya, jadi anak sulung itu istimewa. Jadi panutan, jadi tumpuan harapan keluarga.",
+    "voice": "id-ID-ArdiNeural",
+    "rate": "-10%",
+    "pitch": "-2Hz",
+    "pause_after": 1.1,
+    "keywords": ["istimewa", "panutan", "harapan"]
+  },
+  {
+    "id": "line-02",
+    "shot": 1,
+    "text": "Tapi tak semua hal istimewa itu ringan dijalani.",
+    "voice": "id-ID-ArdiNeural",
+    "rate": "-11%",
+    "pitch": "-3Hz",
+    "pause_after": 1.2,
+    "keywords": ["ringan"]
+  },
+  {
+    "id": "line-03",
+    "shot": 2,
+    "text": "Anak pertama sering kali menjadi tempat orang tua belajar menjadi orang tua. Eksperimen pertama pengasuhan.",
+    "voice": "id-ID-ArdiNeural",
+    "rate": "-9%",
+    "pitch": "-1Hz",
+    "pause_after": 1.2,
+    "keywords": ["belajar", "eksperimen"]
+  },
+  {
+    "id": "line-04",
+    "shot": 3,
+    "text": "Lebih sering ditanya 'sudah sampai mana?', dibanding 'masih sanggup atau tidak?'.",
+    "voice": "id-ID-ArdiNeural",
+    "rate": "-11%",
+    "pitch": "-3Hz",
+    "pause_after": 1.3,
+    "keywords": ["sampai mana", "sanggup"]
+  },
+  {
+    "id": "line-05",
+    "shot": 4,
+    "text": "Diminta mengalah, diminta dewasa... bahkan ketika dirinya sendiri belum tahu cara menjadi anak-anak.",
+    "voice": "id-ID-ArdiNeural",
+    "rate": "-10%",
+    "pitch": "-2Hz",
+    "pause_after": 1.2,
+    "keywords": ["mengalah", "dewasa", "anak-anak"]
+  },
+  {
+    "id": "line-06",
+    "shot": 4,
+    "text": "Bukan tak pernah lelah. Mereka hanya terlalu takut mengecewakan orang-orang yang dicintai.",
+    "voice": "id-ID-ArdiNeural",
+    "rate": "-11%",
+    "pitch": "-3Hz",
+    "pause_after": 1.4,
+    "keywords": ["lelah", "kecewa"]
+  },
+  {
+    "id": "line-07",
+    "shot": 5,
+    "text": "Pada akhirnya, anak sulung adalah pondasi tempat keluarga bertumpu, sekaligus atap yang diam-diam melindungi.",
+    "voice": "id-ID-ArdiNeural",
+    "rate": "-10%",
+    "pitch": "-2Hz",
+    "pause_after": 1.3,
+    "keywords": ["pondasi", "atap", "melindungi"]
+  },
+  {
+    "id": "line-08",
+    "shot": 6,
+    "text": "Jika kamu punya anak sulung di rumah, peluklah.",
+    "voice": "id-ID-ArdiNeural",
+    "rate": "-12%",
+    "pitch": "-3Hz",
+    "pause_after": 1.3,
+    "keywords": ["peluklah"]
+  },
+  {
+    "id": "line-09",
+    "shot": 6,
+    "text": "Ingatkan ia bahwa ia manusia biasa. Yang berhak lelah, boleh gagal, dan layak dirayakan karena tetap bertahan.",
+    "voice": "id-ID-ArdiNeural",
+    "rate": "-11%",
+    "pitch": "-3Hz",
+    "pause_after": 2.0,
+    "keywords": ["manusia", "lelah", "gagal", "bertahan"]
+  }
+]

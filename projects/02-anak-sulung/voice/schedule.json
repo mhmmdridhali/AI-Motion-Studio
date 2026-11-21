@@ -1,0 +1,113 @@
+{
+ "fps": 60,
+ "total": 59.38,
+ "shots": [
+  {
+   "shot": 1,
+   "start": 0.0,
+   "end": 11.453,
+   "dur": 11.453,
+   "chapter": "SHOT 01"
+  },
+  {
+   "shot": 2,
+   "start": 11.453,
+   "end": 19.406,
+   "dur": 7.953,
+   "chapter": "SHOT 02"
+  },
+  {
+   "shot": 3,
+   "start": 19.406,
+   "end": 25.865,
+   "dur": 6.459,
+   "chapter": "SHOT 03"
+  },
+  {
+   "shot": 4,
+   "start": 25.865,
+   "end": 39.036,
+   "dur": 13.171,
+   "chapter": "SHOT 04"
+  },
+  {
+   "shot": 5,
+   "start": 39.036,
+   "end": 46.809,
+   "dur": 7.773,
+   "chapter": "SHOT 05"
+  },
+  {
+   "shot": 6,
+   "start": 46.809,
+   "end": 59.385,
+   "dur": 12.576,
+   "chapter": "SHOT 06"
+  }
+ ],
+ "voice": [
+  {
+   "id": "line-01",
+   "shot": 1,
+   "start": 0.35,
+   "dur": 7.198,
+   "end": 7.548
+  },
+  {
+   "id": "line-02",
+   "shot": 1,
+   "start": 7.848,
+   "dur": 2.705,
+   "end": 10.553
+  },
+  {
+   "id": "line-03",
+   "shot": 2,
+   "start": 11.803,
+   "dur": 6.703,
+   "end": 18.506
+  },
+  {
+   "id": "line-04",
+   "shot": 3,
+   "start": 19.756,
+   "dur": 5.209,
+   "end": 24.965
+  },
+  {
+   "id": "line-05",
+   "shot": 4,
+   "start": 26.215,
+   "dur": 5.914,
+   "end": 32.129
+  },
+  {
+   "id": "line-06",
+   "shot": 4,
+   "start": 32.429,
+   "dur": 5.707,
+   "end": 38.136
+  },
+  {
+   "id": "line-07",
+   "shot": 5,
+   "start": 39.386,
+   "dur": 6.523,
+   "end": 45.909
+  },
+  {
+   "id": "line-08",
+   "shot": 6,
+   "start": 47.159,
+   "dur": 2.831,
+   "end": 49.99
+  },
+  {
+   "id": "line-09",
+   "shot": 6,
+   "start": 50.29,
+   "dur": 8.195,
+   "end": 58.485
+  }
+ ]
+}
