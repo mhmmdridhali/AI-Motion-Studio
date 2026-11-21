@@ -1,17 +1,17 @@
-"""Expressive multi-phrase Indonesian/multilingual VO synthesizer with WordBoundary timings.
+"""Expressive multi-phrase Indonesian/multilingual VO synthesizer.
+
+Primary engine: Gemini TTS (gemini-3.8-flash-tts) + local faster-whisper word alignment.
+Automatic fallback: edge-tts (WordBoundary) when GEMINI_API_KEY is missing, quota-limited (429), or unreachable.
 
 Usage:
-  lemo-opuscar/.venv/Scripts/python.exe .agents/skills/motion-studio-workflow/scripts/tts_expressive.py <project_dir> [--fps 60] [--voice id-ID-ArdiNeural] [--audition-voice id-ID-GadisNeural] [--audition-lines 6]
-
-Supports `<project_dir>/voice/lines.json` either as:
-  1) A plain list of line dicts: [{"id": "01a", "shot": 1, "voice": "...", "rate": "-3%", "pitch": "+2Hz", "text": "...", "say": "...", "keywords": [...], "pre": 0.65}, ...]
-  2) A structured object: {"fps": 60, "lead": 0.35, "gap": 0.30, "default_tail": 0.9, "chapters": {"1": "..."}, "tails": {"1": 0.55}, "lines": [...]}
+  lemo-opuscar/.venv/Scripts/python.exe .agents/skills/motion-studio-workflow/scripts/tts_expressive.py <project_dir> [options]
 
 Outputs inside `<project_dir>/voice/`:
   wav/<id>.wav, dur.json, schedule.json, words.json, cues.json, audition.wav (+ audition-alt.wav if --audition-voice is set).
 """
 import argparse
 import asyncio
+import base64
 import hashlib
 import io
 import json
@@ -19,19 +19,125 @@ import os
 import re
 import subprocess
 import sys
+import time
 import numpy as np
 import soundfile as sf
 
 SR = 24000
 
+KNOWN_GEMINI_VOICES = {
+    "zephyr", "puck", "charon", "kore", "fenrir", "leda", "orus", "aoede",
+    "callirrhoe", "autonoe", "enceladus", "iapetus", "umbriel", "algieba",
+    "despina", "erinome", "algenib", "rasalgethi", "laomedeia", "achernar",
+    "alnilam", "schedar", "gacrux", "pulcherrima", "achird", "zubenelgenubi",
+    "vindemiatrix", "sadachbia", "sadaltager", "sulafat",
+}
 
-async def synth(say: str, voice: str, rate: str, pitch: str, mp3: str, jsn: str) -> None:
+TAG_RE = re.compile(r"<[^>]+>")
+
+
+def strip_tags(s: str) -> str:
+    return re.sub(r"\s+", " ", TAG_RE.sub(" ", s)).strip()
+
+
+def norm_word(w: str) -> str:
+    return re.sub(r"[^\w%]", "", w.lower())
+
+
+def load_gemini_api_key(proj_dir: str) -> str:
+    candidates = [
+        os.path.join(proj_dir, ".env"),
+        os.path.join(os.path.abspath(os.path.join(proj_dir, "..", "..")), ".env"),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", ".env")),
+        os.path.join(os.getcwd(), ".env"),
+    ]
+    for env_path in candidates:
+        if os.path.isfile(env_path):
+            try:
+                with open(env_path, encoding="utf-8") as f:
+                    for raw in f:
+                        line = raw.strip()
+                        if not line or line.startswith("#") or "=" not in line:
+                            continue
+                        k, v = line.split("=", 1)
+                        if k.strip() == "GEMINI_API_KEY":
+                            val = v.strip().strip('"').strip("'")
+                            if val:
+                                return val
+            except OSError:
+                pass
+    return os.environ.get("GEMINI_API_KEY", "").strip()
+
+
+def sanitize_secret(msg: str, secret: str) -> str:
+    return msg.replace(secret, "[REDACTED]") if secret else msg
+
+
+def resolve_gemini_voice(line_voice: str | None, default_voice: str, cli_gemini_voice: str) -> str:
+    if cli_gemini_voice:
+        return cli_gemini_voice
+    cand = (line_voice or default_voice or "").strip()
+    low = cand.lower()
+    if low in KNOWN_GEMINI_VOICES:
+        return cand.capitalize() if cand.islower() else cand
+    if any(k in low for k in ("gadis", "female", "woman", "kore", "aoede", "leda")):
+        return "Kore"
+    return "Orus"
+
+
+def trim_silence(y: np.ndarray, bw: list[dict], sr: int = SR):
+    peak = float(np.abs(y).max()) if len(y) else 0.0
+    nz = np.where(np.abs(y) > peak * 0.02)[0]
+    if len(nz):
+        s0 = max(0, int(nz[0]) - int(0.03 * sr))
+        s1 = min(len(y), int(nz[-1]) + int(0.10 * sr))
+        y = y[s0:s1]
+    else:
+        s0 = 0
+    off = s0 / sr
+    dur_trim = len(y) / sr
+    adj = [
+        {
+            "w": b["w"],
+            "t0": min(dur_trim, max(0.0, b["t0"] - off)),
+            "t1": min(dur_trim, max(0.04, b["t1"] - off)),
+        }
+        for b in bw
+    ]
+    return y, adj
+
+
+def decode_audio_bytes(data: bytes, target_sr: int = SR) -> np.ndarray:
+    res = subprocess.run(
+        ["ffmpeg", "-y", "-loglevel", "error", "-i", "pipe:0", "-ar", str(target_sr), "-ac", "1", "-f", "wav", "-"],
+        input=data,
+        capture_output=True,
+        check=True,
+    )
+    samples, _ = sf.read(io.BytesIO(res.stdout), dtype="float32")
+    return samples
+
+
+def decode_mp3(mp3: str) -> np.ndarray:
+    res = subprocess.run(
+        ["ffmpeg", "-y", "-loglevel", "error", "-i", mp3, "-ar", str(SR), "-ac", "1", "-f", "wav", "-"],
+        capture_output=True,
+        check=True,
+    )
+    samples, _ = sf.read(io.BytesIO(res.stdout), dtype="float32")
+    return samples
+
+
+# --- Edge TTS Fallback Path ---
+
+async def synth_edge(say: str, voice: str, rate: str, pitch: str, mp3: str, jsn: str) -> None:
     import edge_tts
 
+    clean_say = strip_tags(say)
     last_err = None
     for attempt in range(3):
         try:
-            com = edge_tts.Communicate(say, voice, rate=rate, pitch=pitch, boundary="WordBoundary")
+            com = edge_tts.Communicate(clean_say, voice, rate=rate, pitch=pitch, boundary="WordBoundary")
             audio = bytearray()
             words = []
             async for ch in com.stream():
@@ -60,51 +166,243 @@ async def synth(say: str, voice: str, rate: str, pitch: str, mp3: str, jsn: str)
     raise last_err
 
 
-def decode_mp3(mp3: str) -> np.ndarray:
-    res = subprocess.run(
-        ["ffmpeg", "-y", "-loglevel", "error", "-i", mp3, "-ar", str(SR), "-ac", "1", "-f", "wav", "-"],
-        capture_output=True,
-        check=True,
-    )
-    samples, _ = sf.read(io.BytesIO(res.stdout), dtype="float32")
-    return samples
-
-
-def get_clip(line: dict, cache_dir: str, default_voice: str, voice_override: str | None = None):
+def get_edge_clip(line: dict, cache_dir: str, default_voice: str, voice_override: str | None = None):
     voice = voice_override or line.get("voice") or default_voice
+    if voice.lower() in KNOWN_GEMINI_VOICES:
+        voice = default_voice
     rate = line.get("rate") or "+0%"
     pitch = line.get("pitch") or "+0Hz"
-    say = line.get("say") or line["text"]
-    key = hashlib.sha1(json.dumps([voice, rate, pitch, say], ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
+    say = strip_tags(line.get("say") or line["text"])
+    key = hashlib.sha1(json.dumps(["edge", voice, rate, pitch, say], ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
     mp3 = os.path.join(cache_dir, key + ".mp3")
     jsn = os.path.join(cache_dir, key + ".json")
 
     if not (os.path.exists(mp3) and os.path.exists(jsn)):
-        asyncio.run(synth(say, voice, rate, pitch, mp3, jsn))
+        asyncio.run(synth_edge(say, voice, rate, pitch, mp3, jsn))
 
     y = decode_mp3(mp3)
     with open(jsn, encoding="utf-8") as f:
         bw = json.load(f)
-
-    peak = float(np.abs(y).max()) if len(y) else 0.0
-    nz = np.where(np.abs(y) > peak * 0.02)[0]
-    if len(nz):
-        s0 = max(0, int(nz[0]) - int(0.03 * SR))
-        s1 = min(len(y), int(nz[-1]) + int(0.10 * SR))
-        y = y[s0:s1]
-    else:
-        s0 = 0
-        print(f"warning: line '{line['id']}' is nearly silent", file=sys.stderr)
-
-    off = s0 / SR
-    for w in bw:
-        w["t0"] = max(0.0, w["t0"] - off)
-        w["t1"] = max(w["t0"] + 0.04, w["t1"] - off)
-    return y, bw
+    return trim_silence(y, bw)
 
 
-def norm_word(w: str) -> str:
-    return re.sub(r"[^\w%]", "", w.lower())
+# --- Gemini TTS Primary Path + faster-whisper Alignment ---
+
+_WHISPER_MODEL = None
+
+
+def get_whisper_model():
+    global _WHISPER_MODEL
+    if _WHISPER_MODEL is None:
+        from faster_whisper import WhisperModel
+
+        try:
+            _WHISPER_MODEL = WhisperModel("tiny", device="cpu", compute_type="int8", local_files_only=True)
+        except Exception:
+            _WHISPER_MODEL = WhisperModel("tiny", device="cpu", compute_type="int8")
+    return _WHISPER_MODEL
+
+
+def extract_whisper_words(wav_path: str, lang: str) -> list[dict]:
+    model = get_whisper_model()
+    segments, _ = model.transcribe(wav_path, language=lang or "id", word_timestamps=True)
+    words = []
+    for seg in segments:
+        for w in (seg.words or []):
+            txt = w.word.strip()
+            if txt:
+                words.append({"w": txt, "t0": float(w.start), "t1": float(w.end)})
+    return words
+
+
+def synth_gemini_batch(api_key: str, model: str, voice: str, style: str, transcript: str, wav_path: str) -> np.ndarray:
+    from google import genai
+
+    client = genai.Client(api_key=api_key, http_options={"api_version": "v1beta"})
+    resp = client.interactions.create(
+        model=model,
+        input=[
+            {
+                "type": "user_input",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": transcript,
+                        "annotations": [
+                            {
+                                "type": "speech_metadata",
+                                "style": style,
+                            }
+                        ],
+                    }
+                ],
+            }
+        ],
+        response_format={"type": "audio"},
+        generation_config={"speech_config": [{"voice": voice}]},
+    )
+    audio_obj = getattr(resp, "output_audio", None)
+    if not audio_obj or not getattr(audio_obj, "data", None):
+        raise RuntimeError("Gemini TTS response missing output_audio")
+    raw = audio_obj.data
+    audio_bytes = base64.b64decode(raw) if isinstance(raw, str) else bytes(raw)
+    y = decode_audio_bytes(audio_bytes, target_sr=SR)
+    sf.write(wav_path + ".part", y, SR, format="WAV")
+    os.replace(wav_path + ".part", wav_path)
+    return y
+
+
+def quietest_cut_time(y: np.ndarray, t_a: float, t_b: float, sr: int = SR) -> float:
+    if t_b <= t_a + 0.04:
+        return 0.5 * (t_a + t_b)
+    i0 = max(0, int((t_a + 0.02) * sr))
+    i1 = min(len(y), int((t_b - 0.02) * sr))
+    if i1 <= i0 + 480:
+        return 0.5 * (t_a + t_b)
+    win = max(240, int(0.02 * sr))
+    seg = y[i0:i1]
+    best_pos = (i0 + i1) // 2
+    best_rms = float("inf")
+    step = max(120, win // 2)
+    for pos in range(0, max(1, len(seg) - win), step):
+        rms = float(np.sqrt(np.mean(seg[pos : pos + win] ** 2)))
+        if rms < best_rms:
+            best_rms = rms
+            best_pos = i0 + pos + win // 2
+    return best_pos / sr
+
+
+def split_batch_clips(y: np.ndarray, batch_lines: list[dict], whisper_words: list[dict]) -> list[tuple[np.ndarray, list[dict]]]:
+    n_lines = len(batch_lines)
+    if n_lines == 1:
+        y_trim, bw_trim = trim_silence(y, whisper_words)
+        return [(y_trim, bw_trim)]
+
+    expected_chars = [max(1, len(re.sub(r"\W", "", strip_tags(l.get("say") or l["text"])))) for l in batch_lines]
+    tot_exp = sum(expected_chars)
+
+    if len(whisper_words) < n_lines:
+        dur = len(y) / SR
+        cum = 0
+        cuts = [0.0]
+        for k in range(n_lines - 1):
+            cum += expected_chars[k]
+            cuts.append(dur * (cum / tot_exp))
+        cuts.append(dur)
+        out = []
+        for k in range(n_lines):
+            s0, s1 = int(cuts[k] * SR), int(cuts[k + 1] * SR)
+            out.append(trim_silence(y[s0:s1], []))
+        return out
+
+    w_chars = [max(1, len(re.sub(r"\W", "", w["w"]))) for w in whisper_words]
+    tot_w = sum(w_chars)
+    w_cum = np.cumsum(w_chars) / max(1, tot_w)
+
+    prev_idx = 0
+    split_word_idxs = [0]
+    exp_acc = 0
+    for k in range(n_lines - 1):
+        exp_acc += expected_chars[k]
+        target_frac = exp_acc / tot_exp
+        rem_lines = n_lines - 1 - k
+        lo = prev_idx + 1
+        hi = len(whisper_words) - rem_lines
+        if lo >= hi:
+            split_word_idxs.append(lo)
+            prev_idx = lo
+            continue
+        approx = int(np.searchsorted(w_cum[lo : hi + 1], target_frac)) + lo
+        w_lo = max(lo, approx - 4)
+        w_hi = min(hi, approx + 4)
+        best_j = approx
+        best_score = -1e9
+        for j in range(w_lo, w_hi + 1):
+            gap = whisper_words[j]["t0"] - whisper_words[j - 1]["t1"]
+            dist_pen = abs(float(w_cum[j - 1]) - target_frac)
+            score = gap - 1.5 * dist_pen
+            if score > best_score:
+                best_score = score
+                best_j = j
+        split_word_idxs.append(best_j)
+        prev_idx = best_j
+    split_word_idxs.append(len(whisper_words))
+
+    dur_total = len(y) / SR
+    t_bounds = [0.0]
+    for j in split_word_idxs[1:-1]:
+        t_cut = quietest_cut_time(y, whisper_words[j - 1]["t1"], whisper_words[j]["t0"])
+        t_bounds.append(t_cut)
+    t_bounds.append(dur_total)
+
+    out = []
+    for k in range(n_lines):
+        t0, t1 = t_bounds[k], t_bounds[k + 1]
+        s0 = max(0, int(round(t0 * SR)))
+        s1 = min(len(y), int(round(t1 * SR)))
+        chunk_bw = [
+            {"w": w["w"], "t0": max(0.0, w["t0"] - t0), "t1": max(0.04, w["t1"] - t0)}
+            for w in whisper_words[split_word_idxs[k] : split_word_idxs[k + 1]]
+        ]
+        out.append(trim_silence(y[s0:s1], chunk_bw))
+    return out
+
+
+def synthesize_with_gemini(lines: list[dict], cfg: dict, args, api_key: str, cache_dir: str) -> dict:
+    lang = args.lang or cfg.get("lang") or "id"
+    default_style = cfg.get("style") or (
+        "warm natural conversational narrator, expressive intonation, clear rising inflection on questions, gentle breathing pauses"
+    )
+    gemini_voice = resolve_gemini_voice(lines[0].get("gemini_voice") or lines[0].get("voice"), args.voice, args.gemini_voice)
+    model = args.gemini_model
+
+    # Batch up to <= 250 words per request to respect Free Tier RPM/RPD limits
+    batches = []
+    cur_batch = []
+    cur_words = 0
+    for line in lines:
+        say = line.get("say") or line["text"]
+        wc = len(strip_tags(say).split())
+        if cur_batch and (cur_words + wc > 250):
+            batches.append(cur_batch)
+            cur_batch = [line]
+            cur_words = wc
+        else:
+            cur_batch.append(line)
+            cur_words += wc
+    if cur_batch:
+        batches.append(cur_batch)
+
+    clips = {}
+    for bi, batch in enumerate(batches):
+        says = [(l.get("say") or l["text"]).strip() for l in batch]
+        styles = [l.get("style") for l in batch if l.get("style")]
+        batch_style = "; ".join(dict.fromkeys(styles)) if styles else default_style
+        transcript = "\n\n<short pause> <short pause>\n\n".join(says)
+
+        key = hashlib.sha1(
+            json.dumps(["gemini", model, gemini_voice, batch_style, lang, transcript], ensure_ascii=False).encode("utf-8")
+        ).hexdigest()[:16]
+        wav_path = os.path.join(cache_dir, key + ".wav")
+        jsn_path = os.path.join(cache_dir, key + "_whisper.json")
+
+        if os.path.isfile(wav_path) and os.path.isfile(jsn_path):
+            y, _ = sf.read(wav_path, dtype="float32")
+            with open(jsn_path, encoding="utf-8") as f:
+                bw = json.load(f)
+        else:
+            if bi > 0:
+                time.sleep(1.5)
+            y = synth_gemini_batch(api_key, model, gemini_voice, batch_style, transcript, wav_path)
+            bw = extract_whisper_words(wav_path, lang)
+            with open(jsn_path + ".part", "w", encoding="utf-8") as f:
+                json.dump(bw, f, ensure_ascii=False)
+            os.replace(jsn_path + ".part", jsn_path)
+
+        sliced = split_batch_clips(y, batch, bw)
+        for line, (ly, lbw) in zip(batch, sliced):
+            clips[line["id"]] = (ly, len(ly) / SR, lbw)
+    return clips
 
 
 def align_words(display: list[str], bw: list[dict], dur: float):
@@ -144,6 +442,10 @@ def load_config(lines_path: str, cli_fps: int):
             "default_tail": 0.90,
             "chapters": {},
             "tails": {},
+            "engine": "",
+            "gemini_voice": "",
+            "style": "",
+            "lang": "id",
             "lines": raw,
         }
     if isinstance(raw, dict) and isinstance(raw.get("lines"), list):
@@ -154,18 +456,26 @@ def load_config(lines_path: str, cli_fps: int):
             "default_tail": float(raw.get("default_tail", 0.90)),
             "chapters": {str(k): v for k, v in (raw.get("chapters") or {}).items()},
             "tails": {str(k): float(v) for k, v in (raw.get("tails") or {}).items()},
+            "engine": raw.get("engine", ""),
+            "gemini_voice": raw.get("gemini_voice", ""),
+            "style": raw.get("style", ""),
+            "lang": raw.get("lang", "id"),
             "lines": raw["lines"],
         }
     sys.exit(f"tts_expressive.py: invalid lines.json format in {lines_path}")
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Expressive Indonesian/multilingual VO synthesizer with WordBoundary timings.")
+    ap = argparse.ArgumentParser(description="Expressive VO synthesizer (Gemini TTS primary + Edge TTS fallback).")
     ap.add_argument("project_dir", help="Path to project directory containing voice/lines.json")
     ap.add_argument("--fps", type=int, default=60, help="Target FPS if not set in lines.json (default: 60)")
-    ap.add_argument("--voice", default="id-ID-ArdiNeural", help="Default voice if omitted on a line")
-    ap.add_argument("--audition-voice", default="", help="Optional second voice to synthesize audition-alt.wav")
+    ap.add_argument("--voice", default="id-ID-ArdiNeural", help="Default Edge voice or persona hint")
+    ap.add_argument("--audition-voice", default="", help="Optional second Edge voice to synthesize audition-alt.wav")
     ap.add_argument("--audition-lines", type=int, default=6, help="Number of leading lines for audition-alt.wav")
+    ap.add_argument("--engine", choices=["auto", "gemini", "edge"], default="auto", help="TTS engine (default: auto = Gemini primary, Edge fallback)")
+    ap.add_argument("--gemini-model", default="gemini-3.8-flash-tts", help="Gemini TTS model ID")
+    ap.add_argument("--gemini-voice", default="", help="Override Gemini voice (e.g. Orus, Kore, Charon, Puck)")
+    ap.add_argument("--lang", default="", help="Language code for faster-whisper alignment (default: id)")
     args = ap.parse_args()
 
     proj = os.path.abspath(args.project_dir)
@@ -184,12 +494,42 @@ def main() -> None:
     if not lines:
         sys.exit("tts_expressive.py: lines.json has no entries")
 
-    clips = {}
+    if not args.gemini_voice and cfg.get("gemini_voice"):
+        args.gemini_voice = cfg["gemini_voice"]
+    engine = args.engine if args.engine != "auto" else (cfg.get("engine") or "auto")
+
+    api_key = load_gemini_api_key(proj)
+    clips = None
+    used_engine = "edge"
+
+    if engine in ("auto", "gemini"):
+        if not api_key:
+            msg = "missing GEMINI_API_KEY in environment or .env"
+            if engine == "gemini":
+                sys.exit(f"tts_expressive.py: {msg}")
+            print(f"tts_expressive.py: {msg}; falling back to edge-tts", file=sys.stderr)
+        else:
+            try:
+                clips = synthesize_with_gemini(lines, cfg, args, api_key, cache_dir)
+                used_engine = f"gemini ({args.gemini_model})"
+            except Exception as exc:
+                safe_err = sanitize_secret(f"{type(exc).__name__}: {exc}", api_key)
+                if engine == "gemini":
+                    sys.exit(f"tts_expressive.py: Gemini TTS failed ({safe_err})")
+                print(f"tts_expressive.py: Gemini TTS unavailable ({safe_err}); falling back to edge-tts", file=sys.stderr)
+
+    if clips is None:
+        clips = {}
+        for line in lines:
+            y, bw = get_edge_clip(line, cache_dir, args.voice)
+            clips[line["id"]] = (y, len(y) / SR, bw)
+        used_engine = "edge-tts (fallback)" if engine == "auto" else "edge-tts"
+
     for line in lines:
-        y, bw = get_clip(line, cache_dir, args.voice)
+        y, dur, _ = clips[line["id"]]
         sf.write(os.path.join(wav_dir, f"{line['id']}.wav"), y, SR)
-        clips[line["id"]] = (y, len(y) / SR, bw)
-        print(f"{line['id']} {len(y) / SR:.2f}s  {line['text']}")
+        clean_txt = strip_tags(line["text"])
+        print(f"[{used_engine}] {line['id']} {dur:.2f}s  {clean_txt}")
 
     with open(os.path.join(voice_dir, "dur.json"), "w", encoding="utf-8") as f:
         json.dump({k: round(v[1], 3) for k, v in clips.items()}, f, indent=1, ensure_ascii=False)
@@ -210,7 +550,8 @@ def main() -> None:
 
         for k, line in enumerate(ls):
             if k > 0:
-                t += float(line.get("gap", cfg["gap"]))
+                prev_pause = ls[k - 1].get("pause_after")
+                t += float(line["gap"]) if "gap" in line else float(prev_pause if prev_pause is not None else cfg["gap"])
             _, dur, bw = clips[line["id"]]
             placements.append({
                 "id": line["id"],
@@ -219,7 +560,8 @@ def main() -> None:
                 "dur": round(dur, 3),
                 "end": round(t + dur, 3),
             })
-            disp = line["text"].split()
+            clean_txt = strip_tags(line["text"])
+            disp = clean_txt.split()
             times = align_words(disp, bw, dur)
             kws = {norm_word(x) for x in line.get("keywords", [])}
             words = [
@@ -232,7 +574,7 @@ def main() -> None:
                 "chapter": chapter,
                 "t0": round(t - 0.04, 3),
                 "t1": round(t + dur + 0.25, 3),
-                "text": line["text"],
+                "text": clean_txt,
                 "words": words,
             })
             t += dur
@@ -240,6 +582,8 @@ def main() -> None:
         tail = cfg["tails"].get(str(sid), cfg["default_tail"])
         if "tail" in ls[-1]:
             tail = float(ls[-1]["tail"])
+        elif str(sid) not in cfg["tails"] and "pause_after" in ls[-1]:
+            tail = float(ls[-1]["pause_after"])
         end = round(t + tail, 3)
         shots[sid] = {"shot": sid, "start": round(start, 3), "end": end, "dur": round(end - start, 3), "chapter": chapter}
         cur = end
@@ -248,7 +592,7 @@ def main() -> None:
         a["t1"] = round(min(a["t1"], b["t0"] - 0.03), 3)
 
     total = round(cur, 2)
-    sched = {"fps": cfg["fps"], "total": total, "shots": [shots[i] for i in shot_ids], "voice": placements}
+    sched = {"fps": cfg["fps"], "engine": used_engine, "total": total, "shots": [shots[i] for i in shot_ids], "voice": placements}
 
     with open(os.path.join(voice_dir, "schedule.json"), "w", encoding="utf-8") as f:
         json.dump(sched, f, indent=1, ensure_ascii=False)
@@ -257,7 +601,6 @@ def main() -> None:
     with open(os.path.join(voice_dir, "cues.json"), "w", encoding="utf-8") as f:
         json.dump([{"t0": max(0.0, c["t0"] + 0.04), "t1": c["t1"], "text": c["text"]} for c in clauses], f, indent=1, ensure_ascii=False)
 
-    # Render complete scheduled audition.wav for immediate Human Audio QA before animation coding
     audition_buf = np.zeros(max(1, int(round(total * SR))), dtype="float32")
     for p in placements:
         y = clips[p["id"]][0]
@@ -273,11 +616,11 @@ def main() -> None:
     if args.audition_voice:
         parts = []
         for line in lines[: max(1, args.audition_lines)]:
-            y, _ = get_clip(line, cache_dir, args.voice, voice_override=args.audition_voice)
+            y, _ = get_edge_clip(line, cache_dir, args.voice, voice_override=args.audition_voice)
             parts.extend([y, np.zeros(int(0.35 * SR), dtype="float32")])
         sf.write(os.path.join(voice_dir, "audition-alt.wav"), np.concatenate(parts), SR)
 
-    print(f"TOTAL {total}s ({len(shot_ids)} shots) -> voice/audition.wav ready")
+    print(f"TOTAL {total}s ({len(shot_ids)} shots, engine={used_engine}) -> voice/audition.wav ready")
 
 
 if __name__ == "__main__":
