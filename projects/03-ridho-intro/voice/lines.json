@@ -1,0 +1,119 @@
+{
+  "fps": 60,
+  "engine": "auto",
+  "voice": "id-ID-ArdiNeural",
+  "gemini_voice": "Orus",
+  "lang": "id",
+  "lead": 0.25,
+  "gap": 0.25,
+  "default_tail": 0.55,
+  "style": "natural conversational deadpan-witty Indonesian male narrator, moderate unhurried speaking pace (comfortable 0.90x tempo, never rushed), clear articulation, subtle dry humor on punchlines, natural rising tone on questions",
+  "lines": [
+    {
+      "id": "s01",
+      "shot": 1,
+      "chapter": "HOOK",
+      "pre": 0.15,
+      "text": "Kalau mukaku kelihatan jutek, aku lagi nggak marah. Aku lagi debugging rumus di kepala.",
+      "say": "Kalau mukaku kelihatan jutek, aku lagi nggak marah. <short pause> Aku lagi debugging rumus di kepala.",
+      "keywords": ["jutek", "marah", "debugging", "rumus"],
+      "rate": "-2%",
+      "pitch": "-1Hz",
+      "tail": 0.6
+    },
+    {
+      "id": "s02",
+      "shot": 2,
+      "chapter": "IDENTITAS",
+      "text": "Aku Ridho, lulusan Pendidikan Matematika, tipe ISTJ-A. Sehari-hari bekerja sebagai Statistisi di salah satu instansi pemerintahan.",
+      "say": "Aku Ridho, lulusan Pendidikan Matematika, tipe I-S-T-J-A. Sehari-hari bekerja sebagai Statistisi di salah satu instansi pemerintahan.",
+      "keywords": ["Ridho", "Matematika", "ISTJ-A", "Statistisi", "pemerintahan"],
+      "rate": "-2%",
+      "pitch": "+0Hz"
+    },
+    {
+      "id": "s03",
+      "shot": 3,
+      "chapter": "LAZY AUTOMATOR",
+      "text": "Kebiasaan anehku? Rela ngoding seharian biar nggak kerja manual lima menit. Investasi jangka panjang, bro.",
+      "say": "Kebiasaan anehku? Rela ngoding seharian biar nggak kerja manual lima menit. <short pause> Investasi jangka panjang, bro.",
+      "keywords": ["anehku", "seharian", "manual", "investasi", "bro"],
+      "rate": "-2%",
+      "pitch": "-1Hz",
+      "tail": 0.65
+    },
+    {
+      "id": "s04",
+      "shot": 4,
+      "chapter": "SKALA DATA",
+      "text": "Bayangin ngurus 234 madrasah, 31 ribu data siswa, dan hampir 3 ribu data guru dan tendik. Kalau direkap manual satu-satu, kapan selesainya?",
+      "say": "Bayangin ngurus 234 madrasah, 31 ribu data siswa, dan hampir 3 ribu data guru dan tendik. Kalau direkap manual satu-satu, kapan selesainya?",
+      "keywords": ["234", "madrasah", "31", "siswa", "guru", "tendik", "selesainya"],
+      "rate": "+0%",
+      "pitch": "+1Hz"
+    },
+    {
+      "id": "s05",
+      "shot": 5,
+      "chapter": "GOOGLE WORKSPACE",
+      "text": "Jadi aku bangun 16 sistem, 15 sendirian. Modal Google Workspace gratis, disulap jadi aplikasi beneran. Nggak perlu sewa server, nggak bikin kantong jebol.",
+      "say": "Jadi aku bangun 16 sistem, 15 sendirian. Modal Google Workspace gratis, disulap jadi aplikasi beneran. <short pause> Nggak perlu sewa server, nggak bikin kantong jebol.",
+      "keywords": ["16", "sistem", "15", "Google", "Workspace", "gratis", "server", "jebol"],
+      "rate": "-2%",
+      "pitch": "-1Hz",
+      "tail": 0.6
+    },
+    {
+      "id": "s06",
+      "shot": 6,
+      "chapter": "FLAGSHIP",
+      "text": "Dari SI-PRIMA, SI-PELITA, sampai website pemerintahan. Hasilnya? Nggak perlu lagi rekap manual, apalagi tarik data satu per satu.",
+      "say": "Dari SI-PRIMA, SI-PELITA, sampai website pemerintahan. Hasilnya? Nggak perlu lagi rekap manual, apalagi tarik data satu per satu.",
+      "keywords": ["SI-PRIMA", "SI-PELITA", "pemerintahan", "rekap", "manual", "tarik", "data"],
+      "rate": "-2%",
+      "pitch": "+1Hz"
+    },
+    {
+      "id": "s07",
+      "shot": 7,
+      "chapter": "BOT PYTHON",
+      "text": "Kerjaan repetitif yang bikin ngantuk juga kuserahkan ke si Python. Biar mesin yang klik, aku tinggal cek angkanya.",
+      "say": "Kerjaan repetitif yang bikin ngantuk juga kuserahkan ke si Python. Biar mesin yang klik, aku tinggal cek angkanya.",
+      "keywords": ["repetitif", "ngantuk", "Python", "mesin", "cek", "angkanya"],
+      "rate": "-2%",
+      "pitch": "-1Hz"
+    },
+    {
+      "id": "s08",
+      "shot": 8,
+      "chapter": "MINERVA AI",
+      "text": "Lama-lama keterusan, sekarang aku punya Minerva. Asisten AI berbasis Hermes Agent dengan berbagai profil personalisasi. Jalan 9 kali sehari lewat cron, langsung lapor ke Telegram.",
+      "say": "Lama-lama keterusan, sekarang aku punya Minerva. Asisten A-I berbasis Hermes Agent dengan berbagai profil personalisasi. Jalan 9 kali sehari lewat cron, langsung lapor ke Telegram.",
+      "keywords": ["Minerva", "AI", "Hermes", "Agent", "profil", "9", "cron", "Telegram"],
+      "rate": "+0%",
+      "pitch": "+0Hz"
+    },
+    {
+      "id": "s09",
+      "shot": 9,
+      "chapter": "MEDIUM",
+      "text": "Di luar ngoding dan data, aku rutin nulis puluhan artikel di Medium. Isinya keluh kesahku sebagai WNI.",
+      "say": "Di luar ngoding dan data, aku rutin nulis puluhan artikel di Medium. <short pause> Isinya keluh kesahku sebagai W-N-I.",
+      "keywords": ["puluhan", "artikel", "Medium", "keluh", "kesahku", "WNI"],
+      "rate": "-2%",
+      "pitch": "-1Hz",
+      "tail": 0.65
+    },
+    {
+      "id": "s10",
+      "shot": 10,
+      "chapter": "CLOSING",
+      "text": "Intinya: lebih sedikit kerja manual, bebas biaya server, dan alat yang beneran dipakai orang. Mampir aja ke muhammadaliridho.my.id.",
+      "say": "Intinya, lebih sedikit kerja manual, bebas biaya server, dan alat yang beneran dipakai orang. <short pause> Mampir aja ke muhammad ali ridho dot my dot i d.",
+      "keywords": ["manual", "bebas", "dipakai", "muhammadaliridho.my.id"],
+      "rate": "-3%",
+      "pitch": "-1Hz",
+      "tail": 1.4
+    }
+  ]
+}

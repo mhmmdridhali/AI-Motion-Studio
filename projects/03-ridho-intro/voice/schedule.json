@@ -1,0 +1,149 @@
+{
+ "fps": 60,
+ "engine": "gemini (gemini-3.8-flash-tts)",
+ "total": 104.75,
+ "shots": [
+  {
+   "shot": 1,
+   "start": 0.0,
+   "end": 6.488,
+   "dur": 6.488,
+   "chapter": "HOOK"
+  },
+  {
+   "shot": 2,
+   "start": 6.488,
+   "end": 18.032,
+   "dur": 11.544,
+   "chapter": "IDENTITAS"
+  },
+  {
+   "shot": 3,
+   "start": 18.032,
+   "end": 26.69,
+   "dur": 8.658,
+   "chapter": "LAZY AUTOMATOR"
+  },
+  {
+   "shot": 4,
+   "start": 26.69,
+   "end": 40.523,
+   "dur": 13.833,
+   "chapter": "SKALA DATA"
+  },
+  {
+   "shot": 5,
+   "start": 40.523,
+   "end": 52.873,
+   "dur": 12.35,
+   "chapter": "GOOGLE WORKSPACE"
+  },
+  {
+   "shot": 6,
+   "start": 52.873,
+   "end": 63.318,
+   "dur": 10.445,
+   "chapter": "FLAGSHIP"
+  },
+  {
+   "shot": 7,
+   "start": 63.318,
+   "end": 71.47,
+   "dur": 8.152,
+   "chapter": "BOT PYTHON"
+  },
+  {
+   "shot": 8,
+   "start": 71.47,
+   "end": 85.001,
+   "dur": 13.531,
+   "chapter": "MINERVA AI"
+  },
+  {
+   "shot": 9,
+   "start": 85.001,
+   "end": 92.901,
+   "dur": 7.9,
+   "chapter": "MEDIUM"
+  },
+  {
+   "shot": 10,
+   "start": 92.901,
+   "end": 104.746,
+   "dur": 11.845,
+   "chapter": "CLOSING"
+  }
+ ],
+ "voice": [
+  {
+   "id": "s01",
+   "shot": 1,
+   "start": 0.15,
+   "dur": 5.738,
+   "end": 5.888
+  },
+  {
+   "id": "s02",
+   "shot": 2,
+   "start": 6.738,
+   "dur": 10.744,
+   "end": 17.482
+  },
+  {
+   "id": "s03",
+   "shot": 3,
+   "start": 18.282,
+   "dur": 7.758,
+   "end": 26.04
+  },
+  {
+   "id": "s04",
+   "shot": 4,
+   "start": 26.94,
+   "dur": 13.033,
+   "end": 39.973
+  },
+  {
+   "id": "s05",
+   "shot": 5,
+   "start": 40.773,
+   "dur": 11.5,
+   "end": 52.273
+  },
+  {
+   "id": "s06",
+   "shot": 6,
+   "start": 53.123,
+   "dur": 9.645,
+   "end": 62.768
+  },
+  {
+   "id": "s07",
+   "shot": 7,
+   "start": 63.568,
+   "dur": 7.352,
+   "end": 70.92
+  },
+  {
+   "id": "s08",
+   "shot": 8,
+   "start": 71.72,
+   "dur": 12.731,
+   "end": 84.451
+  },
+  {
+   "id": "s09",
+   "shot": 9,
+   "start": 85.251,
+   "dur": 7.0,
+   "end": 92.251
+  },
+  {
+   "id": "s10",
+   "shot": 10,
+   "start": 93.151,
+   "dur": 10.195,
+   "end": 103.346
+  }
+ ]
+}

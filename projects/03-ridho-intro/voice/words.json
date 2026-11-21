@@ -1,0 +1,1218 @@
+[
+ {
+  "id": "s01",
+  "shot": 1,
+  "chapter": "HOOK",
+  "t0": 0.11,
+  "t1": 6.138,
+  "text": "Kalau mukaku kelihatan jutek, aku lagi nggak marah. Aku lagi debugging rumus di kepala.",
+  "words": [
+   {
+    "w": "Kalau",
+    "t0": 0.15,
+    "t1": 0.401,
+    "kw": false
+   },
+   {
+    "w": "mukaku",
+    "t0": 0.401,
+    "t1": 0.735,
+    "kw": false
+   },
+   {
+    "w": "kelihatan",
+    "t0": 0.735,
+    "t1": 1.091,
+    "kw": false
+   },
+   {
+    "w": "jutek,",
+    "t0": 1.091,
+    "t1": 1.797,
+    "kw": true
+   },
+   {
+    "w": "aku",
+    "t0": 1.797,
+    "t1": 2.373,
+    "kw": false
+   },
+   {
+    "w": "lagi",
+    "t0": 2.373,
+    "t1": 2.524,
+    "kw": false
+   },
+   {
+    "w": "nggak",
+    "t0": 2.524,
+    "t1": 2.81,
+    "kw": false
+   },
+   {
+    "w": "marah.",
+    "t0": 2.81,
+    "t1": 3.632,
+    "kw": true
+   },
+   {
+    "w": "Aku",
+    "t0": 3.632,
+    "t1": 4.118,
+    "kw": false
+   },
+   {
+    "w": "lagi",
+    "t0": 4.118,
+    "t1": 4.493,
+    "kw": false
+   },
+   {
+    "w": "debugging",
+    "t0": 4.493,
+    "t1": 4.997,
+    "kw": true
+   },
+   {
+    "w": "rumus",
+    "t0": 4.997,
+    "t1": 5.263,
+    "kw": true
+   },
+   {
+    "w": "di",
+    "t0": 5.263,
+    "t1": 5.386,
+    "kw": false
+   },
+   {
+    "w": "kepala.",
+    "t0": 5.386,
+    "t1": 5.888,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s02",
+  "shot": 2,
+  "chapter": "IDENTITAS",
+  "t0": 6.698,
+  "t1": 17.732,
+  "text": "Aku Ridho, lulusan Pendidikan Matematika, tipe ISTJ-A. Sehari-hari bekerja sebagai Statistisi di salah satu instansi pemerintahan.",
+  "words": [
+   {
+    "w": "Aku",
+    "t0": 6.846,
+    "t1": 7.002,
+    "kw": false
+   },
+   {
+    "w": "Ridho,",
+    "t0": 7.002,
+    "t1": 8.011,
+    "kw": true
+   },
+   {
+    "w": "lulusan",
+    "t0": 8.011,
+    "t1": 8.402,
+    "kw": false
+   },
+   {
+    "w": "Pendidikan",
+    "t0": 8.402,
+    "t1": 8.939,
+    "kw": false
+   },
+   {
+    "w": "Matematika,",
+    "t0": 8.939,
+    "t1": 10.191,
+    "kw": true
+   },
+   {
+    "w": "tipe",
+    "t0": 10.191,
+    "t1": 10.863,
+    "kw": false
+   },
+   {
+    "w": "ISTJ-A.",
+    "t0": 10.863,
+    "t1": 12.486,
+    "kw": true
+   },
+   {
+    "w": "Sehari-hari",
+    "t0": 12.486,
+    "t1": 13.471,
+    "kw": false
+   },
+   {
+    "w": "bekerja",
+    "t0": 13.471,
+    "t1": 13.802,
+    "kw": false
+   },
+   {
+    "w": "sebagai",
+    "t0": 13.802,
+    "t1": 14.137,
+    "kw": false
+   },
+   {
+    "w": "Statistisi",
+    "t0": 14.137,
+    "t1": 14.954,
+    "kw": true
+   },
+   {
+    "w": "di",
+    "t0": 14.954,
+    "t1": 15.182,
+    "kw": false
+   },
+   {
+    "w": "salah",
+    "t0": 15.182,
+    "t1": 15.337,
+    "kw": false
+   },
+   {
+    "w": "satu",
+    "t0": 15.337,
+    "t1": 15.541,
+    "kw": false
+   },
+   {
+    "w": "instansi",
+    "t0": 15.541,
+    "t1": 16.028,
+    "kw": false
+   },
+   {
+    "w": "pemerintahan.",
+    "t0": 16.028,
+    "t1": 16.806,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s03",
+  "shot": 3,
+  "chapter": "LAZY AUTOMATOR",
+  "t0": 18.242,
+  "t1": 26.29,
+  "text": "Kebiasaan anehku? Rela ngoding seharian biar nggak kerja manual lima menit. Investasi jangka panjang, bro.",
+  "words": [
+   {
+    "w": "Kebiasaan",
+    "t0": 18.377,
+    "t1": 18.914,
+    "kw": false
+   },
+   {
+    "w": "anehku?",
+    "t0": 18.914,
+    "t1": 20.137,
+    "kw": true
+   },
+   {
+    "w": "Rela",
+    "t0": 20.137,
+    "t1": 20.459,
+    "kw": false
+   },
+   {
+    "w": "ngoding",
+    "t0": 20.459,
+    "t1": 20.988,
+    "kw": false
+   },
+   {
+    "w": "seharian",
+    "t0": 20.988,
+    "t1": 21.78,
+    "kw": true
+   },
+   {
+    "w": "biar",
+    "t0": 21.78,
+    "t1": 22.241,
+    "kw": false
+   },
+   {
+    "w": "nggak",
+    "t0": 22.241,
+    "t1": 22.572,
+    "kw": false
+   },
+   {
+    "w": "kerja",
+    "t0": 22.572,
+    "t1": 22.87,
+    "kw": false
+   },
+   {
+    "w": "manual",
+    "t0": 22.87,
+    "t1": 23.238,
+    "kw": true
+   },
+   {
+    "w": "lima",
+    "t0": 23.238,
+    "t1": 23.487,
+    "kw": false
+   },
+   {
+    "w": "menit.",
+    "t0": 23.487,
+    "t1": 24.54,
+    "kw": false
+   },
+   {
+    "w": "Investasi",
+    "t0": 24.54,
+    "t1": 24.989,
+    "kw": true
+   },
+   {
+    "w": "jangka",
+    "t0": 24.989,
+    "t1": 25.337,
+    "kw": false
+   },
+   {
+    "w": "panjang,",
+    "t0": 25.337,
+    "t1": 25.768,
+    "kw": false
+   },
+   {
+    "w": "bro.",
+    "t0": 25.768,
+    "t1": 25.917,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s04",
+  "shot": 4,
+  "chapter": "SKALA DATA",
+  "t0": 26.9,
+  "t1": 40.223,
+  "text": "Bayangin ngurus 234 madrasah, 31 ribu data siswa, dan hampir 3 ribu data guru dan tendik. Kalau direkap manual satu-satu, kapan selesainya?",
+  "words": [
+   {
+    "w": "Bayangin",
+    "t0": 27.248,
+    "t1": 28.056,
+    "kw": false
+   },
+   {
+    "w": "ngurus",
+    "t0": 28.056,
+    "t1": 28.588,
+    "kw": false
+   },
+   {
+    "w": "234",
+    "t0": 28.588,
+    "t1": 28.831,
+    "kw": true
+   },
+   {
+    "w": "madrasah,",
+    "t0": 28.831,
+    "t1": 30.011,
+    "kw": true
+   },
+   {
+    "w": "31",
+    "t0": 30.011,
+    "t1": 30.279,
+    "kw": true
+   },
+   {
+    "w": "ribu",
+    "t0": 30.279,
+    "t1": 31.217,
+    "kw": false
+   },
+   {
+    "w": "data",
+    "t0": 31.217,
+    "t1": 32.213,
+    "kw": false
+   },
+   {
+    "w": "siswa,",
+    "t0": 32.213,
+    "t1": 32.588,
+    "kw": true
+   },
+   {
+    "w": "dan",
+    "t0": 32.588,
+    "t1": 32.927,
+    "kw": false
+   },
+   {
+    "w": "hampir",
+    "t0": 32.927,
+    "t1": 34.153,
+    "kw": false
+   },
+   {
+    "w": "3",
+    "t0": 34.153,
+    "t1": 34.242,
+    "kw": false
+   },
+   {
+    "w": "ribu",
+    "t0": 34.242,
+    "t1": 34.682,
+    "kw": false
+   },
+   {
+    "w": "data",
+    "t0": 34.682,
+    "t1": 35.135,
+    "kw": false
+   },
+   {
+    "w": "guru",
+    "t0": 35.135,
+    "t1": 35.27,
+    "kw": true
+   },
+   {
+    "w": "dan",
+    "t0": 35.27,
+    "t1": 35.42,
+    "kw": false
+   },
+   {
+    "w": "tendik.",
+    "t0": 35.42,
+    "t1": 35.986,
+    "kw": true
+   },
+   {
+    "w": "Kalau",
+    "t0": 35.986,
+    "t1": 36.931,
+    "kw": false
+   },
+   {
+    "w": "direkap",
+    "t0": 36.931,
+    "t1": 37.324,
+    "kw": false
+   },
+   {
+    "w": "manual",
+    "t0": 37.324,
+    "t1": 37.725,
+    "kw": false
+   },
+   {
+    "w": "satu-satu,",
+    "t0": 37.725,
+    "t1": 38.727,
+    "kw": false
+   },
+   {
+    "w": "kapan",
+    "t0": 38.727,
+    "t1": 39.208,
+    "kw": false
+   },
+   {
+    "w": "selesainya?",
+    "t0": 39.208,
+    "t1": 39.628,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s05",
+  "shot": 5,
+  "chapter": "GOOGLE WORKSPACE",
+  "t0": 40.733,
+  "t1": 52.523,
+  "text": "Jadi aku bangun 16 sistem, 15 sendirian. Modal Google Workspace gratis, disulap jadi aplikasi beneran. Nggak perlu sewa server, nggak bikin kantong jebol.",
+  "words": [
+   {
+    "w": "Jadi",
+    "t0": 40.883,
+    "t1": 41.29,
+    "kw": false
+   },
+   {
+    "w": "aku",
+    "t0": 41.29,
+    "t1": 41.831,
+    "kw": false
+   },
+   {
+    "w": "bangun",
+    "t0": 41.831,
+    "t1": 42.23,
+    "kw": false
+   },
+   {
+    "w": "16",
+    "t0": 42.23,
+    "t1": 42.35,
+    "kw": true
+   },
+   {
+    "w": "sistem,",
+    "t0": 42.35,
+    "t1": 42.912,
+    "kw": true
+   },
+   {
+    "w": "15",
+    "t0": 42.912,
+    "t1": 43.16,
+    "kw": true
+   },
+   {
+    "w": "sendirian.",
+    "t0": 43.16,
+    "t1": 43.984,
+    "kw": false
+   },
+   {
+    "w": "Modal",
+    "t0": 43.984,
+    "t1": 44.197,
+    "kw": false
+   },
+   {
+    "w": "Google",
+    "t0": 44.197,
+    "t1": 45.411,
+    "kw": true
+   },
+   {
+    "w": "Workspace",
+    "t0": 45.411,
+    "t1": 46.099,
+    "kw": true
+   },
+   {
+    "w": "gratis,",
+    "t0": 46.099,
+    "t1": 46.439,
+    "kw": true
+   },
+   {
+    "w": "disulap",
+    "t0": 46.439,
+    "t1": 47.4,
+    "kw": false
+   },
+   {
+    "w": "jadi",
+    "t0": 47.4,
+    "t1": 47.913,
+    "kw": false
+   },
+   {
+    "w": "aplikasi",
+    "t0": 47.913,
+    "t1": 48.305,
+    "kw": false
+   },
+   {
+    "w": "beneran.",
+    "t0": 48.305,
+    "t1": 48.675,
+    "kw": false
+   },
+   {
+    "w": "Nggak",
+    "t0": 48.675,
+    "t1": 49.192,
+    "kw": false
+   },
+   {
+    "w": "perlu",
+    "t0": 49.192,
+    "t1": 50.066,
+    "kw": false
+   },
+   {
+    "w": "sewa",
+    "t0": 50.066,
+    "t1": 50.263,
+    "kw": false
+   },
+   {
+    "w": "server,",
+    "t0": 50.263,
+    "t1": 50.824,
+    "kw": true
+   },
+   {
+    "w": "nggak",
+    "t0": 50.824,
+    "t1": 51.4,
+    "kw": false
+   },
+   {
+    "w": "bikin",
+    "t0": 51.4,
+    "t1": 51.579,
+    "kw": false
+   },
+   {
+    "w": "kantong",
+    "t0": 51.579,
+    "t1": 51.87,
+    "kw": false
+   },
+   {
+    "w": "jebol.",
+    "t0": 51.87,
+    "t1": 52.243,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s06",
+  "shot": 6,
+  "chapter": "FLAGSHIP",
+  "t0": 53.083,
+  "t1": 63.018,
+  "text": "Dari SI-PRIMA, SI-PELITA, sampai website pemerintahan. Hasilnya? Nggak perlu lagi rekap manual, apalagi tarik data satu per satu.",
+  "words": [
+   {
+    "w": "Dari",
+    "t0": 53.123,
+    "t1": 53.526,
+    "kw": false
+   },
+   {
+    "w": "SI-PRIMA,",
+    "t0": 53.526,
+    "t1": 54.121,
+    "kw": true
+   },
+   {
+    "w": "SI-PELITA,",
+    "t0": 54.121,
+    "t1": 55.483,
+    "kw": true
+   },
+   {
+    "w": "sampai",
+    "t0": 55.483,
+    "t1": 55.845,
+    "kw": false
+   },
+   {
+    "w": "website",
+    "t0": 55.845,
+    "t1": 56.355,
+    "kw": false
+   },
+   {
+    "w": "pemerintahan.",
+    "t0": 56.355,
+    "t1": 58.176,
+    "kw": true
+   },
+   {
+    "w": "Hasilnya?",
+    "t0": 58.176,
+    "t1": 59.07,
+    "kw": false
+   },
+   {
+    "w": "Nggak",
+    "t0": 59.07,
+    "t1": 59.278,
+    "kw": false
+   },
+   {
+    "w": "perlu",
+    "t0": 59.278,
+    "t1": 59.558,
+    "kw": false
+   },
+   {
+    "w": "lagi",
+    "t0": 59.558,
+    "t1": 59.793,
+    "kw": false
+   },
+   {
+    "w": "rekap",
+    "t0": 59.793,
+    "t1": 60.054,
+    "kw": true
+   },
+   {
+    "w": "manual,",
+    "t0": 60.054,
+    "t1": 61.066,
+    "kw": true
+   },
+   {
+    "w": "apalagi",
+    "t0": 61.066,
+    "t1": 61.521,
+    "kw": false
+   },
+   {
+    "w": "tarik",
+    "t0": 61.521,
+    "t1": 61.919,
+    "kw": true
+   },
+   {
+    "w": "data",
+    "t0": 61.919,
+    "t1": 62.135,
+    "kw": true
+   },
+   {
+    "w": "satu",
+    "t0": 62.135,
+    "t1": 62.354,
+    "kw": false
+   },
+   {
+    "w": "per",
+    "t0": 62.354,
+    "t1": 62.532,
+    "kw": false
+   },
+   {
+    "w": "satu.",
+    "t0": 62.532,
+    "t1": 62.768,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s07",
+  "shot": 7,
+  "chapter": "BOT PYTHON",
+  "t0": 63.528,
+  "t1": 71.17,
+  "text": "Kerjaan repetitif yang bikin ngantuk juga kuserahkan ke si Python. Biar mesin yang klik, aku tinggal cek angkanya.",
+  "words": [
+   {
+    "w": "Kerjaan",
+    "t0": 63.681,
+    "t1": 64.07,
+    "kw": false
+   },
+   {
+    "w": "repetitif",
+    "t0": 64.07,
+    "t1": 64.633,
+    "kw": true
+   },
+   {
+    "w": "yang",
+    "t0": 64.633,
+    "t1": 64.779,
+    "kw": false
+   },
+   {
+    "w": "bikin",
+    "t0": 64.779,
+    "t1": 65.008,
+    "kw": false
+   },
+   {
+    "w": "ngantuk",
+    "t0": 65.008,
+    "t1": 65.429,
+    "kw": true
+   },
+   {
+    "w": "juga",
+    "t0": 65.429,
+    "t1": 65.922,
+    "kw": false
+   },
+   {
+    "w": "kuserahkan",
+    "t0": 65.922,
+    "t1": 66.739,
+    "kw": false
+   },
+   {
+    "w": "ke",
+    "t0": 66.739,
+    "t1": 66.902,
+    "kw": false
+   },
+   {
+    "w": "si",
+    "t0": 66.902,
+    "t1": 67.066,
+    "kw": false
+   },
+   {
+    "w": "Python.",
+    "t0": 67.066,
+    "t1": 68.298,
+    "kw": true
+   },
+   {
+    "w": "Biar",
+    "t0": 68.298,
+    "t1": 68.396,
+    "kw": false
+   },
+   {
+    "w": "mesin",
+    "t0": 68.396,
+    "t1": 68.62,
+    "kw": true
+   },
+   {
+    "w": "yang",
+    "t0": 68.62,
+    "t1": 68.892,
+    "kw": false
+   },
+   {
+    "w": "klik,",
+    "t0": 68.892,
+    "t1": 69.863,
+    "kw": false
+   },
+   {
+    "w": "aku",
+    "t0": 69.863,
+    "t1": 69.978,
+    "kw": false
+   },
+   {
+    "w": "tinggal",
+    "t0": 69.978,
+    "t1": 70.217,
+    "kw": false
+   },
+   {
+    "w": "cek",
+    "t0": 70.217,
+    "t1": 70.43,
+    "kw": true
+   },
+   {
+    "w": "angkanya.",
+    "t0": 70.43,
+    "t1": 70.92,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s08",
+  "shot": 8,
+  "chapter": "MINERVA AI",
+  "t0": 71.68,
+  "t1": 84.701,
+  "text": "Lama-lama keterusan, sekarang aku punya Minerva. Asisten AI berbasis Hermes Agent dengan berbagai profil personalisasi. Jalan 9 kali sehari lewat cron, langsung lapor ke Telegram.",
+  "words": [
+   {
+    "w": "Lama-lama",
+    "t0": 71.824,
+    "t1": 72.196,
+    "kw": false
+   },
+   {
+    "w": "keterusan,",
+    "t0": 72.196,
+    "t1": 73.365,
+    "kw": false
+   },
+   {
+    "w": "sekarang",
+    "t0": 73.365,
+    "t1": 73.658,
+    "kw": false
+   },
+   {
+    "w": "aku",
+    "t0": 73.658,
+    "t1": 73.896,
+    "kw": false
+   },
+   {
+    "w": "punya",
+    "t0": 73.896,
+    "t1": 74.287,
+    "kw": false
+   },
+   {
+    "w": "Minerva.",
+    "t0": 74.287,
+    "t1": 75.143,
+    "kw": true
+   },
+   {
+    "w": "Asisten",
+    "t0": 75.143,
+    "t1": 76.019,
+    "kw": false
+   },
+   {
+    "w": "AI",
+    "t0": 76.019,
+    "t1": 76.206,
+    "kw": true
+   },
+   {
+    "w": "berbasis",
+    "t0": 76.206,
+    "t1": 76.634,
+    "kw": false
+   },
+   {
+    "w": "Hermes",
+    "t0": 76.634,
+    "t1": 77.111,
+    "kw": true
+   },
+   {
+    "w": "Agent",
+    "t0": 77.111,
+    "t1": 77.581,
+    "kw": true
+   },
+   {
+    "w": "dengan",
+    "t0": 77.581,
+    "t1": 77.94,
+    "kw": false
+   },
+   {
+    "w": "berbagai",
+    "t0": 77.94,
+    "t1": 78.432,
+    "kw": false
+   },
+   {
+    "w": "profil",
+    "t0": 78.432,
+    "t1": 78.69,
+    "kw": true
+   },
+   {
+    "w": "personalisasi.",
+    "t0": 78.69,
+    "t1": 80.543,
+    "kw": false
+   },
+   {
+    "w": "Jalan",
+    "t0": 80.543,
+    "t1": 80.78,
+    "kw": false
+   },
+   {
+    "w": "9",
+    "t0": 80.78,
+    "t1": 80.828,
+    "kw": true
+   },
+   {
+    "w": "kali",
+    "t0": 80.828,
+    "t1": 81.062,
+    "kw": false
+   },
+   {
+    "w": "sehari",
+    "t0": 81.062,
+    "t1": 81.511,
+    "kw": false
+   },
+   {
+    "w": "lewat",
+    "t0": 81.511,
+    "t1": 81.892,
+    "kw": false
+   },
+   {
+    "w": "cron,",
+    "t0": 81.892,
+    "t1": 82.508,
+    "kw": true
+   },
+   {
+    "w": "langsung",
+    "t0": 82.508,
+    "t1": 83.017,
+    "kw": false
+   },
+   {
+    "w": "lapor",
+    "t0": 83.017,
+    "t1": 83.379,
+    "kw": false
+   },
+   {
+    "w": "ke",
+    "t0": 83.379,
+    "t1": 83.523,
+    "kw": false
+   },
+   {
+    "w": "Telegram.",
+    "t0": 83.523,
+    "t1": 84.104,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s09",
+  "shot": 9,
+  "chapter": "MEDIUM",
+  "t0": 85.211,
+  "t1": 92.501,
+  "text": "Di luar ngoding dan data, aku rutin nulis puluhan artikel di Medium. Isinya keluh kesahku sebagai WNI.",
+  "words": [
+   {
+    "w": "Di",
+    "t0": 85.338,
+    "t1": 85.439,
+    "kw": false
+   },
+   {
+    "w": "luar",
+    "t0": 85.439,
+    "t1": 85.661,
+    "kw": false
+   },
+   {
+    "w": "ngoding",
+    "t0": 85.661,
+    "t1": 85.988,
+    "kw": false
+   },
+   {
+    "w": "dan",
+    "t0": 85.988,
+    "t1": 86.206,
+    "kw": false
+   },
+   {
+    "w": "data,",
+    "t0": 86.206,
+    "t1": 87.327,
+    "kw": false
+   },
+   {
+    "w": "aku",
+    "t0": 87.327,
+    "t1": 87.454,
+    "kw": false
+   },
+   {
+    "w": "rutin",
+    "t0": 87.454,
+    "t1": 87.755,
+    "kw": false
+   },
+   {
+    "w": "nulis",
+    "t0": 87.755,
+    "t1": 88.012,
+    "kw": false
+   },
+   {
+    "w": "puluhan",
+    "t0": 88.012,
+    "t1": 88.282,
+    "kw": true
+   },
+   {
+    "w": "artikel",
+    "t0": 88.282,
+    "t1": 88.674,
+    "kw": true
+   },
+   {
+    "w": "di",
+    "t0": 88.674,
+    "t1": 88.871,
+    "kw": false
+   },
+   {
+    "w": "Medium.",
+    "t0": 88.871,
+    "t1": 89.986,
+    "kw": true
+   },
+   {
+    "w": "Isinya",
+    "t0": 89.986,
+    "t1": 90.78,
+    "kw": false
+   },
+   {
+    "w": "keluh",
+    "t0": 90.78,
+    "t1": 91.054,
+    "kw": true
+   },
+   {
+    "w": "kesahku",
+    "t0": 91.054,
+    "t1": 91.447,
+    "kw": true
+   },
+   {
+    "w": "sebagai",
+    "t0": 91.447,
+    "t1": 91.787,
+    "kw": false
+   },
+   {
+    "w": "WNI.",
+    "t0": 91.787,
+    "t1": 92.018,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s10",
+  "shot": 10,
+  "chapter": "CLOSING",
+  "t0": 93.111,
+  "t1": 103.596,
+  "text": "Intinya: lebih sedikit kerja manual, bebas biaya server, dan alat yang beneran dipakai orang. Mampir aja ke muhammadaliridho.my.id.",
+  "words": [
+   {
+    "w": "Intinya:",
+    "t0": 93.247,
+    "t1": 93.709,
+    "kw": false
+   },
+   {
+    "w": "lebih",
+    "t0": 93.709,
+    "t1": 94.509,
+    "kw": false
+   },
+   {
+    "w": "sedikit",
+    "t0": 94.509,
+    "t1": 94.832,
+    "kw": false
+   },
+   {
+    "w": "kerja",
+    "t0": 94.832,
+    "t1": 95.129,
+    "kw": false
+   },
+   {
+    "w": "manual,",
+    "t0": 95.129,
+    "t1": 95.593,
+    "kw": true
+   },
+   {
+    "w": "bebas",
+    "t0": 95.593,
+    "t1": 96.47,
+    "kw": true
+   },
+   {
+    "w": "biaya",
+    "t0": 96.47,
+    "t1": 96.707,
+    "kw": false
+   },
+   {
+    "w": "server,",
+    "t0": 96.707,
+    "t1": 97.195,
+    "kw": false
+   },
+   {
+    "w": "dan",
+    "t0": 97.195,
+    "t1": 97.956,
+    "kw": false
+   },
+   {
+    "w": "alat",
+    "t0": 97.956,
+    "t1": 98.254,
+    "kw": false
+   },
+   {
+    "w": "yang",
+    "t0": 98.254,
+    "t1": 98.717,
+    "kw": false
+   },
+   {
+    "w": "beneran",
+    "t0": 98.717,
+    "t1": 98.992,
+    "kw": false
+   },
+   {
+    "w": "dipakai",
+    "t0": 98.992,
+    "t1": 99.314,
+    "kw": true
+   },
+   {
+    "w": "orang.",
+    "t0": 99.314,
+    "t1": 99.536,
+    "kw": false
+   },
+   {
+    "w": "Mampir",
+    "t0": 99.536,
+    "t1": 100.352,
+    "kw": false
+   },
+   {
+    "w": "aja",
+    "t0": 100.352,
+    "t1": 100.988,
+    "kw": false
+   },
+   {
+    "w": "ke",
+    "t0": 100.988,
+    "t1": 101.155,
+    "kw": false
+   },
+   {
+    "w": "muhammadaliridho.my.id.",
+    "t0": 101.155,
+    "t1": 103.287,
+    "kw": true
+   }
+  ]
+ }
+]

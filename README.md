@@ -31,7 +31,8 @@ Informasi spesifikasi perangkat, aturan kerja workspace, dan konfigurasi lokal l
 | `00` | **SI-PELITA Kemenag Kab. Banjar** *(Arsip Awal)* | Video-Demo + HyperFrames Explainer | 1080p @ 60 FPS | Selesai | *(Arsip lokal - dikecualikan dari repo publik)* |
 | `01` | **SI-PELITA Mobile Explainer** *(Inovasi Kemenag Kab. Banjar)* | Mode B: Lemo-Opuscar (`stick-explainer` + Geometric Shapes) | `1080x1920 (9:16) @ 60 FPS` · `64.1s` | Selesai | [projects/01-sipelita-explainer/](projects/01-sipelita-explainer/README.md) |
 | `02` | **Anak Sulung: Kuat Karena Harus** *(Koleksi Esai Medium)* | Mode B: Lemo-Opuscar Pure (`risograph` — Canvas 2D + WebGL2) | `1080x1920 (9:16) @ 24 FPS` · `59.4s` | Selesai (Rendered) | [projects/02-anak-sulung/](projects/02-anak-sulung/README.md) |
-| `03` | *Proyek Berikutnya* | - | - | Siap dimulai | [projects/](projects/README.md) |
+| `03` | **Muhammad Ali Ridho: Math Brain, Lazy Automator** *(Video Perkenalan Portofolio)* | Mode A: HyperFrames (`v0.9.70` + GSAP 3.15 + Canvas 2D Verlet Lanyard) | `1080x1920 (9:16) @ 60 FPS` · `104.8s` | Selesai (Rendered) | [projects/03-ridho-intro/](projects/03-ridho-intro/README.md) |
+| `04` | *Proyek Berikutnya* | - | - | Siap dimulai | [projects/](projects/README.md) |
 
 ---
 

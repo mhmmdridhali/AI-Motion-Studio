@@ -1,0 +1,86 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #f8fafc; font-family: "Inter", sans-serif; }
+    .light-curtain { position: absolute; inset: 0; background: #f8fafc; }
+    .dot-grid { position: absolute; inset: 0; background-image: radial-gradient(#0a0a0a 1.5px, transparent 1.5px); background-size: 32px 32px; opacity: 0.06; }
+    .stage { position: absolute; left: 76px; right: 76px; top: 150px; display: flex; flex-direction: column; gap: 22px; }
+
+    .deck-wrap { position: relative; height: 690px; }
+    .article-back { position: absolute; left: 22px; right: 22px; top: 18px; height: 650px; background: #e5e5e5; border-radius: 38px; border: 2px solid #d4d4d4; }
+    .article-front { position: relative; height: 650px; background: #ffffff; border: 2px solid #e5e5e5; border-radius: 38px; padding: 40px 44px; box-shadow: 0 30px 64px rgba(10, 10, 10, 0.11); display: flex; flex-direction: column; justify-content: space-between; }
+    .author-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .author-left { display: flex; align-items: center; gap: 18px; }
+    .author-left img { width: 82px; height: 82px; border-radius: 999px; object-fit: contain; background: #f1f5f9; border: 2px solid #0a0a0a; padding: 4px; }
+    .author-name { font-size: 30px; font-weight: 900; color: #0a0a0a; }
+    .author-handle { font-size: 28px; font-weight: 400; color: #737373; }
+    .med-pill { padding: 10px 22px; border-radius: 999px; background: #0a0a0a; color: #ffffff; font-size: 28px; font-weight: 700; white-space: nowrap; }
+    .med-mid { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .med-headline { font-size: 72px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.04; color: #0a0a0a; }
+    .med-quote { background: #f8fafc; border-left: 8px solid #0a0a0a; border-radius: 0 22px 22px 0; padding: 24px 28px; font-size: 34px; font-weight: 700; color: #262626; line-height: 1.25; }
+
+    .snippets-card { background: #ffffff; border: 2px solid #e5e5e5; border-radius: 32px; padding: 28px 34px; box-shadow: 0 20px 44px rgba(10, 10, 10, 0.08); display: flex; flex-direction: column; gap: 16px; }
+    .snip-row { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; background: #f8fafc; border: 1px solid #e5e5e5; border-radius: 20px; font-size: 28px; font-weight: 700; color: #0a0a0a; }
+    .snip-meta { color: #525252; font-weight: 700; white-space: nowrap; }
+
+    .anchor-med { background: #0a0a0a; color: #ffffff; border-radius: 30px; padding: 28px 36px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .anchor-med h2 { font-size: 40px; font-weight: 900; letter-spacing: -0.025em; }
+    .anchor-line { width: 48px; height: 6px; border-radius: 999px; background: #ffffff; flex-shrink: 0; }
+  </style>
+  <div id="root" data-composition-id="s09-medium" data-width="1080" data-height="1920">
+    <div id="s09-curtain" class="light-curtain" data-layout-ignore="true"></div>
+    <div class="dot-grid" data-layout-ignore="true"></div>
+    <div class="stage">
+      <div class="deck-wrap">
+        <div id="s09-back" class="article-back" data-layout-ignore="true"></div>
+        <div id="s09-front" class="article-front">
+          <div class="author-row">
+            <div class="author-left">
+              <img src="assets/mbti_character.webp" alt="Ilustrasi Penulis" />
+              <div>
+                <div class="author-name">Muhammad Ali Ridho</div>
+                <div class="author-handle">@mhmmdaliridh</div>
+              </div>
+            </div>
+            <span class="med-pill">Medium</span>
+          </div>
+          <div class="med-mid">
+            <div class="med-headline">Puluhan<br />Artikel Terbit.</div>
+            <svg width="150" height="150" viewBox="0 0 150 150" fill="none" data-layout-ignore="true">
+              <circle cx="75" cy="75" r="66" fill="#f8fafc" stroke="#e5e5e5" stroke-width="3" />
+              <path d="M44 106 L52 76 L92 36 L114 58 L74 98 Z" fill="#0a0a0a" />
+              <path id="s09-ink" d="M36 116 H114" stroke="#10b981" stroke-width="6" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100" />
+            </svg>
+          </div>
+          <div id="s09-quote" class="med-quote">
+            "Isinya keluh kesahku sebagai WNI."
+          </div>
+        </div>
+      </div>
+
+      <div id="s09-snips" class="snippets-card">
+        <div class="snip-row"><span>#01 · Catatan Otomasi &amp; Kerja Data</span><span class="snip-meta">Artikel</span></div>
+        <div class="snip-row"><span>#02 · Refleksi Keseharian Sebagai WNI</span><span class="snip-meta">Opini</span></div>
+      </div>
+
+      <div id="s09-anchor" class="anchor-med">
+        <h2>Ngoding, Data, dan Menulis</h2>
+        <div class="anchor-line"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s09-curtain", { y: -1920 }, { y: 0, duration: 0.24, ease: "power3.out" }, 0);
+      tl.fromTo("#s09-back", { rotation: 0, opacity: 0 }, { rotation: -2.4, opacity: 1, duration: 0.36, ease: "power2.out" }, 0.05);
+      tl.fromTo("#s09-front", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.38, ease: "power3.out" }, 0.06);
+      tl.to("#s09-ink", { strokeDashoffset: 0, duration: 1.2, ease: "power2.out" }, 0.8);
+      tl.fromTo("#s09-quote", { x: -24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.42, ease: "power3.out" }, 2.2);
+      tl.fromTo("#s09-snips", { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.38, ease: "power3.out" }, 0.5);
+      tl.fromTo("#s09-anchor", { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.38, ease: "power3.out" }, 0.85);
+      tl.to(["#s09-front", "#s09-back", "#s09-snips", "#s09-anchor"], { opacity: 0, y: -26, duration: 0.24, ease: "power3.in" }, 7.62);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["s09-medium"] = tl;
+    })();
+  </script>
+</template>

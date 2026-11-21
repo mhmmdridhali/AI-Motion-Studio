@@ -1,0 +1,252 @@
+[
+ {
+  "t0": 0.15,
+  "t1": 1.917,
+  "text": "Kalau mukaku kelihatan jutek,"
+ },
+ {
+  "t0": 1.797,
+  "t1": 3.752,
+  "text": "aku lagi nggak marah."
+ },
+ {
+  "t0": 3.632,
+  "t1": 5.506,
+  "text": "Aku lagi debugging rumus di"
+ },
+ {
+  "t0": 5.386,
+  "t1": 6.008,
+  "text": "kepala."
+ },
+ {
+  "t0": 6.846,
+  "t1": 10.311,
+  "text": "Aku Ridho, lulusan Pendidikan Matematika,"
+ },
+ {
+  "t0": 10.191,
+  "t1": 12.606,
+  "text": "tipe ISTJ-A."
+ },
+ {
+  "t0": 12.486,
+  "t1": 15.302,
+  "text": "Sehari-hari bekerja sebagai Statistisi di"
+ },
+ {
+  "t0": 15.182,
+  "t1": 16.926,
+  "text": "salah satu instansi pemerintahan."
+ },
+ {
+  "t0": 18.377,
+  "t1": 20.257,
+  "text": "Kebiasaan anehku?"
+ },
+ {
+  "t0": 20.137,
+  "t1": 22.692,
+  "text": "Rela ngoding seharian biar nggak"
+ },
+ {
+  "t0": 22.572,
+  "t1": 24.66,
+  "text": "kerja manual lima menit."
+ },
+ {
+  "t0": 24.54,
+  "t1": 25.888,
+  "text": "Investasi jangka panjang,"
+ },
+ {
+  "t0": 25.768,
+  "t1": 26.037,
+  "text": "bro."
+ },
+ {
+  "t0": 27.248,
+  "t1": 30.131,
+  "text": "Bayangin ngurus 234 madrasah,"
+ },
+ {
+  "t0": 30.011,
+  "t1": 32.708,
+  "text": "31 ribu data siswa,"
+ },
+ {
+  "t0": 32.588,
+  "t1": 35.255,
+  "text": "dan hampir 3 ribu data"
+ },
+ {
+  "t0": 35.135,
+  "t1": 36.106,
+  "text": "guru dan tendik."
+ },
+ {
+  "t0": 35.986,
+  "t1": 38.847,
+  "text": "Kalau direkap manual satu-satu,"
+ },
+ {
+  "t0": 38.727,
+  "t1": 39.748,
+  "text": "kapan selesainya?"
+ },
+ {
+  "t0": 40.883,
+  "t1": 43.032,
+  "text": "Jadi aku bangun 16 sistem,"
+ },
+ {
+  "t0": 42.912,
+  "t1": 44.104,
+  "text": "15 sendirian."
+ },
+ {
+  "t0": 43.984,
+  "t1": 46.559,
+  "text": "Modal Google Workspace gratis,"
+ },
+ {
+  "t0": 46.439,
+  "t1": 48.795,
+  "text": "disulap jadi aplikasi beneran."
+ },
+ {
+  "t0": 48.675,
+  "t1": 50.944,
+  "text": "Nggak perlu sewa server,"
+ },
+ {
+  "t0": 50.824,
+  "t1": 52.363,
+  "text": "nggak bikin kantong jebol."
+ },
+ {
+  "t0": 53.123,
+  "t1": 55.603,
+  "text": "Dari SI-PRIMA, SI-PELITA,"
+ },
+ {
+  "t0": 55.483,
+  "t1": 58.296,
+  "text": "sampai website pemerintahan."
+ },
+ {
+  "t0": 58.176,
+  "t1": 59.19,
+  "text": "Hasilnya?"
+ },
+ {
+  "t0": 59.07,
+  "t1": 61.186,
+  "text": "Nggak perlu lagi rekap manual,"
+ },
+ {
+  "t0": 61.066,
+  "t1": 62.652,
+  "text": "apalagi tarik data satu per"
+ },
+ {
+  "t0": 62.532,
+  "t1": 62.888,
+  "text": "satu."
+ },
+ {
+  "t0": 63.681,
+  "t1": 65.549,
+  "text": "Kerjaan repetitif yang bikin ngantuk"
+ },
+ {
+  "t0": 65.429,
+  "t1": 68.418,
+  "text": "juga kuserahkan ke si Python."
+ },
+ {
+  "t0": 68.298,
+  "t1": 69.983,
+  "text": "Biar mesin yang klik,"
+ },
+ {
+  "t0": 69.863,
+  "t1": 71.04,
+  "text": "aku tinggal cek angkanya."
+ },
+ {
+  "t0": 71.824,
+  "t1": 74.407,
+  "text": "Lama-lama keterusan, sekarang aku punya"
+ },
+ {
+  "t0": 74.287,
+  "t1": 75.263,
+  "text": "Minerva."
+ },
+ {
+  "t0": 75.143,
+  "t1": 77.701,
+  "text": "Asisten AI berbasis Hermes Agent"
+ },
+ {
+  "t0": 77.581,
+  "t1": 80.663,
+  "text": "dengan berbagai profil personalisasi."
+ },
+ {
+  "t0": 80.543,
+  "t1": 82.012,
+  "text": "Jalan 9 kali sehari lewat"
+ },
+ {
+  "t0": 81.892,
+  "t1": 84.224,
+  "text": "cron, langsung lapor ke Telegram."
+ },
+ {
+  "t0": 85.338,
+  "t1": 87.447,
+  "text": "Di luar ngoding dan data,"
+ },
+ {
+  "t0": 87.327,
+  "t1": 88.794,
+  "text": "aku rutin nulis puluhan artikel"
+ },
+ {
+  "t0": 88.674,
+  "t1": 90.106,
+  "text": "di Medium."
+ },
+ {
+  "t0": 89.986,
+  "t1": 92.138,
+  "text": "Isinya keluh kesahku sebagai WNI."
+ },
+ {
+  "t0": 93.247,
+  "t1": 95.713,
+  "text": "Intinya: lebih sedikit kerja manual,"
+ },
+ {
+  "t0": 95.593,
+  "t1": 97.315,
+  "text": "bebas biaya server,"
+ },
+ {
+  "t0": 97.195,
+  "t1": 99.434,
+  "text": "dan alat yang beneran dipakai"
+ },
+ {
+  "t0": 99.314,
+  "t1": 99.656,
+  "text": "orang."
+ },
+ {
+  "t0": 99.536,
+  "t1": 103.407,
+  "text": "Mampir aja ke muhammadaliridho.my.id."
+ }
+]

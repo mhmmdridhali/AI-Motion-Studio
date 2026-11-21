@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="id" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Thumbnail - Muhammad Ali Ridho</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #f8fafc;
+        color: #0a0a0a;
+        font-family: "Inter", sans-serif;
+      }
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        background: #f8fafc;
+        overflow: hidden;
+      }
+      .dot-grid {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(#0a0a0a 1.5px, transparent 1.5px);
+        background-size: 32px 32px;
+        opacity: 0.06;
+      }
+      #thumb-rope {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        pointer-events: none;
+        z-index: 15;
+      }
+      #thumb-card {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 450px;
+        transform-origin: 50% 0%;
+        z-index: 10;
+        background: #ffffff;
+        border: 2px solid #e5e5e5;
+        border-radius: 34px;
+        padding: 14px;
+        box-shadow: 0 36px 80px rgba(10, 10, 10, 0.16);
+      }
+      #thumb-card img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 24px;
+      }
+      .cover-bottom {
+        position: absolute;
+        left: 72px;
+        right: 72px;
+        top: 1090px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        z-index: 20;
+      }
+      .cover-headline {
+        width: 100%;
+        background: #0a0a0a;
+        color: #ffffff;
+        border-radius: 40px;
+        padding: 44px 48px;
+        box-shadow: 0 30px 70px rgba(10, 10, 10, 0.20);
+      }
+      .cover-headline h1 {
+        font-size: 86px;
+        font-weight: 900;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+      }
+      .pill-row {
+        margin-top: 26px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 22px;
+        border-radius: 999px;
+        font-size: 28px;
+        font-weight: 700;
+        background: #1c1c1c;
+        color: #f8fafc;
+        border: 1px solid #383838;
+      }
+      .dot-live {
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+        background: #10b981;
+      }
+      .brand-foot {
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 36px;
+        border-radius: 999px;
+        background: #ffffff;
+        border: 2px solid #e5e5e5;
+        font-size: 30px;
+        font-weight: 900;
+        color: #0a0a0a;
+        box-shadow: 0 16px 36px rgba(10, 10, 10, 0.08);
+      }
+      .brand-foot img {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="dot-grid"></div>
+      <canvas id="thumb-rope" width="1080" height="1920"></canvas>
+      <div id="thumb-card">
+        <img src="assets/asn-card-front-masked.png" alt="Kartu Identitas Lanyard" />
+      </div>
+      <div class="cover-bottom">
+        <div class="cover-headline">
+          <h1>Math Brain,<br />Lazy Automator.</h1>
+          <div class="pill-row">
+            <span class="pill"><span class="dot-live"></span>ISTJ-A · 86% I</span>
+            <span class="pill">16 Sistem · Google Workspace</span>
+            <span class="pill">234 Madrasah</span>
+          </div>
+        </div>
+        <div class="brand-foot">
+          <img src="assets/logo-mar.webp" alt="MAR" />
+          <span>muhammadaliridho.my.id</span>
+        </div>
+      </div>
+    </div>
+    <script>
+      (() => {
+        const canvas = document.getElementById("thumb-rope");
+        const card = document.getElementById("thumb-card");
+        const ctx = canvas.getContext("2d");
+        const W = 1080, cw = 450, sw = 48, ringR = 18;
+        const ch = Math.round(cw * 1.56);
+        const lowLen = sw * 1.9;
+        const clipH = Math.round(cw * 0.11);
+        const arm = ringR * 2 + clipH + ch * 0.55;
+        const N = 14, STEP = 1 / 120, GRAVITY = 2400, ITER = 18;
+
+        const pts = [];
+        const links = [];
+        const add = (x, y, w) => { pts.push({ x, y, px: x, py: y, w }); return pts.length - 1; };
+        const strand = (from, to, n, slack) => {
+          const a = pts[from], b = pts[to];
+          const rest = (Math.hypot(b.x - a.x, b.y - a.y) * slack) / n;
+          const ids = [from];
+          for (let i = 1; i < n; i++) ids.push(add(a.x + ((b.x - a.x) * i) / n, a.y + ((b.y - a.y) * i) / n, 1));
+          ids.push(to);
+          for (let i = 0; i < n; i++) links.push([ids[i], ids[i + 1], rest]);
+          return { ids, rest };
+        };
+
+        const cx = W / 2, spread = 190, top = -sw * 1.2, bY = 235;
+        const aL = add(cx - spread, top, 0);
+        const iB = add(cx, bY, 1.4);
+        const l = strand(aL, iB, N, 1.03);
+        const aR = add(cx + spread, top, 0);
+        const r = strand(aR, iB, N, 1.03);
+        const iT = add(cx, bY + lowLen, 0.8);
+        const lo = strand(iB, iT, 3, 1);
+        const iC = add(cx, bY + lowLen + arm, 0.25);
+        links.push([iT, iC, arm]);
+
+        // Give gentle natural tilt
+        pts[iC].x += 58;
+        pts[iC].px = pts[iC].x - 0.8;
+        for (let s = 0; s < 35; s++) {
+          for (const p of pts) {
+            if (!p.w) continue;
+            const vx = (p.x - p.px) * 0.992, vy = (p.y - p.py) * 0.992;
+            p.px = p.x; p.py = p.y;
+            p.x += vx; p.y += vy + GRAVITY * STEP * STEP;
+          }
+          for (let k = 0; k < ITER; k++) {
+            for (const [i, j, rest] of links) {
+              const a = pts[i], b = pts[j], ws = a.w + b.w;
+              if (!ws) continue;
+              const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1e-6;
+              const f = (d - rest) / (d * ws);
+              a.x += dx * f * a.w; a.y += dy * f * a.w;
+              b.x -= dx * f * b.w; b.y -= dy * f * b.w;
+            }
+          }
+        }
+
+        function drawHoneycomb(c2, startX, endX, width) {
+          const rad = width * 0.22, dx = rad * 1.5, dy = rad * Math.sqrt(3);
+          c2.save(); c2.beginPath(); c2.rect(startX, 0, endX - startX, width); c2.clip();
+          c2.lineWidth = Math.max(1, width * 0.035); c2.strokeStyle = "#525252";
+          let col = 0;
+          for (let x = startX; x <= endX + rad; x += dx, col++) {
+            const prog = Math.max(0, Math.min(1, (x - startX) / Math.max(1, endX - startX)));
+            c2.globalAlpha = 0.14 + prog * 0.55;
+            const yOff = (col % 2) * (dy / 2);
+            for (let y = -rad + yOff; y <= width + rad; y += dy) {
+              c2.beginPath();
+              for (let s = 0; s < 6; s++) {
+                const ang = (s / 6) * Math.PI * 2;
+                const hx = x + Math.cos(ang) * rad * 0.92, hy = y + Math.sin(ang) * rad * 0.92;
+                if (s === 0) c2.moveTo(hx, hy); else c2.lineTo(hx, hy);
+              }
+              c2.closePath(); c2.stroke();
+            }
+          }
+          c2.restore();
+        }
+
+        function makeStrap(len, wid, plain) {
+          const c = document.createElement("canvas");
+          c.width = Math.round(wid); c.height = Math.round(len);
+          const c2 = c.getContext("2d");
+          c2.setTransform(0, 1, -1, 0, c.width, 0);
+          c2.fillStyle = "#0a0a0a"; c2.fillRect(0, 0, len, wid);
+          if (!plain) drawHoneycomb(c2, len * 0.25, len, wid);
+          c2.globalAlpha = 0.28; c2.strokeStyle = "#525252"; c2.lineWidth = 1.5;
+          c2.beginPath(); c2.moveTo(0, 2); c2.lineTo(len, 2); c2.moveTo(0, wid - 2); c2.lineTo(len, wid - 2); c2.stroke();
+          return c;
+        }
+
+        const strapTex = makeStrap(l.rest * N + 8, sw, false);
+        const plainTex = makeStrap(lowLen + 8, sw * 0.84, true);
+
+        const drawRibbon = (ids, tex, rest, light) => {
+          const Wt = tex.width;
+          for (let i = 0; i < ids.length - 1; i++) {
+            const a = pts[ids[i]], b = pts[ids[i + 1]];
+            const dx = b.x - a.x, dy = b.y - a.y, ln = Math.hypot(dx, dy) || 1e-6;
+            const tx = dx / ln, ty = dy / ln, nx = ty, ny = -tx;
+            const v0 = i * rest, dv = rest, k = ln / dv;
+            ctx.setTransform(nx, ny, tx * k, ty * k, a.x - (nx * Wt) / 2 - tx * k * v0, a.y - (ny * Wt) / 2 - ty * k * v0);
+            const src = Math.min(dv + 1.5, tex.height - v0);
+            if (src > 0) ctx.drawImage(tex, 0, v0, Wt, src, 0, v0, Wt, src);
+            ctx.fillStyle = `rgba(0,0,0,${(0.22 * (1 - Math.max(0, nx * light))).toFixed(3)})`;
+            ctx.fillRect(0, v0, Wt, dv + 1);
+          }
+        };
+
+        drawRibbon(l.ids, strapTex, l.rest, -1);
+        drawRibbon(r.ids, strapTex, r.rest, 1);
+        drawRibbon(lo.ids, plainTex, lowLen / 3, 0);
+
+        const B = pts[iB], T = pts[iT], ang = Math.atan2(T.x - B.x, T.y - B.y), u = sw / 20;
+        ctx.setTransform(1, 0, 0, 1, B.x, B.y);
+        ctx.rotate(-ang);
+        ctx.fillStyle = "#171717"; ctx.strokeStyle = "#525252"; ctx.lineWidth = 1.2 * u;
+        ctx.beginPath(); ctx.roundRect(-14 * u, -17 * u, 28 * u, 20 * u, 3.5 * u); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.roundRect(-11 * u, 2 * u, 22 * u, 16 * u, [2 * u, 2 * u, 5 * u, 5 * u]); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = "#0a0a0a"; ctx.beginPath(); ctx.arc(0, -4 * u, 6.2 * u, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+        ctx.setTransform(1, 0, 0, 1, T.x, T.y + ringR * 0.8);
+        const g = ctx.createLinearGradient(-ringR, -ringR, ringR, ringR);
+        g.addColorStop(0, "#f8fafc"); g.addColorStop(0.5, "#737373"); g.addColorStop(1, "#e5e5e5");
+        ctx.lineWidth = 6.5; ctx.strokeStyle = g;
+        ctx.beginPath(); ctx.arc(0, 0, ringR, 0, Math.PI * 2); ctx.stroke();
+
+        const C = pts[iC];
+        const swing = Math.atan2(C.x - T.x, C.y - T.y);
+        card.style.transform = `translate3d(${(T.x - cw / 2).toFixed(2)}px, ${(T.y + ringR).toFixed(2)}px, 0) rotate(${(-swing).toFixed(4)}rad)`;
+      })();
+    </script>
+  </body>
+</html>

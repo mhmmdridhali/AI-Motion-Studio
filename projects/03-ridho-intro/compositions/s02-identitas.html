@@ -1,0 +1,115 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #f8fafc; font-family: "Inter", sans-serif; }
+    .dot-grid { position: absolute; inset: 0; background-image: radial-gradient(#0a0a0a 1.5px, transparent 1.5px); background-size: 32px 32px; opacity: 0.06; }
+    .stage { position: absolute; left: 76px; right: 76px; top: 155px; height: 1290px; }
+    .face-front { position: absolute; inset: 0; background: #ffffff; border: 2px solid #e5e5e5; border-radius: 44px; padding: 48px; box-shadow: 0 32px 68px rgba(10, 10, 10, 0.12); display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
+    .front-img { height: 780px; width: auto; border-radius: 30px; border: 1px solid #e5e5e5; }
+    .front-meta { width: 100%; display: flex; align-items: center; justify-content: space-between; background: #f8fafc; border: 1px solid #e5e5e5; border-radius: 26px; padding: 24px 32px; }
+    .front-name { font-size: 40px; font-weight: 900; color: #0a0a0a; letter-spacing: -0.02em; }
+    .front-pill { padding: 10px 22px; border-radius: 999px; background: #0a0a0a; color: #ffffff; font-size: 28px; font-weight: 700; }
+
+    .face-back { position: absolute; inset: 0; background: #0d0d0f; color: #ffffff; border: 2px solid #2a2a2e; border-radius: 44px; padding: 42px 44px; box-shadow: 0 36px 80px rgba(10, 10, 10, 0.25); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+    .back-grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 28px 28px; }
+    .back-head { position: relative; z-index: 2; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .back-title { font-size: 46px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.06; }
+    .back-sub { color: #a3a3a3; font-weight: 400; font-size: 32px; display: block; margin-top: 6px; }
+    .back-bar { width: 56px; height: 6px; background: #ffffff; border-radius: 999px; margin-top: 14px; }
+    .role-badge { padding: 10px 22px; border-radius: 999px; background: #1e1e22; border: 1px solid #3f3f46; color: #f8fafc; font-size: 28px; font-weight: 700; white-space: nowrap; }
+
+    .char-stage { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 18px; margin: 12px 0; }
+    .bubble { background: #ffffff; color: #0a0a0a; border-radius: 26px; padding: 20px 28px; font-size: 28px; font-weight: 700; text-align: center; line-height: 1.28; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35); max-width: 720px; }
+    .char-box { width: 290px; height: 290px; border-radius: 34px; background: #ffffff; padding: 12px; box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45); }
+    .char-box img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+    .traits-panel { position: relative; z-index: 2; border-top: 1px solid rgba(255, 255, 255, 0.14); padding-top: 26px; display: flex; flex-direction: column; gap: 18px; }
+    .trait-row { display: flex; flex-direction: column; gap: 8px; }
+    .trait-top { display: flex; align-items: center; justify-content: space-between; font-size: 28px; font-weight: 700; }
+    .trait-name { color: #e5e5e5; }
+    .trait-pct { color: #ffffff; font-weight: 900; font-variant-numeric: tabular-nums; }
+    .trait-track { height: 20px; width: 100%; border-radius: 999px; background: rgba(255, 255, 255, 0.14); overflow: hidden; }
+    .trait-fill { height: 100%; width: 100%; border-radius: 999px; background: #ffffff; transform-origin: left center; }
+    .trait-fill.primary { background: #10b981; }
+  </style>
+  <div id="root" data-composition-id="s02-identitas" data-width="1080" data-height="1920">
+    <div class="dot-grid" data-layout-ignore="true"></div>
+    <div class="stage">
+      <div id="s02-front" class="face-front">
+        <img class="front-img" src="assets/asn-card-front-masked.png" alt="Kartu Identitas" />
+        <div class="front-meta">
+          <span class="front-name">Muhammad Ali Ridho</span>
+          <span class="front-pill">Statistisi</span>
+        </div>
+      </div>
+
+      <div id="s02-back" class="face-back">
+        <div class="back-grid" data-layout-ignore="true"></div>
+        <div class="back-head">
+          <div>
+            <div class="back-title">ISTJ-A<span class="back-sub">The Logistician</span></div>
+            <div class="back-bar"></div>
+          </div>
+          <span class="role-badge">Pend. Matematika</span>
+        </div>
+
+        <div class="char-stage">
+          <div class="bubble">"I'm not glaring at you, I'm debugging a formula in my head."</div>
+          <div id="s02-char" class="char-box">
+            <img src="assets/mbti_character.webp" alt="ISTJ-A Character" />
+          </div>
+        </div>
+
+        <div class="traits-panel">
+          <div class="trait-row">
+            <div class="trait-top"><span class="trait-name">Introverted (I)</span><span class="trait-pct">86%</span></div>
+            <div class="trait-track"><div id="bar-i" class="trait-fill primary"></div></div>
+          </div>
+          <div class="trait-row">
+            <div class="trait-top"><span class="trait-name">Sensing (S)</span><span class="trait-pct">58%</span></div>
+            <div class="trait-track"><div id="bar-s" class="trait-fill"></div></div>
+          </div>
+          <div class="trait-row">
+            <div class="trait-top"><span class="trait-name">Thinking (T)</span><span class="trait-pct">64%</span></div>
+            <div class="trait-track"><div id="bar-t" class="trait-fill"></div></div>
+          </div>
+          <div class="trait-row">
+            <div class="trait-top"><span class="trait-name">Judging (J)</span><span class="trait-pct">67%</span></div>
+            <div class="trait-track"><div id="bar-j" class="trait-fill"></div></div>
+          </div>
+          <div class="trait-row">
+            <div class="trait-top"><span class="trait-name">Assertive (A)</span><span class="trait-pct">61%</span></div>
+            <div class="trait-track"><div id="bar-a" class="trait-fill"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      gsap.set("#s02-back", { opacity: 0, scaleX: 0 });
+      gsap.set(["#bar-i", "#bar-s", "#bar-t", "#bar-j", "#bar-a"], { scaleX: 0 });
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#s02-front", { opacity: 0, y: 36, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.40, ease: "power3.out" }, 0.05);
+      // 3D Flip into ISTJ-A | The Logistician
+      tl.to("#s02-front", { scaleX: 0, opacity: 0, duration: 0.28, ease: "power2.in" }, 1.25);
+      tl.fromTo("#s02-back", { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.34, ease: "power2.out" }, 1.53);
+
+      // Staggered smooth trait bars
+      tl.to("#bar-i", { scaleX: 0.86, duration: 0.85, ease: "power3.out" }, 2.05);
+      tl.to("#bar-s", { scaleX: 0.58, duration: 0.85, ease: "power3.out" }, 2.22);
+      tl.to("#bar-t", { scaleX: 0.64, duration: 0.85, ease: "power3.out" }, 2.39);
+      tl.to("#bar-j", { scaleX: 0.67, duration: 0.85, ease: "power3.out" }, 2.56);
+      tl.to("#bar-a", { scaleX: 0.61, duration: 0.85, ease: "power3.out" }, 2.73);
+
+      // Gentle float on MBTI character
+      tl.fromTo("#s02-char", { y: 0 }, { y: -12, duration: 2.2, ease: "sine.inOut" }, 2.2);
+      tl.to("#s02-char", { y: 0, duration: 2.2, ease: "sine.inOut" }, 4.4);
+      tl.to("#s02-char", { y: -10, duration: 2.2, ease: "sine.inOut" }, 6.6);
+
+      tl.to("#s02-back", { x: -80, opacity: 0, duration: 0.30, ease: "power3.in" }, 11.20);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["s02-identitas"] = tl;
+    })();
+  </script>
+</template>

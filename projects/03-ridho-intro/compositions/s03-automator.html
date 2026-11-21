@@ -1,0 +1,91 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #f8fafc; font-family: "Inter", sans-serif; }
+    .dot-grid { position: absolute; inset: 0; background-image: radial-gradient(#0a0a0a 1.5px, transparent 1.5px); background-size: 32px 32px; opacity: 0.06; }
+    .stage { position: absolute; left: 76px; right: 76px; top: 150px; display: flex; flex-direction: column; gap: 26px; }
+    .block-dark { background: #0a0a0a; color: #ffffff; border-radius: 38px; padding: 40px 42px; box-shadow: 0 30px 66px rgba(10, 10, 10, 0.18); }
+    .head-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .kicker-light { font-size: 28px; font-weight: 700; color: #a3a3a3; }
+    .pill-green { padding: 8px 18px; border-radius: 999px; background: #10b981; color: #0a0a0a; font-size: 28px; font-weight: 900; }
+    .big-stat { font-size: 68px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; }
+    .pipe-box { margin-top: 26px; background: #151518; border: 1px solid #2c2c32; border-radius: 26px; padding: 26px 28px; display: flex; flex-direction: column; gap: 20px; }
+    .pipe-vis { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .code-snippet { flex: 1; font-family: "JetBrains Mono", monospace; font-size: 28px; font-weight: 700; color: #e5e5e5; line-height: 1.38; }
+    .code-kw { color: #10b981; }
+    .meter-track { height: 20px; border-radius: 999px; background: #262626; overflow: hidden; }
+    .meter-fill { width: 100%; height: 100%; background: #10b981; border-radius: 999px; transform-origin: left center; }
+
+    .block-light { background: #ffffff; color: #0a0a0a; border: 2px solid #e5e5e5; border-radius: 38px; padding: 36px 42px; box-shadow: 0 22px 50px rgba(10, 10, 10, 0.08); position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .kicker-dark { font-size: 28px; font-weight: 700; color: #737373; margin-bottom: 8px; }
+    .strike-line { position: absolute; left: 36px; right: 36px; top: 52%; height: 10px; background: #0a0a0a; border-radius: 999px; transform-origin: left center; }
+
+    .stamp-box { background: #ffffff; border: 5px solid #0a0a0a; border-radius: 34px; padding: 34px 40px; box-shadow: 0 26px 56px rgba(10, 10, 10, 0.16); display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .stamp-text { font-size: 44px; font-weight: 900; letter-spacing: -0.025em; color: #0a0a0a; line-height: 1.15; }
+    .stamp-badge { padding: 12px 24px; border-radius: 999px; background: #0a0a0a; color: #10b981; font-size: 28px; font-weight: 900; white-space: nowrap; }
+  </style>
+  <div id="root" data-composition-id="s03-automator" data-width="1080" data-height="1920">
+    <div class="dot-grid" data-layout-ignore="true"></div>
+    <div class="stage">
+      <div id="s03-dev" class="block-dark">
+        <div class="head-row">
+          <span class="kicker-light">Opsi Otomasi</span>
+          <span class="pill-green">1x Bangun</span>
+        </div>
+        <div class="big-stat">Ngoding Seharian</div>
+        <div class="pipe-box">
+          <div class="pipe-vis">
+            <div class="code-snippet">
+              <span class="code-kw">while</span> (manual) &#123;<br />
+              &nbsp;&nbsp;automateAll();<br />
+              &#125;
+            </div>
+            <svg width="150" height="150" viewBox="0 0 150 150" fill="none" data-layout-ignore="true">
+              <g id="s03-gear1" style="transform-origin: 58px 58px">
+                <circle cx="58" cy="58" r="28" stroke="#10b981" stroke-width="8" stroke-dasharray="14 8" />
+                <circle cx="58" cy="58" r="11" fill="#10b981" />
+              </g>
+              <g id="s03-gear2" style="transform-origin: 108px 104px">
+                <circle cx="108" cy="104" r="22" stroke="#ffffff" stroke-width="7" stroke-dasharray="11 7" />
+                <circle cx="108" cy="104" r="8" fill="#ffffff" />
+              </g>
+            </svg>
+          </div>
+          <div class="meter-track"><div id="s03-meter" class="meter-fill"></div></div>
+        </div>
+      </div>
+
+      <div id="s03-manual" class="block-light">
+        <div>
+          <div class="kicker-dark">Yang Dihindari Tiap Hari</div>
+          <div class="big-stat">5 Menit Manual</div>
+        </div>
+        <svg width="110" height="110" viewBox="0 0 110 110" fill="none" data-layout-ignore="true">
+          <rect x="18" y="24" width="66" height="72" rx="12" fill="#f1f5f9" stroke="#737373" stroke-width="4" />
+          <rect x="28" y="14" width="66" height="72" rx="12" fill="#ffffff" stroke="#0a0a0a" stroke-width="4" />
+          <path d="M40 38 H82 M40 52 H82 M40 66 H66" stroke="#737373" stroke-width="4" stroke-linecap="round" />
+        </svg>
+        <div id="s03-strike" class="strike-line"></div>
+      </div>
+
+      <div id="s03-stamp" class="stamp-box">
+        <div class="stamp-text">Investasi jangka panjang, bro.</div>
+        <span class="stamp-badge">Otomasi &gt; Manual</span>
+      </div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s03-dev", { x: 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 0.08);
+      tl.fromTo("#s03-gear1", { rotation: 0 }, { rotation: 360, duration: 7.8, ease: "none" }, 0.2);
+      tl.fromTo("#s03-gear2", { rotation: 0 }, { rotation: -360, duration: 7.8, ease: "none" }, 0.2);
+      tl.fromTo("#s03-meter", { scaleX: 0.08 }, { scaleX: 1, duration: 2.6, ease: "power2.inOut" }, 1.2);
+      tl.fromTo("#s03-manual", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 2.0);
+      tl.fromTo("#s03-strike", { scaleX: 0 }, { scaleX: 1, duration: 0.38, ease: "power3.out" }, 3.4);
+      tl.fromTo("#s03-stamp", { scale: 1.15, rotation: -5, opacity: 0 }, { scale: 1, rotation: -2, opacity: 1, duration: 0.40, ease: "back.out(1.6)" }, 4.2);
+      tl.to(["#s03-dev", "#s03-manual", "#s03-stamp"], { opacity: 0, y: -24, duration: 0.28, ease: "power3.in" }, 8.35);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["s03-automator"] = tl;
+    })();
+  </script>
+</template>

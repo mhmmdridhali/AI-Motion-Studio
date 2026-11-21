@@ -1,0 +1,104 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #f8fafc; font-family: "Inter", sans-serif; }
+    .dot-grid { position: absolute; inset: 0; background-image: radial-gradient(#0a0a0a 1.5px, transparent 1.5px); background-size: 32px 32px; opacity: 0.06; }
+    .stage { position: absolute; left: 76px; right: 76px; top: 145px; display: flex; flex-direction: column; gap: 22px; }
+    .browser-stage { position: relative; height: 670px; }
+    .proj-slide { position: absolute; inset: 0; background: #ffffff; border: 2px solid #e5e5e5; border-radius: 36px; overflow: hidden; box-shadow: 0 28px 60px rgba(10, 10, 10, 0.12); display: flex; flex-direction: column; }
+    .proj-bar { height: 82px; padding: 0 30px; background: #0a0a0a; color: #ffffff; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .proj-name { font-size: 32px; font-weight: 900; letter-spacing: -0.02em; }
+    .proj-badge { padding: 8px 18px; border-radius: 999px; background: #262626; color: #f8fafc; font-size: 28px; font-weight: 700; }
+    .shot-wrap { position: relative; flex: 1; overflow: hidden; background: #ffffff; }
+    .shot-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+    .privacy-blur { position: absolute; backdrop-filter: blur(26px); -webkit-backdrop-filter: blur(26px); background: rgba(244, 250, 246, 0.96); border-radius: 14px; }
+    .privacy-blur-dark { background: rgba(15, 35, 22, 0.94); }
+
+    .flow-card { background: #ffffff; border: 2px solid #e5e5e5; border-radius: 34px; padding: 30px 34px; box-shadow: 0 22px 48px rgba(10, 10, 10, 0.08); display: flex; flex-direction: column; gap: 20px; }
+    .flow-title { font-size: 30px; font-weight: 900; color: #0a0a0a; }
+    .flow-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .flow-node { background: #f8fafc; border: 2px solid #e5e5e5; border-radius: 24px; padding: 22px 14px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; font-size: 28px; font-weight: 700; color: #0a0a0a; }
+    .flow-node.done { background: #0a0a0a; border-color: #0a0a0a; color: #ffffff; }
+
+    .result-strip { background: #0a0a0a; color: #ffffff; border-radius: 30px; padding: 28px 36px; box-shadow: 0 22px 48px rgba(10, 10, 10, 0.16); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .result-title { font-size: 40px; font-weight: 900; letter-spacing: -0.025em; }
+    .result-pill { display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; border-radius: 999px; background: #10b981; color: #0a0a0a; font-size: 28px; font-weight: 900; white-space: nowrap; }
+  </style>
+  <div id="root" data-composition-id="s06-flagship" data-width="1080" data-height="1920">
+    <div class="dot-grid" data-layout-ignore="true"></div>
+    <div class="stage">
+      <div class="browser-stage">
+        <div id="s06-p1" class="proj-slide">
+          <div class="proj-bar"><span class="proj-name">SI-PRIMA</span><span class="proj-badge">Portal Prestasi</span></div>
+          <div class="shot-wrap">
+            <img src="assets/siprima-thumb.webp" alt="SI-PRIMA" />
+            <div class="privacy-blur" style="left: 1%; top: 13%; width: 38%; height: 9%;" data-layout-ignore="true"></div>
+            <div class="privacy-blur" style="left: 1%; top: 36%; width: 38%; height: 9%;" data-layout-ignore="true"></div>
+          </div>
+        </div>
+        <div id="s06-p2" class="proj-slide">
+          <div class="proj-bar"><span class="proj-name">SI-PELITA</span><span class="proj-badge">Helpdesk</span></div>
+          <div class="shot-wrap">
+            <img src="assets/sipelita-thumb.webp" alt="SI-PELITA" />
+            <div class="privacy-blur" style="left: 10%; top: 1%; width: 22%; height: 9%;" data-layout-ignore="true"></div>
+            <div class="privacy-blur privacy-blur-dark" style="left: 26%; top: 42%; width: 48%; height: 15%;" data-layout-ignore="true"></div>
+          </div>
+        </div>
+        <div id="s06-p3" class="proj-slide">
+          <div class="proj-bar"><span class="proj-name">Website Pemerintahan</span><span class="proj-badge">Portal</span></div>
+          <div class="shot-wrap">
+            <img src="assets/penmadbanjar-thumb.webp" alt="Website Pemerintahan" />
+            <div class="privacy-blur" style="left: 0%; top: 0%; width: 32%; height: 12%;" data-layout-ignore="true"></div>
+            <div class="privacy-blur" style="left: 0%; top: 30%; width: 58%; height: 34%;" data-layout-ignore="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="s06-flow" class="flow-card">
+        <div class="flow-title">Alur Kerja 1-Klik Otomatis</div>
+        <div class="flow-steps">
+          <div id="s06-f1" class="flow-node">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" data-layout-ignore="true">
+              <rect x="8" y="6" width="28" height="32" rx="6" stroke="#0a0a0a" stroke-width="3.5" />
+              <path d="M15 17 H29 M15 25 H25" stroke="#0a0a0a" stroke-width="3.5" stroke-linecap="round" />
+            </svg>
+            <span>Input Masuk</span>
+          </div>
+          <div id="s06-f2" class="flow-node">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" data-layout-ignore="true">
+              <circle cx="22" cy="22" r="14" stroke="#10b981" stroke-width="4" stroke-dasharray="10 5" />
+            </svg>
+            <span>Sortir Drive</span>
+          </div>
+          <div id="s06-f3" class="flow-node done">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" data-layout-ignore="true">
+              <path d="M10 23 L19 32 L34 14" stroke="#10b981" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>Rekap Jadi</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="s06-res" class="result-strip">
+        <div class="result-title">Bebas Rekap Manual</div>
+        <div class="result-pill">1-Klik Selesai</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      gsap.set(["#s06-p2", "#s06-p3"], { opacity: 0, x: 80 });
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s06-p1", { opacity: 0, y: 36, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: "power3.out" }, 0.05);
+      tl.to("#s06-p1", { x: -70, opacity: 0, duration: 0.30, ease: "power2.in" }, 1.95);
+      tl.fromTo("#s06-p2", { x: 70, opacity: 0 }, { x: 0, opacity: 1, duration: 0.36, ease: "power3.out" }, 2.15);
+      tl.to("#s06-p2", { x: -70, opacity: 0, duration: 0.30, ease: "power2.in" }, 3.85);
+      tl.fromTo("#s06-p3", { x: 70, opacity: 0 }, { x: 0, opacity: 1, duration: 0.36, ease: "power3.out" }, 4.05);
+      tl.fromTo("#s06-flow", { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, ease: "power3.out" }, 1.2);
+      tl.fromTo([ "#s06-f1", "#s06-f2", "#s06-f3" ], { scale: 0.9, opacity: 0.6 }, { scale: 1, opacity: 1, duration: 0.35, stagger: 0.45, ease: "back.out(1.4)" }, 4.6);
+      tl.fromTo("#s06-res", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.44, ease: "power3.out" }, 5.8);
+      tl.to(["#s06-p3", "#s06-flow", "#s06-res"], { opacity: 0, y: -24, duration: 0.28, ease: "power3.in" }, 10.12);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["s06-flagship"] = tl;
+    })();
+  </script>
+</template>
