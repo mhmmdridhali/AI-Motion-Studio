@@ -44,6 +44,18 @@ lemo-opuscar\.venv\Scripts\python.exe .agents\skills\motion-studio-workflow\scri
 | **Pilih Persona `gemini_voice` (Solo / Duet)** | Pria hangat: `Orus` / `Charon` · Wanita hangat: `Kore` / `Aoede` · Dinamis: `Puck` | Untuk format dialog 2-suara (*Duet*), tulis `"gemini_voice"` & `"style"` berbeda di masing-masing baris `lines.json` (mis. Murid `Kore` vs Mentor `Orus`). |
 | **Siap-Fallback Pertanyaan Retoris** | Akhiri kalimat tanya dengan **`?` murni** (hindari pola `'...?' .`), pecah frasa pendek, serta variasikan `rate` dan `pitch` (`-4Hz`..`+4Hz`). | Jika fallback ke `edge-tts`, intonasi tanya & jeda tetap alami. |
 
+### Pagar *Word Budget* & Kalibrasi Durasi VO (Tahap 1)
+
+Gemini TTS Bahasa Indonesia berbicara alami di kisaran **`~2,00–2,15 kata/detik`**, ditambah total jeda `lead`/`gap`/`tail` sekitar **`8–12 detik`** per 10 shot. Gunakan patokan jumlah kata bersih (`text` pada `voice/lines.json`) sebelum menyajikan **Gate #1**:
+
+| Target Durasi `BRIEF.md` | Batas Kata Bersih (`lines.json`) | Catatan Eksekusi |
+| :--- | :---: | :--- |
+| **`45–60 detik`** | **`80–105 kata`** | Padat untuk hook & 1–2 poin inti Shorts/Reels. |
+| **`75–85 detik`** *(standar)* | **`135–160 kata`** | Cukup untuk 8–10 shot analogi + rekap cepat. |
+| **`90–120 detik`** | **`165–220 kata`** | Cocok untuk explainer multi-pilar mendalam. |
+
+- Wajib hitung total kata `lines.json` sebelum **Gate #1**. Apabila materi menuntut naskah lebih panjang dari kontrak awal `BRIEF.md`, ajukan penyesuaian target durasi secara eksplisit di Gate #1 — atau tawarkan percepatan non-destruktif `--tempo 1.15–1.25` saat Mini-Gate Audisi.
+
 ---
 
 ## 4. Mini-Gate Audisi Audio (Hyperlink + Browser Player + `/compact` Mandiri)
@@ -66,10 +78,12 @@ Tepat setelah `tts_expressive.py` selesai dan **sebelum menulis kode animasi**:
 ## 5. Produksi BGM, SFX & Mastering 2-Fase (`mix.py` → `out/mix.wav`)
 
 1. Apabila `BRIEF.md` mencatat `BGM/SFX: Aktif`, buat `projects/NN-slug/mix.py` membaca `voice/schedule.json` & `voice/words.json`.
-2. Gunakan perkakas lokal di `lemo-opuscar/core/audio/` (`sfx.py`, `sampler.py`, `pluck.py`, sintesis NumPy) dan/atau audio berlisensi.
-3. **Alur Audio 2-Fase untuk Gaya *Procedural Foley* (mis. `ipad-sketch`, goresan pena, fisika partikel):**
+2. Gunakan perkakas lokal di `lemo-opuscar/core/audio/` (`sfx.py`, `sampler.py`, `pluck.py`, sintesis NumPy) dan/atau audio berlisensi. Pakai cache instrumen **`_PLUCK_CACHE`** saat memanggil `core/audio/pluck.py` agar iterasi `mix.py` tetap cepat.
+3. **Alur Audio 2-Fase & Kalibrasi Baku Foley 2-Tier (untuk gaya *Procedural Foley*, mis. `ipad-sketch`):**
    - **Tahap 2 (Sebelum kode animasi ada):** Rakit `mix.py` hanya dengan **VO + BGM bed** (*dilarang membuat loop foley palsu menebak timing gambar*).
-   - **Tahap 4B (Sesudah animasi & `scenes.js` selesai):** Ekspor log event gerak nyata (`window.EV` → `events.json`), lalu perbarui/jalankan ulang `mix.py` membaca `events.json` dengan **`-50%` foley ducking saat VO berbicara** (`sfx_gain = 1.0 - 0.5 * env`) agar ketukan pena/pop tidak menutupi vokal narator sebelum membuka Live Preview Gate #2B/#3.
+   - **Tahap 4B (Sesudah animasi & `scenes.js` selesai):** Ekspor log event gerak nyata (`window.EV` → `events.json`), lalu perbarui/jalankan ulang `mix.py` membaca `events.json` dengan memisahkan foley ke 2 tier agar bersih sejak percobaan pertama Gate #2B:
+     - **Foley Gesekan Kontinu (`draw_fol`: `pencil`, `write`, `color`, `light`, `tap`):** Wajib pakai filter ***warm low-pass* `<= 1.700 Hz`** *(hindari rentang vokal `2.5–5.2 kHz`)*, gain lembut (turunkan ~`-20 dB` dari resep demo mentah), dan ***speech ducking* `-80%`** saat VO berbicara (`draw_fol *= (1.0 - 0.80 * env)[:, None]`).
+     - **Foley Aksen Cerita (`story_fol`: `shatter`, `pop`, `lock`, `chime`, `gesture`, `punch`):** Terapkan ***speech ducking* `-45%` s/d `-50%`** (`story_fol *= (1.0 - 0.50 * env)[:, None]`) agar transisi tetap terasa tanpa menutupi dialog.
 4. **Wajib Event-Synced SFX & Punchline Dips (Bukan Sekadar Transisi Generik):**
    - Pasang minimal **2–3 foley bermakna per shot** yang menempel tepat pada *micro-motion* visual (mis. klik tombol, ketikan keyboard, *gear spin*, coretan garis, pop kartu data, dering notifikasi), **bukan hanya mengulang `whoosh + click` di awal cut**.
    - Terapkan **Punchline Silence Dips (`-18 dB` selama `~0.45s`)** berjangkar timestamp `words.json` tepat pada kata punchline untuk efek komedik/dramatis.
@@ -88,7 +102,8 @@ Tepat setelah `tts_expressive.py` selesai dan **sebelum menulis kode animasi**:
        lfilter([alpha], [1.0, -(1.0 - alpha)], active[::-1])[::-1] * 0.75,
    ).clip(0.0, 1.0)
    gain_curve = 1.0 - env * (1.0 - 0.398)  # -8 dB pada BGM saat VO aktif
-   sfx_gain = 1.0 - 0.5 * env              # -50% (-6 dB) pada foley prosedural saat VO aktif
+   draw_fol_gain = 1.0 - 0.80 * env        # -80% pada foley gesekan kontinu (<= 1.700 Hz)
+   story_sfx_gain = 1.0 - 0.50 * env       # -50% pada foley aksen cerita saat VO aktif
    ```
 6. Mix di **`48000 Hz` stereo** lalu ekspor **`out/mix.wav`** *(cukup 1 file `out/mix.wav`, tidak perlu diduplikasi ke `assets/mix.wav` pada Track 1/2)* memenuhi standar **`-14 LUFS` (±1.0 LU)** dan **True Peak `≤ -1.0 dBFS`**.
 7. Ekspor subtitle `.srt` via `lemo-opuscar\core\render\srt.py` (atau `cues.json`).

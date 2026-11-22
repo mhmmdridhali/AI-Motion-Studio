@@ -9,7 +9,7 @@ Panduan ini menjamin hasil akhir `.mp4` berkapasitas di bawah **50 MB** dengan k
 - **Wajib Matikan Daemon Preview di Awal Tahap 6:** Sebelum memulai render `.mp4`, cek `manage_task` (`list`) dan **`kill` seluruh background task `lemo-preview.mjs` / `hyperframes preview`** agar UI tidak menampilkan spinner tergantung maupun mengunci port.
 - **Target Ukuran:** `projects/NN-slug/output/<slug>.mp4` **wajib < 50 MB** (`< 52.428.800` byte). Rentang optimal untuk 45–90 detik adalah **10–35 MB**.
 - **FPS Adaptif Efisien:** Gunakan `24/30 FPS` sebagai default untuk gaya artistik (`Track 1`) & presentasi editorial tenang agar waktu render 2× lebih cepat; gunakan `60 FPS` hanya untuk motion UI/scroll cepat (`Track 2/3`) saat dibutuhkan.
-- **Deteksi Dinamis Chrome Playwright (Windows):** Hindari menulis revisi angka tetap (mis. `chromium-1234` vs `chromium_headless_shell-1248`) — gunakan pencari otomatis berikut sebelum memanggil `still.mjs` / `video.mjs`:
+- **Deteksi Dinamis Chrome Playwright (Windows):** Hindari menulis revisi angka tetap (mis. `chromium-1234` vs `chromium_headless_shell-1248`) maupun path user literal (`C:\Users\<user>`) — **selalu gunakan** pencari dinamis berikut **di setiap eksekusi terminal produksi maupun di `README.md`** sebelum memanggil `still.mjs` / `video.mjs` / `events.mjs`:
   ```powershell
   $env:PLAYWRIGHT_CHROME = (Get-ChildItem "$env:USERPROFILE\AppData\Local\ms-playwright" -Recurse -Include chrome-headless-shell.exe,chrome.exe | Sort-Object FullName -Descending | Select-Object -First 1 -ExpandProperty FullName)
   ```
@@ -57,7 +57,7 @@ Hanya jalankan setelah user mengonfirmasi `.mp4` final lulus Human QA:
 1. Hapus file mezzanine berat (`out/video.mp4`, `out/raw-render.mp4`, serta duplikat `assets/mix.wav` jika ada agar tidak memakan disk) — folder `projects/**/boards/` otomatis diabaikan `.gitignore` untuk arsip lokal, sementara GitHub cukup menyimpan `preview/*.jpg`.
 2. Ekspor **`preview/poster.jpg`** *(dari `output/<slug>-thumbnail.jpg` atau hero frame bersih)* dan **`preview/contact-sheet.jpg`**, masing-masing terkompresi **`≤ 400 KB`**.
 3. Pastikan `output/`, `boards/`, `ref/`, `source/`, `.cache/`, `.env`, maupun **file skrip studio global (`.agents/skills/.../scripts/*`)** tidak muncul sebagai perubahan tak diinginkan di `git status --short` (jaga total file Git proyek tetap ramping `< 2 MB`).
-4. **Wajib Audit Privasi & Keamanan Regex Scan** pada seluruh file proyek yang akan di-commit:
-   - Scan nama user Windows aktif (`$env:USERNAME` / `C:\Users\<user>`), pola `GEMINI_API_KEY` / token rahasia, serta **daftar kata sensitif/instansi/daerah** yang dikunci pada bagian `Privasi & Sensor` di `BRIEF.md` → hasil wajib **0 temuan**.
-   - Pakai selalu `$env:USERPROFILE` / `%USERPROFILE%` di semua dokumen contoh perintah.
-5. Tulis `projects/NN-slug/README.md` mengikuti [project-readme-template.md](project-readme-template.md), perbarui tabel portofolio di root `README.md`, buat **1x `git commit` lokal**, lalu **minta izin user** sebelum `git push`.
+4. **Wajib Audit Privasi & Keamanan Regex Scan Dinamis Berbasis `BRIEF.md`:** pada seluruh file proyek yang akan di-commit:
+   - Bentuk pola regex **secara dinamis langsung dari daftar sensor aktual pada bagian `Privasi & Sensor` di `BRIEF.md` dan nama sumber/sponsor/komunitas di `FACTS.md` proyek aktif** *(dilarang menyalin daftar kata sisa proyek lama)*, lalu gabungkan dengan pola sistem & kredensial (`$env:USERNAME`, `C:\Users\<user>`, pola token `GEMINI_API_KEY` / API key rahasia) → hasil wajib **`0` temuan**.
+   - Pakai selalu `$env:USERPROFILE` / `%USERPROFILE%` di semua dokumen contoh perintah maupun eksekusi terminal produksi.
+5. **Dokumentasi, Sinkronisasi & Commit:** Pastikan `TREATMENT.md` (atau `SPEC.md`) sudah disinkronkan bila ada perubahan arsitektur zona atau ending besar saat revisi Gate #2A/#2B. Tulis `projects/NN-slug/README.md` mengikuti [project-readme-template.md](project-readme-template.md), perbarui tabel portofolio di root `README.md`, buat **1x `git commit` lokal**, lalu **minta izin user** sebelum `git push`.

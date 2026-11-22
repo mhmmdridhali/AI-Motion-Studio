@@ -7,7 +7,7 @@ Panduan ini menjaga setiap proyek punya arahan seni orisinal bebas kontaminasi, 
 ## 1. Zero Cross-Project Contamination (Kanvas Bersih)
 
 - **Sumber Kebenaran Visual Proyek Baru:** Hanya `FACTS.md`, `BRIEF.md` (hasil Grill Me #1–#4), kontrak `STYLE.md` / `SPEC.md`, dan `STYLE_REF.md` (jika ada referensi video).
-- **Larangan Kontaminasi:** Dilarang membuka, menyalin, atau mengadaptasi `scenes.js`, HTML komposisi, rig karakter, palet, atau `lines.json` dari proyek sebelumnya (`projects/01-...`, `projects/02-...`, dst.). Skrip bersama hanya boleh diambil dari `.agents/skills/motion-studio-workflow/scripts/`.
+- **Larangan Kontaminasi:** Dilarang membuka, menyalin, atau mengadaptasi `scenes.js`, HTML komposisi, rig karakter, palet, atau `lines.json` dari proyek sebelumnya (`projects/01-...`, `projects/02-...`, dst.). Skrip bersama diambil dari `.agents/skills/motion-studio-workflow/scripts/`, dan **font OFL standar disalin dari folder studio bersama `assets/fonts/`** di root workspace *(jangan mengambil dari folder proyek lama)*.
 
 ---
 
@@ -51,6 +51,9 @@ Pemilihan track ditentukan otomatis pada `BRIEF.md` sesuai karakteristik proyek:
 - **Porting Aset Web Asli & Privasi Sensor:** Ketika mengadaptasi web/portofolio brand, porting komponen autentiknya (mis. *Verlet rope physics*, doodle SVG asli) dan blur-mask wajah, NIP, kode QR, serta teks instansi sensitif sesuai `BRIEF.md` dengan rapi tanpa memotong nama pemilik/label utama.
 - **Batas Aman Ilustrasi Canvas `9:16` (`y <= 1120px`) & Watermark:** Pada adegan Canvas `9:16`, jaga sketsa/diagram inti berada pada **`y <= 1120px`** agar pita subtitle *chip* (`y: 1184–1290px`) tidak pernah menimpa gambar. Terapkan **Watermark** persis sesuai `BRIEF.md` (`Tanpa Watermark` default; `End Card Only` pada kartu akhir; atau watermark halus `opacity 18–25%` di sudut atas aman `y >= 144px` sepanjang video).
 - **Karakter & Kepadatan Teks:** Gunakan figur manusia sesuai `BRIEF.md` (pakai *stickman* hanya untuk gaya `stick-explainer`). Maksimal **1 frasa judul jangkar (1–5 kata)** per shot kunci.
+- **Standar "Editorial Illustration First" & Modular `art.js`:** Untuk gaya ilustratif (`ipad-sketch`, `sketchnote`, `stick-explainer`, `collage`, `paper-cut`, dll.), **dilarang** menampilkan *placeholder* bentuk geometris polos (kotak/lingkaran kosong) pada *draft* pertama Gate #2A. Pisahkan helper ilustrasi konkret sejak awal ke **`art.js`** *(figur manusia/karakter ekspresif, prop nyata untuk analogi seperti gitar/piano/meja/rumah, dan sketsa bentuk khas yang menyerupai logo resmi bila menyebut produk/tools populer)*.
+- **Anti Frame-Drop Canvas (`Viewport-Clipped Buffer Copy` & Zona Penutup Terpisah):** Hindari *mega zoom-out* (`z < 0.8`) ke seluruh kanvas padat pada adegan rekap/penutup yang memicu *frame drop* di Live Preview dan mengecilkan teks di `360px` — gunakan **zona penutup terpisah pada zoom seragam (`z ≈ 1.45–1.55`)**. Pada engine buffer `CACHE → WORK`, salin hanya irisan *viewport* kamera (`WORK.L[n].subarray(s0, s1).set(CACHE.L[n].subarray(s0, s1))` + `WORK.fx.drawImage(..., vx0, vy0, vw, vh)`) agar audit & render `2,5–3×` lebih cepat.
+- **Filter `cmap` `fontTools` untuk `glyphs.json`:** Saat membangun `glyphs.json` di `ipad-sketch`, periksa `cmap` font terlebih dahulu agar karakter yang tidak tersedia (mis. `→✓★`) dilewati bersih tanpa kotak rusak `.notdef` dan digambar dengan vektor `PEN`.
 
 ---
 
@@ -83,11 +86,12 @@ Pemilihan track ditentukan otomatis pada `BRIEF.md` sesuai karakteristik proyek:
      ```
      Menghasilkan `boards/contact-sheet.jpg`, `boards/phone-360.jpg` (`360px`), `boards/seams.jpg`, dan `boards/audit-report.json`.
    - **Track 3:** Jalankan `check --snapshots --no-contrast` (Run #1).
-   - **Aturan Pemisahan Ketat Gate #2A vs #2B:** Buka `boards/contact-sheet.jpg` (+ `phone-360.jpg`/`seams.jpg` bila perlu), lalu sajikan **HANYA hasil Stills & Contact Sheet** di chat. **DILARANG menggabungkan Gate #2A dan Gate #2B atau mengirim tautan `http://127.0.0.1:3020/` pada tahap ini.** Revisi memakai **Protokol Revisi 4 Langkah**, dan setelah user menyetujui Gate #2A, ingatkan user untuk mengirim **`/compact` saja secara mandiri** lalu mengetik `"Lanjut"`.
+   - **Aturan Pemisahan Ketat Gate #2A vs #2B:** Buka `boards/contact-sheet.jpg` (+ `phone-360.jpg`/`seams.jpg` bila perlu), lalu sajikan **HANYA hasil Stills & Contact Sheet** di chat. **DILARANG menggabungkan Gate #2A dan Gate #2B atau mengirim tautan `http://127.0.0.1:3020/` pada tahap ini.** Revisi memakai **Protokol Revisi 4 Langkah** *(manfaatkan **Targeted Spot Check `still.mjs <proj> <t> --out <proj>/boards --size <WxH>`** `< 1s` untuk mengecek perubahan 1 frame lokal sebelum mengulang `studio-audit.mjs` penuh)*. Setelah user menyetujui Gate #2A, ingatkan user untuk mengirim **`/compact` saja secara mandiri** lalu mengetik `"Lanjut"`.
 4. **Tahap 4B (*Procedural Foley* Sync) → Gate #2B (Live Preview Interaktif):**
    - Bila proyek memakai foley berbasis gerak prosedural, pastikan `events.json` (`window.EV`) diekspor dan `mix.py` final sudah dijalankan sebelum membuka Gate #2B.
    - **Track 1 & 2:** `node .agents\skills\motion-studio-workflow\scripts\lemo-preview.mjs projects\NN-slug --port 3020` (`BypassSandbox: true`, `IsDaemon: true`, `toolSummary: "Run live preview & audition server (daemon)"`). Cek badge header hijau **`out/mix.wav (VO+BGM+SFX)`** bila BGM/SFX aktif.
    - **Track 3:** `hyperframes play` (cepat) atau `hyperframes preview --foreground --port 3030` dengan `IsDaemon: true` agar server persisten tidak mati sendiri.
+   - **Titik `/compact` #3 Opsional & Aturan Ganti Model:** Apabila sesi revisi Gate #2B berlangsung panjang (`ctx > 160K`), rekomendasikan user mengirim **`/compact` mandiri** sebelum masuk Tahap 5/6; apabila user berencana mengganti model di tengah proyek, minta user menjalankan `/compact` mandiri **tepat sebelumnya** agar *prompt cache* tidak terbuang sia-sia.
 5. **Gate #3 (QA Akhir):**
    - **Track 1 & 2:** Jalankan `studio-audit.mjs projects\NN-slug --strict` (`--thumb` bila cover terpisah aktif: `0 errors`, `0 warnings`, 0 CDN luar, 0 404 font, 0 *dead-hold*, 0 pelanggaran zona aman `y > 1360px`).
    - **Track 3:** Jalankan Run #2 `hyperframes check --json` + `snapshot --review` + cek playbook `impeccable` (`reference/craft-floor.md`).
@@ -97,7 +101,7 @@ Pastikan `REVIEW.md` mengisi status aktual seluruh item ini sebelum meminta izin
 - [ ] **`DEMO.md` + Min. 2 *Native Moves* *(Track 1)* / `hyperframes-registry` + Struktur Flat *(Track 2/3)***
 - [ ] **Font & GSAP Fisik Lokal Terverifikasi:** `@font-face` lokal aktif (`0` CDN eksternal, `0` 404 aset)
 - [ ] **Panggung Penuh, 0 *Dead-Hold > 2.2s*, Kanvas `y <= 1120px`, Watermark Sesuai `BRIEF.md` & Zona Aman `9:16` (`y <= 1360px`)**
-- [ ] **Audio Mix & Event-Synced SFX:** `out/mix.wav` aktif di Live Preview (`-14 LUFS`, `events.json` / 2–3 foley per shot, `-50%` foley ducking, *punchline dips*)
+- [ ] **Audio Mix & Event-Synced SFX:** `out/mix.wav` aktif di Live Preview (`-14 LUFS`, `events.json` / 2–3 foley per shot, **2-tier foley**: gesekan `<= 1.700 Hz` + `-80%` ducking & aksen cerita `-45–50%` ducking, *punchline dips*)
 - [ ] **Subtitle Sesuai Pilihan `BRIEF.md`:** basis `words.json`, `KEEP_PAIRS` anti-pecah angka/istilah, *Speaker Badge* bila Duet
 - [ ] **Uji Teknis & Privasi:** `studio-audit.mjs --strict` / `hyperframes check --json` `PASS` · Phone `360px` · Seams · Masking Privasi
 - [ ] **Thumbnail Bersih Siap & Rencana Encoding `< 50 MB` (`libx264` TV-range `yuv420p`, `48 kHz` stereo, FPS adaptif)**

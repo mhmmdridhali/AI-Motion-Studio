@@ -65,11 +65,11 @@ Pastikan `BRIEF.md` memuat setiap baris berikut sebelum melangkah ke Tahap 1:
 
 ## 4. Protokol Revisi 4 Langkah (Selama Produksi & Live Preview)
 
-Saat user memberi masukan pada **Gate #1, Audisi Audio, Gate #2A/2B, atau Gate #3**, jalankan alur ini lewat **chat biasa** (tanpa `ask_question`):
+**Berlaku Mutlak di Semua Model & Mode:** Baik saat berjalan di mode Plan-Execute (`Neon + Hydrogen`) maupun mode langsung single-model (`Argon`, `Flash`, dll.), setiap masukan user pada **Gate #1, Audisi Audio, Gate #2A/2B, atau Gate #3** wajib mengikuti alur ini lewat **chat biasa** *(tanpa `ask_question`)*:
 
 1. **Langkah 1 — Masukan User:** User menjelaskan bagian yang perlu diubah dan hasil yang diharapkan.
-2. **Langkah 2 — Konfirmasi & Opsi Solusi *(sebelum menyentuh kode)*:** Ringkas pemahaman Anda atas masukan user, simpulkan akar masalahnya, **peringatkan secara transparan bila opsi revisi berisiko mengubah warna/tempo suara** (untuk VO), dan tawarkan **opsi perbaikan konkret**.
+2. **Langkah 2 — Konfirmasi & Opsi Solusi *(sebelum menyentuh kode)*:** Ringkas pemahaman Anda atas masukan user, simpulkan akar masalahnya, **peringatkan secara transparan bila opsi revisi berisiko mengubah warna/tempo suara** (untuk VO), dan tawarkan **opsi perbaikan konkret**. **Wajib berhenti di Langkah 2** untuk perubahan arsitektur/desain ulang scene, perombakan gaya ilustrasi atau logo, penyesuaian alur/tempo VO, serta **kapan pun user mengajukan pertanyaan terbuka** *(mis. "bagaimana menurutmu?")*.
 3. **Langkah 3 — Kesepakatan User:** User menyetujui opsi atau memberi tambahan hingga sepakat.
 4. **Langkah 4 — Eksekusi & Refresh:** Baru terapkan revisi ke kode/audio/stills dan kabari user untuk me-**refresh Live Preview** (`http://127.0.0.1:3020/`).
 
-*(Untuk perintah 100% eksplisit & tunggal tanpa ruang tafsir — seperti "hapus baris kredit di Scene 6" — eksekusi langsung pada Langkah 4 lalu minta user refresh).*
+*(Pengecualian langsung Langkah 4 hanya berlaku untuk perintah tunggal yang 100% eksplisit & lokal tanpa ruang tafsir — seperti "hapus baris kredit di Scene 6").*

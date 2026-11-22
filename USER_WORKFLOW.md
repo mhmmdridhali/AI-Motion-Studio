@@ -52,8 +52,8 @@ Jika bahan mentah panjang (repo/artikel/video), subagent `research` (**Model Fla
 > Begitu `BRIEF.md` selesai di Tahap 0, **widget Grill Me resmi berakhir**. Seluruh diskusi dari Gate #1 hingga selesai menggunakan **chat biasa**.
 
 ### Gate #1 — Pilih Cerita & Setujui Draf VO
-- Agent menyajikan `TREATMENT.md` (**Tabel Anti-Jipling**) atau `STORYLINES.md` + `SPEC.md` disertai draf `voice/lines.json` (`text` layar vs `say` ber-ekspresi `<short pause>`, `<sigh>`, `?`).
-- **Tugas Anda:** Pilih opsi alur, lalu koreksi istilah, nama resmi, sensor privasi, atau angka sebelum suara disintesis.
+- Agent menyajikan `TREATMENT.md` (**Tabel Anti-Jipling**) atau `STORYLINES.md` + `SPEC.md` disertai draf `voice/lines.json` (`text` layar vs `say` ber-ekspresi `<short pause>`, `<sigh>`, `?`) dengan *word budget* terkalibrasi sesuai target durasi `BRIEF.md` *(mis. `~135–160 kata` untuk `75–85 detik`)*.
+- **Tugas Anda:** Pilih opsi alur, lalu koreksi istilah, nama resmi, sensor privasi, angka, atau kesepakatan durasi sebelum suara disintesis.
 
 ### Mini-Gate Audisi Audio *(Dilengkapi Pengunci Warna Suara / Audio Lock)*
 - Agent mensintesis `voice/audition.wav` memakai **Gemini TTS** (atau fallback Edge TTS) termasuk dukungan **Duet 2-Suara**, lalu menyajikan:
@@ -63,9 +63,9 @@ Jika bahan mentah panjang (repo/artikel/video), subagent `research` (**Model Fla
 - **WAJIB `/compact` Mandiri:** Begitu audio disetujui, kirim **`/compact` saja sebagai pesan terpisah** *(jangan digabung dengan kata lain seperti `"Setuju, /compact"` agar perintah `/compact` terpicu!)*. Proses compaction selesai dalam `< 2 detik`, lalu ketik **`Lanjut`** agar agent merakit musik bed & mengoding visual.
 
 ### Gate #2A (Stills Saja + `/compact`) → Gate #2B / #3 (Live Preview Interaktif)
-- **Gate #2A (Persetujuan Stills Terpisah):** Agent menjalankan `studio-audit.mjs` (~12–24 detik untuk Track 1/2) atau `check --snapshots` (Track 3) untuk menguji *0 font 404*, *0 *dead-hold* > 2 detik*, *zona aman Reels/TikTok `y <= 1360px` (`y <= 1120px` untuk ilustrasi Canvas)*, *kontras WCAG*, serta menyajikan **HANYA `boards/contact-sheet.jpg`**, `phone-360.jpg`, dan `seams.jpg` — **tautan Live Preview belum dibuka di tahap ini** agar revisi tata letak lebih cepat lewat storyboard/stills.
+- **Gate #2A (Persetujuan Stills Terpisah — Sudah Ilustrasi Lengkap):** Agent menjalankan `studio-audit.mjs` (~12–24 detik untuk Track 1/2) atau `check --snapshots` (Track 3) untuk menguji *0 font 404*, *0 *dead-hold* > 2 detik*, *zona aman Reels/TikTok `y <= 1360px` (`y <= 1120px` untuk ilustrasi Canvas)*, *kontras WCAG*, serta menyajikan **HANYA `boards/contact-sheet.jpg`**, `phone-360.jpg`, dan `seams.jpg` *(sudah memakai ilustrasi penuh & `art.js`, bukan bentuk kotak/lingkaran polos)* — **tautan Live Preview belum dibuka di tahap ini** agar revisi tata letak lebih cepat lewat storyboard/stills.
 - **Kirim `/compact` lagi secara mandiri**, lalu ketik **`Lanjut`** setelah Gate #2A disetujui.
-- **Sinkron Foley & Gate #2B / #3 (Live Preview):** Jika gaya memakai foley prosedural (seperti coretan pena), agent terlebih dahulu mengekspor `events.json` nyata dari animasi agar SFX sinkron sempurna dengan gambar (2-fase audio), lalu membuka Live Preview (`http://127.0.0.1:3020/`). Pastikan badge bar atas berwarna hijau **`Audio: out/mix.wav (VO+BGM+SFX)`** bila musik/SFX aktif. Cukup **refresh browser** setiap selesai revisi.
+- **Sinkron Foley & Gate #2B / #3 (Live Preview):** Jika gaya memakai foley prosedural (seperti coretan pena), agent terlebih dahulu mengekspor `events.json` nyata dari animasi agar SFX sinkron sempurna dengan gambar (2-fase audio: foley gesekan halus `<= 1.700 Hz` di-duck `-80%` saat dialog & foley aksen `-50%`), lalu membuka Live Preview (`http://127.0.0.1:3020/`). Pastikan badge bar atas berwarna hijau **`Audio: out/mix.wav (VO+BGM+SFX)`** bila musik/SFX aktif. Cukup **refresh browser** setiap selesai revisi. *(Opsional: bila revisi Live Preview cukup panjang, kirim **`/compact` mandiri ke-3** sebelum masuk Tahap 5/6 agar konsumsi token tetap irit).*
 
 ### Tahap 6 & 7 — Render Final `< 50 MB`, Thumbnail, Privacy Scan & Git
 - Di awal Tahap 6, agent **otomatis mematikan seluruh background daemon preview** sebelum mengekspor `.mp4` **`< 50 MB`** (`yuv420p` TV-range, `48 kHz` stereo, **`-14 LUFS`**, 0 frame hitam) + `output/<slug>-thumbnail.jpg`.
@@ -94,7 +94,7 @@ Folder `projects/**/ref/` dan `projects/**/source/` otomatis masuk `.gitignore`,
 
 ## 6. Protokol Revisi 4 Langkah (Cepat & Terarah)
 
-Selama produksi dan Live Preview, revisi berjalan lewat **chat biasa** (tanpa widget Grill Me):
+Selama produksi dan Live Preview, revisi berjalan lewat **chat biasa** *(tanpa widget Grill Me)* dan **berlaku mutlak di semua model** *(termasuk mode langsung seperti Argon/Flash)* untuk perubahan desain scene, ilustrasi besar, naskah/tempo VO, maupun saat Anda mengajukan pertanyaan terbuka *(mis. "bagaimana menurutmu?")*:
 1. **Anda:** Menyampaikan bagian yang kurang pas dan hasil yang diharapkan.
 2. **Agent *(sebelum menyentuh kode)*:** Mengonfirmasi pemahaman, merangkum akar masalah, **memperingatkan bila opsi berpotensi memicu regenerasi audio**, dan mengajukan **opsi perbaikan konkret**.
 3. **Anda:** Memilih opsi atau memberi masukan tambahan sampai sepakat.
@@ -107,8 +107,9 @@ Selama produksi dan Live Preview, revisi berjalan lewat **chat biasa** (tanpa wi
 
 | Kebutuhan Tahap | Rekomendasi Model | Alasan Praktis |
 | :--- | :--- | :--- |
-| **Tahap 0–1 (Grill Me, Konsep, *Storytelling*) & Desain Scene Inti** | **Model Pro / High** | Menjaga orisinalitas visual, kepatuhan gaya, akting animasi, & mencegah iterasi revisi berulang. |
-| **Subagent `research`, Tahap 2, 5, 6, 7 (TTS/Render/QA/`README.md`) & Revisi Terarah** | **Model Flash** | Menghemat hingga ~60–70% kuota limit 5-jam dan menjaga riset cepat tanpa mengorbankan hasil akhir. |
+| **Tahap 0–4A (Grill Me, Konsep, Naskah, Desain Sistem Visual)** | **Neon + Hydrogen / Pro-High** | Paling disiplin menjaga pagar SOP, naskah ekspresif, dan desain ilustrasi editorial `art.js` sejak *draft* pertama. |
+| **Subagent `research`, Tahap 4B–7 (Revisi Cepat, Audit, Render, Git)** | **Argon / Flash** | Lincah untuk optimasi performa, revisi taktis berbasis feedback langsung, dan menghemat kuota limit 5-jam tanpa overhead handoff antar model. |
 
-- **Cara Benar Menggunakan `/compact`:** Kirim **`/compact` saja dalam 1 pesan tersendiri** tepat setelah **Audisi Audio** dan **Gate #2A** disetujui (jangan menulis `"Setuju, /compact"` dalam 1 pesan karena slash command bisa terabaikan). Setelah selesai (`< 2 detik`), ketik **`Lanjut`**. Catatan: bila server **Live Preview** masih menyala (ikon spinner task berputar), hal itu **bukan** tanda `/compact` macet — agent akan mematikan semua server preview otomatis saat masuk Tahap 6.
+- **Cara Benar Menggunakan `/compact`:** Kirim **`/compact` saja dalam 1 pesan tersendiri** tepat setelah **Audisi Audio** dan **Gate #2A** disetujui (jangan menulis `"Setuju, /compact"` dalam 1 pesan karena slash command bisa terabaikan). Tambahan opsional: kirim **`/compact` mandiri ke-3** sebelum masuk **Tahap 5/6** jika revisi Gate #2B berlangsung lama (`ctx > 160K`). Setelah compaction selesai (`< 2 detik`), ketik **`Lanjut`**. Catatan: bila server **Live Preview** masih menyala (ikon spinner task berputar), hal itu **bukan** tanda `/compact` macet — agent akan mematikan semua server preview otomatis saat masuk Tahap 6.
+- **Aturan Emas Pindah Model:** Jika Anda berencana mengganti model di tengah proyek *(mis. dari Neon ke Argon/Flash)*, kirim **`/compact` mandiri tepat SEBELUM mengganti model** agar *prompt cache* lama tidak ikut terbuang sia-sia di konteks raksasa.
 - Jika terjadi **pivot total gaya**, buka **chat baru** membawa `FACTS.md` & `BRIEF.md` yang sudah ada.
