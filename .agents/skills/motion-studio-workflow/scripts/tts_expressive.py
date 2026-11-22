@@ -13,6 +13,7 @@ Outputs inside `<project_dir>/voice/`:
 import argparse
 import asyncio
 import base64
+from difflib import SequenceMatcher
 import hashlib
 import io
 import json
@@ -105,6 +106,9 @@ def trim_silence(y: np.ndarray, bw: list[dict], sr: int = SR):
         }
         for b in bw
     ]
+    if len(adj) == 1 and (adj[0]["t1"] - adj[0]["t0"]) < 0.04 and dur_trim > 0.05:
+        adj[0]["t0"] = 0.0
+        adj[0]["t1"] = dur_trim
     return y, adj
 
 
@@ -254,7 +258,8 @@ def extract_whisper_words(wav_path: str, lang: str) -> list[dict]:
 def synth_gemini_batch(api_key: str, model: str, voice: str, style: str, transcript: str, wav_path: str) -> np.ndarray:
     from google import genai
 
-    client = genai.Client(api_key=api_key, http_options={"api_version": "v1beta"})
+    print(f"[gemini] requesting voice={voice} ({len(strip_tags(transcript).split())} words)...", flush=True)
+    client = genai.Client(api_key=api_key, http_options={"api_version": "v1beta", "timeout": 60000})
     resp = client.interactions.create(
         model=model,
         input=[
@@ -296,10 +301,24 @@ def quietest_cut_time(y: np.ndarray, t_a: float, t_b: float, sr: int = SR) -> fl
     if i1 <= i0 + 480:
         return 0.5 * (t_a + t_b)
     win = max(240, int(0.02 * sr))
+    step = max(120, win // 2)
+    if t_b - t_a > 0.65:
+        e0 = max(i0, int((t_a + 0.03) * sr))
+        e1 = min(i1, int(min(t_b - 0.03, t_a + 0.60) * sr))
+        if e1 > e0 + win:
+            early_seg = y[e0:e1]
+            early_best_pos = e0 + (e1 - e0) // 2
+            early_best_rms = float("inf")
+            for pos in range(0, max(1, len(early_seg) - win), step):
+                rms = float(np.sqrt(np.mean(early_seg[pos : pos + win] ** 2)))
+                if rms < early_best_rms:
+                    early_best_rms = rms
+                    early_best_pos = e0 + pos + win // 2
+            if early_best_rms < 0.005:
+                return early_best_pos / sr
     seg = y[i0:i1]
     best_pos = (i0 + i1) // 2
     best_rms = float("inf")
-    step = max(120, win // 2)
     for pos in range(0, max(1, len(seg) - win), step):
         rms = float(np.sqrt(np.mean(seg[pos : pos + win] ** 2)))
         if rms < best_rms:
@@ -349,14 +368,49 @@ def split_batch_clips(y: np.ndarray, batch_lines: list[dict], whisper_words: lis
             prev_idx = lo
             continue
         approx = int(np.searchsorted(w_cum[lo : hi + 1], target_frac)) + lo
-        w_lo = max(lo, approx - 4)
-        w_hi = min(hi, approx + 4)
+        w_lo = max(lo, approx - 6)
+        w_hi = min(hi, approx + 6)
+        prev_tokens = [
+            norm_word(w)
+            for w in strip_tags(batch_lines[k].get("say") or batch_lines[k]["text"]).split()
+            if norm_word(w)
+        ]
+        next_tokens = [
+            norm_word(w)
+            for w in strip_tags(batch_lines[k + 1].get("say") or batch_lines[k + 1]["text"]).split()
+            if norm_word(w)
+        ]
         best_j = approx
         best_score = -1e9
         for j in range(w_lo, w_hi + 1):
-            gap = whisper_words[j]["t0"] - whisper_words[j - 1]["t1"]
+            w_prev = norm_word(whisper_words[j - 1]["w"])
+            w_next = norm_word(whisper_words[j]["w"])
+            sim_prev_single = SequenceMatcher(None, w_prev, prev_tokens[-1]).ratio() if prev_tokens else 0.0
+            sim_prev_join = (
+                SequenceMatcher(None, norm_word(whisper_words[j - 2]["w"] + whisper_words[j - 1]["w"]), prev_tokens[-1]).ratio()
+                if (prev_tokens and j >= 2)
+                else 0.0
+            )
+            sim_prev = max(sim_prev_single, sim_prev_join)
+            sim_next_single = SequenceMatcher(None, w_next, next_tokens[0]).ratio() if next_tokens else 0.0
+            sim_next_join = (
+                SequenceMatcher(None, norm_word(whisper_words[j]["w"] + whisper_words[j + 1]["w"]), next_tokens[0]).ratio()
+                if (next_tokens and j + 1 < len(whisper_words))
+                else 0.0
+            )
+            sim_next = max(sim_next_single, sim_next_join)
+            if next_tokens and len(next_tokens) > 1:
+                n2_idx = (j + 2) if (sim_next_join > sim_next_single and j + 2 < len(whisper_words)) else (j + 1)
+                sim_next2 = (
+                    SequenceMatcher(None, norm_word(whisper_words[n2_idx]["w"]), next_tokens[1]).ratio()
+                    if n2_idx < len(whisper_words)
+                    else 0.0
+                )
+            else:
+                sim_next2 = 0.0
+            gap = min(1.2, max(0.0, whisper_words[j]["t0"] - whisper_words[j - 1]["t1"]))
             dist_pen = abs(float(w_cum[j - 1]) - target_frac)
-            score = gap - 1.5 * dist_pen
+            score = 2.2 * sim_next + 1.6 * sim_prev + 0.8 * sim_next2 + 2.2 * gap - 1.5 * dist_pen
             if score > best_score:
                 best_score = score
                 best_j = j
@@ -389,7 +443,7 @@ def synthesize_with_gemini(lines: list[dict], cfg: dict, args, api_key: str, cac
     default_style = cfg.get("style") or (
         "warm natural conversational narrator, expressive intonation, clear rising inflection on questions, gentle breathing pauses"
     )
-    gemini_voice = resolve_gemini_voice(
+    default_gemini_voice = resolve_gemini_voice(
         cfg.get("gemini_voice") or lines[0].get("gemini_voice") or lines[0].get("voice"),
         args.voice,
         args.gemini_voice,
@@ -402,13 +456,22 @@ def synthesize_with_gemini(lines: list[dict], cfg: dict, args, api_key: str, cac
     clips = {}
     sources = {}
     line_keys = {}
+    line_voices = {}
+    line_styles = {}
     missing_lines = []
 
     for line in lines:
         say = (line.get("say") or line["text"]).strip()
+        eff_voice = resolve_gemini_voice(
+            line.get("gemini_voice") or line.get("voice"),
+            default_gemini_voice,
+            args.gemini_voice,
+        )
         eff_style = (line.get("style") or default_style).strip()
+        line_voices[line["id"]] = eff_voice
+        line_styles[line["id"]] = eff_style
         line_key = hashlib.sha1(
-            json.dumps(["gemini_clip", model, gemini_voice, eff_style, lang, say], ensure_ascii=False).encode("utf-8")
+            json.dumps(["gemini_clip", model, eff_voice, eff_style, lang, say], ensure_ascii=False).encode("utf-8")
         ).hexdigest()[:16]
         line_keys[line["id"]] = line_key
         clip_wav = os.path.join(clips_cache_dir, f"{line_key}.wav")
@@ -425,31 +488,35 @@ def synthesize_with_gemini(lines: list[dict], cfg: dict, args, api_key: str, cac
     if not missing_lines:
         return clips, sources
 
-    # Batch only uncached/edited lines (<= 250 words per request) to respect Free Tier RPM/RPD limits
-    batches = []
-    cur_batch = []
-    cur_words = 0
+    # Group uncached/edited lines by (voice, style) and batch <= 250 words per request
+    grouped = {}
     for line in missing_lines:
-        say = line.get("say") or line["text"]
-        wc = len(strip_tags(say).split())
-        if cur_batch and (cur_words + wc > 250):
-            batches.append(cur_batch)
-            cur_batch = [line]
-            cur_words = wc
-        else:
-            cur_batch.append(line)
-            cur_words += wc
-    if cur_batch:
-        batches.append(cur_batch)
+        gk = (line_voices[line["id"]], line_styles[line["id"]])
+        grouped.setdefault(gk, []).append(line)
 
-    for bi, batch in enumerate(batches):
+    batches = []
+    for (batch_voice, batch_style), group_lines in grouped.items():
+        cur_batch = []
+        cur_words = 0
+        for line in group_lines:
+            say = line.get("say") or line["text"]
+            wc = len(strip_tags(say).split())
+            if cur_batch and (cur_words + wc > 250):
+                batches.append((batch_voice, batch_style, cur_batch))
+                cur_batch = [line]
+                cur_words = wc
+            else:
+                cur_batch.append(line)
+                cur_words += wc
+        if cur_batch:
+            batches.append((batch_voice, batch_style, cur_batch))
+
+    for bi, (batch_voice, batch_style, batch) in enumerate(batches):
         says = [(l.get("say") or l["text"]).strip() for l in batch]
-        styles = [l.get("style") for l in batch if l.get("style")]
-        batch_style = "; ".join(dict.fromkeys(styles)) if styles else default_style
         transcript = "\n\n<short pause> <short pause>\n\n".join(says)
 
         key = hashlib.sha1(
-            json.dumps(["gemini", model, gemini_voice, batch_style, lang, transcript], ensure_ascii=False).encode("utf-8")
+            json.dumps(["gemini", model, batch_voice, batch_style, lang, transcript], ensure_ascii=False).encode("utf-8")
         ).hexdigest()[:16]
         wav_path = os.path.join(cache_dir, key + ".wav")
         jsn_path = os.path.join(cache_dir, key + "_whisper.json")
@@ -462,7 +529,7 @@ def synthesize_with_gemini(lines: list[dict], cfg: dict, args, api_key: str, cac
         else:
             if bi > 0:
                 time.sleep(1.5)
-            y = synth_gemini_batch(api_key, model, gemini_voice, batch_style, transcript, wav_path)
+            y = synth_gemini_batch(api_key, model, batch_voice, batch_style, transcript, wav_path)
             bw = extract_whisper_words(wav_path, lang)
             with open(jsn_path + ".part", "w", encoding="utf-8") as f:
                 json.dump(bw, f, ensure_ascii=False)

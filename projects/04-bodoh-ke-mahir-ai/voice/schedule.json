@@ -1,0 +1,212 @@
+{
+ "fps": 30,
+ "engine": "gemini (gemini-3.8-flash-tts)",
+ "total": 80.01,
+ "shots": [
+  {
+   "shot": 1,
+   "start": 0.0,
+   "end": 8.583,
+   "dur": 8.583,
+   "chapter": "01 CUMA TEMAN CHAT?"
+  },
+  {
+   "shot": 2,
+   "start": 8.583,
+   "end": 17.353,
+   "dur": 8.77,
+   "chapter": "02 PETA BELAJAR AI"
+  },
+  {
+   "shot": 3,
+   "start": 17.353,
+   "end": 30.511,
+   "dur": 13.158,
+   "chapter": "03 OTAK LLM"
+  },
+  {
+   "shot": 4,
+   "start": 30.511,
+   "end": 38.034,
+   "dur": 7.523,
+   "chapter": "04 BADAN HARNESS"
+  },
+  {
+   "shot": 5,
+   "start": 38.034,
+   "end": 45.411,
+   "dur": 7.377,
+   "chapter": "05 JADILAH AI AGENT"
+  },
+  {
+   "shot": 6,
+   "start": 45.411,
+   "end": 53.65,
+   "dur": 8.239,
+   "chapter": "06 MITOS VERSI GRATIS"
+  },
+  {
+   "shot": 7,
+   "start": 53.65,
+   "end": 61.292,
+   "dur": 7.642,
+   "chapter": "07 STADION VS SERUANGAN"
+  },
+  {
+   "shot": 8,
+   "start": 61.292,
+   "end": 64.975,
+   "dur": 3.683,
+   "chapter": "08 HASILNYA SERING HALU"
+  },
+  {
+   "shot": 9,
+   "start": 64.975,
+   "end": 73.852,
+   "dur": 8.877,
+   "chapter": "09 BUKAN HANYA MODEL PINTAR"
+  },
+  {
+   "shot": 10,
+   "start": 73.852,
+   "end": 80.009,
+   "dur": 6.157,
+   "chapter": "10 OBROLAN SELANJUTNYA"
+  }
+ ],
+ "voice": [
+  {
+   "id": "s01_murid",
+   "shot": 1,
+   "start": 0.2,
+   "dur": 4.149,
+   "end": 4.349
+  },
+  {
+   "id": "s01_mentor",
+   "shot": 1,
+   "start": 4.509,
+   "dur": 3.695,
+   "end": 8.203
+  },
+  {
+   "id": "s02_murid",
+   "shot": 2,
+   "start": 8.783,
+   "dur": 2.031,
+   "end": 10.814
+  },
+  {
+   "id": "s02_mentor",
+   "shot": 2,
+   "start": 10.974,
+   "dur": 6.0,
+   "end": 16.973
+  },
+  {
+   "id": "s03_murid",
+   "shot": 3,
+   "start": 17.553,
+   "dur": 1.988,
+   "end": 19.541
+  },
+  {
+   "id": "s03_mentor1",
+   "shot": 3,
+   "start": 19.701,
+   "dur": 6.718,
+   "end": 26.42
+  },
+  {
+   "id": "s03_murid2",
+   "shot": 3,
+   "start": 26.5,
+   "dur": 0.721,
+   "end": 27.221
+  },
+  {
+   "id": "s03_mentor2",
+   "shot": 3,
+   "start": 27.361,
+   "dur": 2.77,
+   "end": 30.131
+  },
+  {
+   "id": "s04_murid",
+   "shot": 4,
+   "start": 30.711,
+   "dur": 1.501,
+   "end": 32.212
+  },
+  {
+   "id": "s04_mentor",
+   "shot": 4,
+   "start": 32.372,
+   "dur": 5.283,
+   "end": 37.654
+  },
+  {
+   "id": "s05_mentor",
+   "shot": 5,
+   "start": 38.234,
+   "dur": 5.17,
+   "end": 43.404
+  },
+  {
+   "id": "s05_murid",
+   "shot": 5,
+   "start": 43.544,
+   "dur": 1.487,
+   "end": 45.031
+  },
+  {
+   "id": "s06_murid",
+   "shot": 6,
+   "start": 45.611,
+   "dur": 4.692,
+   "end": 50.303
+  },
+  {
+   "id": "s06_mentor",
+   "shot": 6,
+   "start": 50.463,
+   "dur": 2.807,
+   "end": 53.27
+  },
+  {
+   "id": "s07_mentor",
+   "shot": 7,
+   "start": 53.85,
+   "dur": 7.062,
+   "end": 60.912
+  },
+  {
+   "id": "s08_murid",
+   "shot": 8,
+   "start": 61.492,
+   "dur": 3.103,
+   "end": 64.595
+  },
+  {
+   "id": "s09_mentor",
+   "shot": 9,
+   "start": 65.175,
+   "dur": 5.005,
+   "end": 70.18
+  },
+  {
+   "id": "s09_murid",
+   "shot": 9,
+   "start": 70.32,
+   "dur": 3.152,
+   "end": 73.472
+  },
+  {
+   "id": "s10_mentor",
+   "shot": 10,
+   "start": 74.052,
+   "dur": 4.857,
+   "end": 78.909
+  }
+ ]
+}
