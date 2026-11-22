@@ -1,0 +1,1644 @@
+[
+ {
+  "id": "s01_1",
+  "shot": 1,
+  "chapter": "HOOK",
+  "t0": 0.26,
+  "t1": 6.172,
+  "text": "Nah, kemarin janji mau kasih rahasianya! Kenapa sih AI suka ngawur pas kusuruh?",
+  "words": [
+   {
+    "w": "Nah,",
+    "t0": 0.3,
+    "t1": 0.635,
+    "kw": false
+   },
+   {
+    "w": "kemarin",
+    "t0": 0.635,
+    "t1": 1.184,
+    "kw": false
+   },
+   {
+    "w": "janji",
+    "t0": 1.184,
+    "t1": 1.531,
+    "kw": false
+   },
+   {
+    "w": "mau",
+    "t0": 1.531,
+    "t1": 1.748,
+    "kw": false
+   },
+   {
+    "w": "kasih",
+    "t0": 1.748,
+    "t1": 2.109,
+    "kw": false
+   },
+   {
+    "w": "rahasianya!",
+    "t0": 2.109,
+    "t1": 3.482,
+    "kw": true
+   },
+   {
+    "w": "Kenapa",
+    "t0": 3.482,
+    "t1": 3.795,
+    "kw": false
+   },
+   {
+    "w": "sih",
+    "t0": 3.795,
+    "t1": 4.177,
+    "kw": false
+   },
+   {
+    "w": "AI",
+    "t0": 4.177,
+    "t1": 4.352,
+    "kw": false
+   },
+   {
+    "w": "suka",
+    "t0": 4.352,
+    "t1": 4.604,
+    "kw": false
+   },
+   {
+    "w": "ngawur",
+    "t0": 4.604,
+    "t1": 5.083,
+    "kw": true
+   },
+   {
+    "w": "pas",
+    "t0": 5.083,
+    "t1": 5.304,
+    "kw": false
+   },
+   {
+    "w": "kusuruh?",
+    "t0": 5.304,
+    "t1": 6.002,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s01_2",
+  "shot": 1,
+  "chapter": "HOOK",
+  "t0": 6.202,
+  "t1": 11.659,
+  "text": "Sebenarnya AI jarang jelek. Yang sering kurang justru instruksi kita.",
+  "words": [
+   {
+    "w": "Sebenarnya",
+    "t0": 6.242,
+    "t1": 7.076,
+    "kw": false
+   },
+   {
+    "w": "AI",
+    "t0": 7.076,
+    "t1": 7.716,
+    "kw": false
+   },
+   {
+    "w": "jarang",
+    "t0": 7.716,
+    "t1": 8.056,
+    "kw": true
+   },
+   {
+    "w": "jelek.",
+    "t0": 8.056,
+    "t1": 8.856,
+    "kw": false
+   },
+   {
+    "w": "Yang",
+    "t0": 8.856,
+    "t1": 9.036,
+    "kw": false
+   },
+   {
+    "w": "sering",
+    "t0": 9.036,
+    "t1": 9.296,
+    "kw": false
+   },
+   {
+    "w": "kurang",
+    "t0": 9.296,
+    "t1": 9.676,
+    "kw": false
+   },
+   {
+    "w": "justru",
+    "t0": 9.676,
+    "t1": 10.116,
+    "kw": false
+   },
+   {
+    "w": "instruksi",
+    "t0": 10.116,
+    "t1": 10.596,
+    "kw": true
+   },
+   {
+    "w": "kita.",
+    "t0": 10.596,
+    "t1": 11.196,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s02_1",
+  "shot": 2,
+  "chapter": "3 AI UTAMA",
+  "t0": 12.219,
+  "t1": 23.619,
+  "text": "Di pelajaran kali ini kita kuasai alatnya. Mulai dari tiga AI utama: ChatGPT, Claude, sama Gemini. Kerennya sih, AI Trinity!",
+  "words": [
+   {
+    "w": "Di",
+    "t0": 12.259,
+    "t1": 12.469,
+    "kw": false
+   },
+   {
+    "w": "pelajaran",
+    "t0": 12.469,
+    "t1": 12.889,
+    "kw": false
+   },
+   {
+    "w": "kali",
+    "t0": 12.889,
+    "t1": 13.169,
+    "kw": false
+   },
+   {
+    "w": "ini",
+    "t0": 13.169,
+    "t1": 13.789,
+    "kw": false
+   },
+   {
+    "w": "kita",
+    "t0": 13.789,
+    "t1": 14.089,
+    "kw": false
+   },
+   {
+    "w": "kuasai",
+    "t0": 14.089,
+    "t1": 14.489,
+    "kw": false
+   },
+   {
+    "w": "alatnya.",
+    "t0": 14.489,
+    "t1": 15.649,
+    "kw": false
+   },
+   {
+    "w": "Mulai",
+    "t0": 15.649,
+    "t1": 15.789,
+    "kw": false
+   },
+   {
+    "w": "dari",
+    "t0": 15.789,
+    "t1": 16.119,
+    "kw": false
+   },
+   {
+    "w": "tiga",
+    "t0": 16.119,
+    "t1": 16.449,
+    "kw": false
+   },
+   {
+    "w": "AI",
+    "t0": 16.449,
+    "t1": 16.769,
+    "kw": true
+   },
+   {
+    "w": "utama:",
+    "t0": 16.769,
+    "t1": 17.789,
+    "kw": false
+   },
+   {
+    "w": "ChatGPT,",
+    "t0": 17.789,
+    "t1": 19.109,
+    "kw": true
+   },
+   {
+    "w": "Claude,",
+    "t0": 19.109,
+    "t1": 19.659,
+    "kw": true
+   },
+   {
+    "w": "sama",
+    "t0": 19.659,
+    "t1": 19.858,
+    "kw": false
+   },
+   {
+    "w": "Gemini.",
+    "t0": 19.858,
+    "t1": 20.889,
+    "kw": true
+   },
+   {
+    "w": "Kerennya",
+    "t0": 20.889,
+    "t1": 21.209,
+    "kw": false
+   },
+   {
+    "w": "sih,",
+    "t0": 21.209,
+    "t1": 21.669,
+    "kw": false
+   },
+   {
+    "w": "AI",
+    "t0": 21.669,
+    "t1": 22.089,
+    "kw": true
+   },
+   {
+    "w": "Trinity!",
+    "t0": 22.089,
+    "t1": 22.869,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s02_2",
+  "shot": 2,
+  "chapter": "3 AI UTAMA",
+  "t0": 23.649,
+  "t1": 28.3,
+  "text": "Aplikasinya udah ada. Terus biar hasilnya pas gimana?",
+  "words": [
+   {
+    "w": "Aplikasinya",
+    "t0": 23.816,
+    "t1": 24.285,
+    "kw": false
+   },
+   {
+    "w": "udah",
+    "t0": 24.285,
+    "t1": 24.516,
+    "kw": false
+   },
+   {
+    "w": "ada.",
+    "t0": 24.516,
+    "t1": 25.102,
+    "kw": false
+   },
+   {
+    "w": "Terus",
+    "t0": 25.102,
+    "t1": 26.32,
+    "kw": false
+   },
+   {
+    "w": "biar",
+    "t0": 26.32,
+    "t1": 26.772,
+    "kw": false
+   },
+   {
+    "w": "hasilnya",
+    "t0": 26.772,
+    "t1": 27.245,
+    "kw": true
+   },
+   {
+    "w": "pas",
+    "t0": 27.245,
+    "t1": 27.542,
+    "kw": true
+   },
+   {
+    "w": "gimana?",
+    "t0": 27.542,
+    "t1": 27.976,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s03_1",
+  "shot": 3,
+  "chapter": "ANALOGI LAGU",
+  "t0": 28.86,
+  "t1": 35.093,
+  "text": "Bayangin kamu minta musisi bikin lagu. Maumu pop, tapi nggak dibilang, malah dikasih jazz!",
+  "words": [
+   {
+    "w": "Bayangin",
+    "t0": 29.102,
+    "t1": 29.588,
+    "kw": false
+   },
+   {
+    "w": "kamu",
+    "t0": 29.588,
+    "t1": 29.859,
+    "kw": false
+   },
+   {
+    "w": "minta",
+    "t0": 29.859,
+    "t1": 30.136,
+    "kw": false
+   },
+   {
+    "w": "musisi",
+    "t0": 30.136,
+    "t1": 30.538,
+    "kw": false
+   },
+   {
+    "w": "bikin",
+    "t0": 30.538,
+    "t1": 30.819,
+    "kw": false
+   },
+   {
+    "w": "lagu.",
+    "t0": 30.819,
+    "t1": 31.299,
+    "kw": false
+   },
+   {
+    "w": "Maumu",
+    "t0": 31.299,
+    "t1": 32.089,
+    "kw": false
+   },
+   {
+    "w": "pop,",
+    "t0": 32.089,
+    "t1": 32.39,
+    "kw": true
+   },
+   {
+    "w": "tapi",
+    "t0": 32.39,
+    "t1": 32.717,
+    "kw": false
+   },
+   {
+    "w": "nggak",
+    "t0": 32.717,
+    "t1": 32.946,
+    "kw": false
+   },
+   {
+    "w": "dibilang,",
+    "t0": 32.946,
+    "t1": 33.738,
+    "kw": false
+   },
+   {
+    "w": "malah",
+    "t0": 33.738,
+    "t1": 33.918,
+    "kw": false
+   },
+   {
+    "w": "dikasih",
+    "t0": 33.918,
+    "t1": 34.298,
+    "kw": false
+   },
+   {
+    "w": "jazz!",
+    "t0": 34.298,
+    "t1": 34.862,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s03_2",
+  "shot": 3,
+  "chapter": "ANALOGI LAGU",
+  "t0": 35.123,
+  "t1": 39.24,
+  "text": "Haha, iya juga, kan dia nggak bisa baca pikiran.",
+  "words": [
+   {
+    "w": "Haha,",
+    "t0": 36.27,
+    "t1": 36.56,
+    "kw": false
+   },
+   {
+    "w": "iya",
+    "t0": 36.56,
+    "t1": 37.01,
+    "kw": false
+   },
+   {
+    "w": "juga,",
+    "t0": 37.01,
+    "t1": 37.53,
+    "kw": false
+   },
+   {
+    "w": "kan",
+    "t0": 37.53,
+    "t1": 37.55,
+    "kw": false
+   },
+   {
+    "w": "dia",
+    "t0": 37.55,
+    "t1": 37.59,
+    "kw": false
+   },
+   {
+    "w": "nggak",
+    "t0": 37.59,
+    "t1": 37.786,
+    "kw": false
+   },
+   {
+    "w": "bisa",
+    "t0": 37.786,
+    "t1": 37.928,
+    "kw": false
+   },
+   {
+    "w": "baca",
+    "t0": 37.928,
+    "t1": 38.07,
+    "kw": true
+   },
+   {
+    "w": "pikiran.",
+    "t0": 38.07,
+    "t1": 38.77,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s04_1",
+  "shot": 4,
+  "chapter": "CONTEXT",
+  "t0": 39.8,
+  "t1": 45.12,
+  "text": "Makanya kasih konteks jelas: peran, tujuan, target, sama batasannya.",
+  "words": [
+   {
+    "w": "Makanya",
+    "t0": 39.99,
+    "t1": 40.39,
+    "kw": false
+   },
+   {
+    "w": "kasih",
+    "t0": 40.39,
+    "t1": 41.07,
+    "kw": false
+   },
+   {
+    "w": "konteks",
+    "t0": 41.07,
+    "t1": 41.51,
+    "kw": true
+   },
+   {
+    "w": "jelas:",
+    "t0": 41.51,
+    "t1": 42.35,
+    "kw": false
+   },
+   {
+    "w": "peran,",
+    "t0": 42.35,
+    "t1": 42.93,
+    "kw": true
+   },
+   {
+    "w": "tujuan,",
+    "t0": 42.93,
+    "t1": 43.61,
+    "kw": true
+   },
+   {
+    "w": "target,",
+    "t0": 43.61,
+    "t1": 43.95,
+    "kw": true
+   },
+   {
+    "w": "sama",
+    "t0": 43.95,
+    "t1": 44.35,
+    "kw": false
+   },
+   {
+    "w": "batasannya.",
+    "t0": 44.35,
+    "t1": 44.95,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s04_2",
+  "shot": 4,
+  "chapter": "CONTEXT",
+  "t0": 45.15,
+  "t1": 51.639,
+  "text": "Ingat, lengkap nggak harus panjang. Begitu konteksnya pas, jawabannya langsung nyambung.",
+  "words": [
+   {
+    "w": "Ingat,",
+    "t0": 45.19,
+    "t1": 46.617,
+    "kw": false
+   },
+   {
+    "w": "lengkap",
+    "t0": 46.617,
+    "t1": 46.985,
+    "kw": true
+   },
+   {
+    "w": "nggak",
+    "t0": 46.985,
+    "t1": 47.22,
+    "kw": false
+   },
+   {
+    "w": "harus",
+    "t0": 47.22,
+    "t1": 47.434,
+    "kw": false
+   },
+   {
+    "w": "panjang.",
+    "t0": 47.434,
+    "t1": 47.953,
+    "kw": true
+   },
+   {
+    "w": "Begitu",
+    "t0": 47.953,
+    "t1": 48.994,
+    "kw": false
+   },
+   {
+    "w": "konteksnya",
+    "t0": 48.994,
+    "t1": 49.479,
+    "kw": false
+   },
+   {
+    "w": "pas,",
+    "t0": 49.479,
+    "t1": 49.771,
+    "kw": false
+   },
+   {
+    "w": "jawabannya",
+    "t0": 49.771,
+    "t1": 50.514,
+    "kw": false
+   },
+   {
+    "w": "langsung",
+    "t0": 50.514,
+    "t1": 50.822,
+    "kw": false
+   },
+   {
+    "w": "nyambung.",
+    "t0": 50.822,
+    "t1": 51.389,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s05_1",
+  "shot": 5,
+  "chapter": "SKILLS",
+  "t0": 52.199,
+  "t1": 59.402,
+  "text": "Waduh, walaupun ringkas, kalau tiap minggu harus ngetik ulang konteks yang sama terus, capek dong?",
+  "words": [
+   {
+    "w": "Waduh,",
+    "t0": 52.239,
+    "t1": 53.234,
+    "kw": false
+   },
+   {
+    "w": "walaupun",
+    "t0": 53.234,
+    "t1": 53.955,
+    "kw": false
+   },
+   {
+    "w": "ringkas,",
+    "t0": 53.955,
+    "t1": 55.121,
+    "kw": false
+   },
+   {
+    "w": "kalau",
+    "t0": 55.121,
+    "t1": 55.406,
+    "kw": false
+   },
+   {
+    "w": "tiap",
+    "t0": 55.406,
+    "t1": 55.603,
+    "kw": false
+   },
+   {
+    "w": "minggu",
+    "t0": 55.603,
+    "t1": 55.821,
+    "kw": false
+   },
+   {
+    "w": "harus",
+    "t0": 55.821,
+    "t1": 55.991,
+    "kw": false
+   },
+   {
+    "w": "ngetik",
+    "t0": 55.991,
+    "t1": 56.283,
+    "kw": true
+   },
+   {
+    "w": "ulang",
+    "t0": 56.283,
+    "t1": 56.562,
+    "kw": false
+   },
+   {
+    "w": "konteks",
+    "t0": 56.562,
+    "t1": 56.878,
+    "kw": true
+   },
+   {
+    "w": "yang",
+    "t0": 56.878,
+    "t1": 57.008,
+    "kw": false
+   },
+   {
+    "w": "sama",
+    "t0": 57.008,
+    "t1": 57.176,
+    "kw": false
+   },
+   {
+    "w": "terus,",
+    "t0": 57.176,
+    "t1": 57.655,
+    "kw": false
+   },
+   {
+    "w": "capek",
+    "t0": 57.655,
+    "t1": 58.619,
+    "kw": true
+   },
+   {
+    "w": "dong?",
+    "t0": 58.619,
+    "t1": 58.961,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s05_2",
+  "shot": 5,
+  "chapter": "SKILLS",
+  "t0": 59.432,
+  "t1": 65.201,
+  "text": "Nggak usah! Simpan jadi Skills. Tinggal ketik /riset-konten, langsung jalan.",
+  "words": [
+   {
+    "w": "Nggak",
+    "t0": 59.59,
+    "t1": 60.537,
+    "kw": false
+   },
+   {
+    "w": "usah!",
+    "t0": 60.537,
+    "t1": 60.716,
+    "kw": false
+   },
+   {
+    "w": "Simpan",
+    "t0": 60.716,
+    "t1": 61.095,
+    "kw": false
+   },
+   {
+    "w": "jadi",
+    "t0": 61.095,
+    "t1": 61.507,
+    "kw": false
+   },
+   {
+    "w": "Skills.",
+    "t0": 61.507,
+    "t1": 62.186,
+    "kw": true
+   },
+   {
+    "w": "Tinggal",
+    "t0": 62.186,
+    "t1": 62.634,
+    "kw": false
+   },
+   {
+    "w": "ketik",
+    "t0": 62.634,
+    "t1": 63.047,
+    "kw": false
+   },
+   {
+    "w": "/riset-konten,",
+    "t0": 63.047,
+    "t1": 63.956,
+    "kw": true
+   },
+   {
+    "w": "langsung",
+    "t0": 63.956,
+    "t1": 64.505,
+    "kw": false
+   },
+   {
+    "w": "jalan.",
+    "t0": 64.505,
+    "t1": 64.87,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s06_1",
+  "shot": 6,
+  "chapter": "PROJECTS",
+  "t0": 65.761,
+  "t1": 70.696,
+  "text": "Kalau lagi garap dua kerjaan beda, nggak takut ketuker?",
+  "words": [
+   {
+    "w": "Kalau",
+    "t0": 66.911,
+    "t1": 67.111,
+    "kw": false
+   },
+   {
+    "w": "lagi",
+    "t0": 67.111,
+    "t1": 67.411,
+    "kw": false
+   },
+   {
+    "w": "garap",
+    "t0": 67.411,
+    "t1": 67.771,
+    "kw": false
+   },
+   {
+    "w": "dua",
+    "t0": 67.771,
+    "t1": 67.971,
+    "kw": true
+   },
+   {
+    "w": "kerjaan",
+    "t0": 67.971,
+    "t1": 68.431,
+    "kw": false
+   },
+   {
+    "w": "beda,",
+    "t0": 68.431,
+    "t1": 69.591,
+    "kw": false
+   },
+   {
+    "w": "nggak",
+    "t0": 69.591,
+    "t1": 69.731,
+    "kw": false
+   },
+   {
+    "w": "takut",
+    "t0": 69.731,
+    "t1": 69.971,
+    "kw": false
+   },
+   {
+    "w": "ketuker?",
+    "t0": 69.971,
+    "t1": 70.431,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s06_2",
+  "shot": 6,
+  "chapter": "PROJECTS",
+  "t0": 70.726,
+  "t1": 78.145,
+  "text": "Pisahkan pakai Projects! Tiap folder punya memori dan file sendiri, jadi Proyek A nggak nyampur sama Proyek B.",
+  "words": [
+   {
+    "w": "Pisahkan",
+    "t0": 70.938,
+    "t1": 71.381,
+    "kw": false
+   },
+   {
+    "w": "pakai",
+    "t0": 71.381,
+    "t1": 71.65,
+    "kw": false
+   },
+   {
+    "w": "Projects!",
+    "t0": 71.65,
+    "t1": 72.8,
+    "kw": true
+   },
+   {
+    "w": "Tiap",
+    "t0": 72.8,
+    "t1": 73.007,
+    "kw": false
+   },
+   {
+    "w": "folder",
+    "t0": 73.007,
+    "t1": 73.257,
+    "kw": false
+   },
+   {
+    "w": "punya",
+    "t0": 73.257,
+    "t1": 73.558,
+    "kw": false
+   },
+   {
+    "w": "memori",
+    "t0": 73.558,
+    "t1": 73.957,
+    "kw": true
+   },
+   {
+    "w": "dan",
+    "t0": 73.957,
+    "t1": 74.16,
+    "kw": false
+   },
+   {
+    "w": "file",
+    "t0": 74.16,
+    "t1": 74.342,
+    "kw": false
+   },
+   {
+    "w": "sendiri,",
+    "t0": 74.342,
+    "t1": 75.331,
+    "kw": false
+   },
+   {
+    "w": "jadi",
+    "t0": 75.331,
+    "t1": 75.696,
+    "kw": false
+   },
+   {
+    "w": "Proyek",
+    "t0": 75.696,
+    "t1": 76.018,
+    "kw": true
+   },
+   {
+    "w": "A",
+    "t0": 76.018,
+    "t1": 76.134,
+    "kw": false
+   },
+   {
+    "w": "nggak",
+    "t0": 76.134,
+    "t1": 76.699,
+    "kw": false
+   },
+   {
+    "w": "nyampur",
+    "t0": 76.699,
+    "t1": 77.059,
+    "kw": false
+   },
+   {
+    "w": "sama",
+    "t0": 77.059,
+    "t1": 77.27,
+    "kw": false
+   },
+   {
+    "w": "Proyek",
+    "t0": 77.27,
+    "t1": 77.562,
+    "kw": true
+   },
+   {
+    "w": "B.",
+    "t0": 77.562,
+    "t1": 77.895,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s07_1",
+  "shot": 7,
+  "chapter": "MCP",
+  "t0": 78.705,
+  "t1": 84.667,
+  "text": "Keren! Tapi tetap harus copy-paste manual ke email sama kalender, kan?",
+  "words": [
+   {
+    "w": "Keren!",
+    "t0": 79.313,
+    "t1": 80.693,
+    "kw": false
+   },
+   {
+    "w": "Tapi",
+    "t0": 80.693,
+    "t1": 81.093,
+    "kw": false
+   },
+   {
+    "w": "tetap",
+    "t0": 81.093,
+    "t1": 81.893,
+    "kw": false
+   },
+   {
+    "w": "harus",
+    "t0": 81.893,
+    "t1": 82.053,
+    "kw": false
+   },
+   {
+    "w": "copy-paste",
+    "t0": 82.053,
+    "t1": 82.637,
+    "kw": false
+   },
+   {
+    "w": "manual",
+    "t0": 82.637,
+    "t1": 83.021,
+    "kw": true
+   },
+   {
+    "w": "ke",
+    "t0": 83.021,
+    "t1": 83.173,
+    "kw": false
+   },
+   {
+    "w": "email",
+    "t0": 83.173,
+    "t1": 83.508,
+    "kw": true
+   },
+   {
+    "w": "sama",
+    "t0": 83.508,
+    "t1": 83.72,
+    "kw": false
+   },
+   {
+    "w": "kalender,",
+    "t0": 83.72,
+    "t1": 84.497,
+    "kw": true
+   },
+   {
+    "w": "kan?",
+    "t0": 84.497,
+    "t1": 84.497,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s07_2",
+  "shot": 7,
+  "chapter": "MCP",
+  "t0": 84.697,
+  "t1": 91.63,
+  "text": "Nggak perlu lagi. Ada MCP dan Connectors, jembatan dua arah terenkripsi ke aplikasi harianmu.",
+  "words": [
+   {
+    "w": "Nggak",
+    "t0": 84.83,
+    "t1": 85.044,
+    "kw": false
+   },
+   {
+    "w": "perlu",
+    "t0": 85.044,
+    "t1": 85.5,
+    "kw": false
+   },
+   {
+    "w": "lagi.",
+    "t0": 85.5,
+    "t1": 86.206,
+    "kw": false
+   },
+   {
+    "w": "Ada",
+    "t0": 86.206,
+    "t1": 86.55,
+    "kw": false
+   },
+   {
+    "w": "MCP",
+    "t0": 86.55,
+    "t1": 86.928,
+    "kw": true
+   },
+   {
+    "w": "dan",
+    "t0": 86.928,
+    "t1": 87.106,
+    "kw": false
+   },
+   {
+    "w": "Connectors,",
+    "t0": 87.106,
+    "t1": 88.347,
+    "kw": true
+   },
+   {
+    "w": "jembatan",
+    "t0": 88.347,
+    "t1": 88.922,
+    "kw": false
+   },
+   {
+    "w": "dua",
+    "t0": 88.922,
+    "t1": 89.251,
+    "kw": false
+   },
+   {
+    "w": "arah",
+    "t0": 89.251,
+    "t1": 89.606,
+    "kw": false
+   },
+   {
+    "w": "terenkripsi",
+    "t0": 89.606,
+    "t1": 90.398,
+    "kw": true
+   },
+   {
+    "w": "ke",
+    "t0": 90.398,
+    "t1": 90.506,
+    "kw": false
+   },
+   {
+    "w": "aplikasi",
+    "t0": 90.506,
+    "t1": 90.821,
+    "kw": false
+   },
+   {
+    "w": "harianmu.",
+    "t0": 90.821,
+    "t1": 91.25,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s08_1",
+  "shot": 8,
+  "chapter": "ASISTEN",
+  "t0": 92.19,
+  "t1": 98.867,
+  "text": "Tanpa bagi password, AI bisa cek kalender, rapikan catatan, sampai siapkan draf email otomatis.",
+  "words": [
+   {
+    "w": "Tanpa",
+    "t0": 92.26,
+    "t1": 92.611,
+    "kw": false
+   },
+   {
+    "w": "bagi",
+    "t0": 92.611,
+    "t1": 92.863,
+    "kw": false
+   },
+   {
+    "w": "password,",
+    "t0": 92.863,
+    "t1": 93.805,
+    "kw": true
+   },
+   {
+    "w": "AI",
+    "t0": 93.805,
+    "t1": 93.976,
+    "kw": false
+   },
+   {
+    "w": "bisa",
+    "t0": 93.976,
+    "t1": 94.211,
+    "kw": false
+   },
+   {
+    "w": "cek",
+    "t0": 94.211,
+    "t1": 94.43,
+    "kw": false
+   },
+   {
+    "w": "kalender,",
+    "t0": 94.43,
+    "t1": 95.289,
+    "kw": true
+   },
+   {
+    "w": "rapikan",
+    "t0": 95.289,
+    "t1": 95.642,
+    "kw": false
+   },
+   {
+    "w": "catatan,",
+    "t0": 95.642,
+    "t1": 96.565,
+    "kw": true
+   },
+   {
+    "w": "sampai",
+    "t0": 96.565,
+    "t1": 96.797,
+    "kw": false
+   },
+   {
+    "w": "siapkan",
+    "t0": 96.797,
+    "t1": 97.285,
+    "kw": false
+   },
+   {
+    "w": "draf",
+    "t0": 97.285,
+    "t1": 97.5,
+    "kw": false
+   },
+   {
+    "w": "email",
+    "t0": 97.5,
+    "t1": 97.924,
+    "kw": false
+   },
+   {
+    "w": "otomatis.",
+    "t0": 97.924,
+    "t1": 98.697,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s08_2",
+  "shot": 8,
+  "chapter": "ASISTEN",
+  "t0": 98.897,
+  "t1": 103.683,
+  "text": "Wah, keren banget! Berasa punya asisten pribadi beneran!",
+  "words": [
+   {
+    "w": "Wah,",
+    "t0": 98.937,
+    "t1": 100.255,
+    "kw": false
+   },
+   {
+    "w": "keren",
+    "t0": 100.255,
+    "t1": 100.508,
+    "kw": true
+   },
+   {
+    "w": "banget!",
+    "t0": 100.508,
+    "t1": 101.617,
+    "kw": false
+   },
+   {
+    "w": "Berasa",
+    "t0": 101.617,
+    "t1": 101.902,
+    "kw": false
+   },
+   {
+    "w": "punya",
+    "t0": 101.902,
+    "t1": 102.151,
+    "kw": false
+   },
+   {
+    "w": "asisten",
+    "t0": 102.151,
+    "t1": 102.546,
+    "kw": true
+   },
+   {
+    "w": "pribadi",
+    "t0": 102.546,
+    "t1": 102.931,
+    "kw": true
+   },
+   {
+    "w": "beneran!",
+    "t0": 102.931,
+    "t1": 103.41,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s09_1",
+  "shot": 9,
+  "chapter": "REKAP",
+  "t0": 104.243,
+  "t1": 115.267,
+  "text": "Nah, itu empat jurus utamanya: Context, Skills, Projects, sama MCP. Kerjamu bakal 100 kali lipat lebih produktif, dijamin!",
+  "words": [
+   {
+    "w": "Nah,",
+    "t0": 104.618,
+    "t1": 105.221,
+    "kw": false
+   },
+   {
+    "w": "itu",
+    "t0": 105.221,
+    "t1": 105.523,
+    "kw": false
+   },
+   {
+    "w": "empat",
+    "t0": 105.523,
+    "t1": 106.096,
+    "kw": false
+   },
+   {
+    "w": "jurus",
+    "t0": 106.096,
+    "t1": 106.409,
+    "kw": false
+   },
+   {
+    "w": "utamanya:",
+    "t0": 106.409,
+    "t1": 107.671,
+    "kw": false
+   },
+   {
+    "w": "Context,",
+    "t0": 107.671,
+    "t1": 108.603,
+    "kw": true
+   },
+   {
+    "w": "Skills,",
+    "t0": 108.603,
+    "t1": 109.497,
+    "kw": true
+   },
+   {
+    "w": "Projects,",
+    "t0": 109.497,
+    "t1": 110.274,
+    "kw": true
+   },
+   {
+    "w": "sama",
+    "t0": 110.274,
+    "t1": 111.431,
+    "kw": false
+   },
+   {
+    "w": "MCP.",
+    "t0": 111.431,
+    "t1": 111.576,
+    "kw": true
+   },
+   {
+    "w": "Kerjamu",
+    "t0": 111.576,
+    "t1": 112.07,
+    "kw": false
+   },
+   {
+    "w": "bakal",
+    "t0": 112.07,
+    "t1": 112.518,
+    "kw": false
+   },
+   {
+    "w": "100",
+    "t0": 112.518,
+    "t1": 112.729,
+    "kw": true
+   },
+   {
+    "w": "kali",
+    "t0": 112.729,
+    "t1": 112.944,
+    "kw": false
+   },
+   {
+    "w": "lipat",
+    "t0": 112.944,
+    "t1": 113.188,
+    "kw": false
+   },
+   {
+    "w": "lebih",
+    "t0": 113.188,
+    "t1": 113.411,
+    "kw": false
+   },
+   {
+    "w": "produktif,",
+    "t0": 113.411,
+    "t1": 113.815,
+    "kw": true
+   },
+   {
+    "w": "dijamin!",
+    "t0": 113.815,
+    "t1": 115.017,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s10_1",
+  "shot": 10,
+  "chapter": "TEASER",
+  "t0": 116.127,
+  "t1": 121.313,
+  "text": "Oke, aku mau 200 kali lipat! Gimana caranya?",
+  "words": [
+   {
+    "w": "Oke,",
+    "t0": 116.253,
+    "t1": 117.774,
+    "kw": false
+   },
+   {
+    "w": "aku",
+    "t0": 117.774,
+    "t1": 118.218,
+    "kw": false
+   },
+   {
+    "w": "mau",
+    "t0": 118.218,
+    "t1": 118.705,
+    "kw": false
+   },
+   {
+    "w": "200",
+    "t0": 118.705,
+    "t1": 118.94,
+    "kw": true
+   },
+   {
+    "w": "kali",
+    "t0": 118.94,
+    "t1": 119.177,
+    "kw": false
+   },
+   {
+    "w": "lipat!",
+    "t0": 119.177,
+    "t1": 119.925,
+    "kw": false
+   },
+   {
+    "w": "Gimana",
+    "t0": 119.925,
+    "t1": 120.509,
+    "kw": false
+   },
+   {
+    "w": "caranya?",
+    "t0": 120.509,
+    "t1": 120.853,
+    "kw": true
+   }
+  ]
+ },
+ {
+  "id": "s10_2",
+  "shot": 10,
+  "chapter": "TEASER",
+  "t0": 121.343,
+  "t1": 131.944,
+  "text": "Dua ratus?! Tenang, obrolan depan aku kasih tahu caranya, bahkan sampai 2.000 kali lipat, lewat sistem dan pasukan agen sendiri. Sampai jumpa lagi!",
+  "words": [
+   {
+    "w": "Dua",
+    "t0": 121.52,
+    "t1": 121.67,
+    "kw": true
+   },
+   {
+    "w": "ratus?!",
+    "t0": 121.67,
+    "t1": 123.017,
+    "kw": true
+   },
+   {
+    "w": "Tenang,",
+    "t0": 123.017,
+    "t1": 123.407,
+    "kw": false
+   },
+   {
+    "w": "obrolan",
+    "t0": 123.407,
+    "t1": 124.147,
+    "kw": false
+   },
+   {
+    "w": "depan",
+    "t0": 124.147,
+    "t1": 124.609,
+    "kw": false
+   },
+   {
+    "w": "aku",
+    "t0": 124.609,
+    "t1": 124.859,
+    "kw": false
+   },
+   {
+    "w": "kasih",
+    "t0": 124.859,
+    "t1": 125.088,
+    "kw": false
+   },
+   {
+    "w": "tahu",
+    "t0": 125.088,
+    "t1": 125.296,
+    "kw": false
+   },
+   {
+    "w": "caranya,",
+    "t0": 125.296,
+    "t1": 126.152,
+    "kw": false
+   },
+   {
+    "w": "bahkan",
+    "t0": 126.152,
+    "t1": 126.517,
+    "kw": false
+   },
+   {
+    "w": "sampai",
+    "t0": 126.517,
+    "t1": 126.849,
+    "kw": false
+   },
+   {
+    "w": "2.000",
+    "t0": 126.849,
+    "t1": 127.135,
+    "kw": true
+   },
+   {
+    "w": "kali",
+    "t0": 127.135,
+    "t1": 127.36,
+    "kw": false
+   },
+   {
+    "w": "lipat,",
+    "t0": 127.36,
+    "t1": 127.752,
+    "kw": false
+   },
+   {
+    "w": "lewat",
+    "t0": 127.752,
+    "t1": 128.496,
+    "kw": false
+   },
+   {
+    "w": "sistem",
+    "t0": 128.496,
+    "t1": 128.878,
+    "kw": true
+   },
+   {
+    "w": "dan",
+    "t0": 128.878,
+    "t1": 129.172,
+    "kw": false
+   },
+   {
+    "w": "pasukan",
+    "t0": 129.172,
+    "t1": 129.614,
+    "kw": false
+   },
+   {
+    "w": "agen",
+    "t0": 129.614,
+    "t1": 129.903,
+    "kw": true
+   },
+   {
+    "w": "sendiri.",
+    "t0": 129.903,
+    "t1": 130.275,
+    "kw": false
+   },
+   {
+    "w": "Sampai",
+    "t0": 130.275,
+    "t1": 131.151,
+    "kw": false
+   },
+   {
+    "w": "jumpa",
+    "t0": 131.151,
+    "t1": 131.374,
+    "kw": false
+   },
+   {
+    "w": "lagi!",
+    "t0": 131.374,
+    "t1": 131.56,
+    "kw": false
+   }
+  ]
+ }
+]

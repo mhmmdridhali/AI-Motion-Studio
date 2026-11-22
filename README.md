@@ -33,7 +33,8 @@ Informasi spesifikasi perangkat, aturan kerja workspace, dan konfigurasi lokal l
 | `02` | **Anak Sulung: Kuat Karena Harus** *(Koleksi Esai Medium)* | Mode B: Lemo-Opuscar Pure (`risograph` — Canvas 2D + WebGL2) | `1080x1920 (9:16) @ 24 FPS` · `59.4s` | Selesai (Rendered) | [projects/02-anak-sulung/](projects/02-anak-sulung/README.md) |
 | `03` | **Muhammad Ali Ridho: Math Brain, Lazy Automator** *(Video Perkenalan Portofolio)* | Mode A: HyperFrames (`v0.9.70` + GSAP 3.15 + Canvas 2D Verlet Lanyard) | `1080x1920 (9:16) @ 60 FPS` · `104.8s` | Selesai (Rendered) | [projects/03-ridho-intro/](projects/03-ridho-intro/README.md) |
 | `04` | **Belajar AI dari Nol — Part 1: Fundamental AI** *(Duet Explainer 4 Tangga AI)* | Track 1: Lemo-Opuscar (`ipad-sketch` — Canvas 2D) | `1080x1920 (9:16) @ 30 FPS` · `80.0s` | Selesai (Rendered) | [projects/04-bodoh-ke-mahir-ai/](projects/04-bodoh-ke-mahir-ai/README.md) |
-| `05` | *Proyek Berikutnya* | - | - | Siap dimulai | [projects/](projects/README.md) |
+| `05` | **Belajar AI dari Nol — Part 2: AI Tools Mastery** *(Duet Explainer Context, Skills, Projects & MCP)* | Track 1: Lemo-Opuscar (`ipad-sketch` — Canvas 2D) | `1080x1920 (9:16) @ 30 FPS` · `133.1s` | Selesai (Rendered) | [projects/05-ai-tools-mastery/](projects/05-ai-tools-mastery/README.md) |
+| `06` | *Proyek Berikutnya* | - | - | Siap dimulai | [projects/](projects/README.md) |
 
 ---
 

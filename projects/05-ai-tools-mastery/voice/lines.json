@@ -1,0 +1,236 @@
+{
+  "fps": 30,
+  "lead": 0.30,
+  "gap": 0.24,
+  "default_tail": 0.55,
+  "engine": "auto",
+  "lang": "id",
+  "tempo": 1.0,
+  "chapters": {
+    "1": "HOOK",
+    "2": "3 AI UTAMA",
+    "3": "ANALOGI LAGU",
+    "4": "CONTEXT",
+    "5": "SKILLS",
+    "6": "PROJECTS",
+    "7": "MCP",
+    "8": "ASISTEN",
+    "9": "REKAP",
+    "10": "TEASER"
+  },
+  "tails": {
+    "9": 0.85,
+    "10": 1.40
+  },
+  "lines": [
+    {
+      "id": "s01_1",
+      "shot": 1,
+      "speaker": "MURID",
+      "gemini_voice": "Kore",
+      "voice": "id-ID-GadisNeural",
+      "style": "casual curious Indonesian young woman speaking naturally to a friendly mentor, expressive rising intonation on questions, light amusement on funny moments, conversational pace",
+      "text": "Nah, kemarin janji mau kasih rahasianya! Kenapa sih AI suka ngawur pas kusuruh?",
+      "say": "Nah, kemarin janji mau kasih rahasianya! <short pause> Kenapa sih AI suka ngawur pas kusuruh?",
+      "keywords": ["rahasianya", "ngawur"]
+    },
+    {
+      "id": "s01_2",
+      "shot": 1,
+      "speaker": "MENTOR",
+      "gemini_voice": "Orus",
+      "voice": "id-ID-ArdiNeural",
+      "style": "warm friendly Indonesian male mentor explaining simply over a sketchpad, relaxed clear articulation, encouraging upbeat tone, crisp emphasis on key terms",
+      "text": "Sebenarnya AI jarang jelek. Yang sering kurang justru instruksi kita.",
+      "say": "Sebenarnya, AI jarang jelek. <short pause> Yang sering kurang justru instruksi kita.",
+      "keywords": ["jarang", "instruksi"]
+    },
+    {
+      "id": "s02_1",
+      "shot": 2,
+      "speaker": "MENTOR",
+      "gemini_voice": "Orus",
+      "voice": "id-ID-ArdiNeural",
+      "style": "warm friendly Indonesian male mentor explaining simply over a sketchpad, relaxed clear articulation, encouraging upbeat tone, crisp emphasis on key terms",
+      "text": "Di pelajaran kali ini kita kuasai alatnya. Mulai dari tiga AI utama: ChatGPT, Claude, sama Gemini. Kerennya sih, AI Trinity!",
+      "say": "Di pelajaran kali ini, kita kuasai alatnya. <short pause> Mulai dari tiga AI utama: ChatGPT, Claude, sama Gemini. <short pause> Kerennya sih... AI Trinity!",
+      "keywords": ["ChatGPT", "Claude", "Gemini", "AI", "Trinity"]
+    },
+    {
+      "id": "s02_2",
+      "shot": 2,
+      "speaker": "MURID",
+      "gemini_voice": "Kore",
+      "voice": "id-ID-GadisNeural",
+      "style": "casual curious Indonesian young woman speaking naturally to a friendly mentor, expressive rising intonation on questions, light amusement on funny moments, conversational pace",
+      "text": "Aplikasinya udah ada. Terus biar hasilnya pas gimana?",
+      "say": "Aplikasinya udah ada. <short pause> Terus biar hasilnya pas gimana?",
+      "keywords": ["hasilnya", "pas"]
+    },
+    {
+      "id": "s03_1",
+      "shot": 3,
+      "speaker": "MENTOR",
+      "gemini_voice": "Orus",
+      "voice": "id-ID-ArdiNeural",
+      "style": "warm friendly Indonesian male mentor explaining simply over a sketchpad, relaxed clear articulation, encouraging upbeat tone, crisp emphasis on key terms",
+      "text": "Bayangin kamu minta musisi bikin lagu. Maumu pop, tapi nggak dibilang, malah dikasih jazz!",
+      "say": "Bayangin kamu minta musisi bikin lagu. <short pause> Maumu pop, tapi nggak dibilang, <short pause> malah dikasih jazz!",
+      "keywords": ["pop", "jazz"]
+    },
+    {
+      "id": "s03_2",
+      "shot": 3,
+      "speaker": "MURID",
+      "gemini_voice": "Kore",
+      "voice": "id-ID-GadisNeural",
+      "style": "casual curious Indonesian young woman speaking naturally to a friendly mentor, expressive rising intonation on questions, light amusement on funny moments, conversational pace",
+      "text": "Haha, iya juga, kan dia nggak bisa baca pikiran.",
+      "say": "<laugh> Haha, iya juga, kan dia nggak bisa baca pikiran.",
+      "keywords": ["baca", "pikiran"]
+    },
+    {
+      "id": "s04_1",
+      "shot": 4,
+      "speaker": "MENTOR",
+      "gemini_voice": "Orus",
+      "voice": "id-ID-ArdiNeural",
+      "style": "warm friendly Indonesian male mentor explaining simply over a sketchpad, relaxed clear articulation, encouraging upbeat tone, crisp emphasis on key terms",
+      "text": "Makanya kasih konteks jelas: peran, tujuan, target, sama batasannya.",
+      "say": "Makanya kasih konteks jelas: peran, tujuan, target, sama batasannya.",
+      "keywords": ["konteks", "peran", "tujuan", "target", "batasannya"]
+    },
+    {
+      "id": "s04_2",
+      "shot": 4,
+      "speaker": "MENTOR",
+      "gemini_voice": "Orus",
+      "voice": "id-ID-ArdiNeural",
+      "style": "warm friendly Indonesian male mentor explaining simply over a sketchpad, relaxed clear articulation, encouraging upbeat tone, crisp emphasis on key terms",
+      "text": "Ingat, lengkap nggak harus panjang. Begitu konteksnya pas, jawabannya langsung nyambung.",
+      "say": "Ingat, lengkap nggak harus panjang. <short pause> Begitu konteksnya pas, jawabannya langsung nyambung.",
+      "keywords": ["lengkap", "panjang", "nyambung"]
+    },
+    {
+      "id": "s05_1",
+      "shot": 5,
+      "speaker": "MURID",
+      "gemini_voice": "Kore",
+      "voice": "id-ID-GadisNeural",
+      "style": "casual curious Indonesian young woman speaking naturally to a friendly mentor, expressive rising intonation on questions, light amusement on funny moments, conversational pace",
+      "text": "Waduh, walaupun ringkas, kalau tiap minggu harus ngetik ulang konteks yang sama terus, capek dong?",
+      "say": "Waduh, walaupun ringkas, kalau tiap minggu harus ngetik ulang konteks yang sama terus, <short pause> capek dong?",
+      "keywords": ["ngetik", "konteks", "capek"]
+    },
+    {
+      "id": "s05_2",
+      "shot": 5,
+      "speaker": "MENTOR",
+      "gemini_voice": "Orus",
+      "voice": "id-ID-ArdiNeural",
+      "style": "warm friendly Indonesian male mentor explaining simply over a sketchpad, relaxed clear articulation, encouraging upbeat tone, crisp emphasis on key terms",
+      "text": "Nggak usah! Simpan jadi Skills. Tinggal ketik /riset-konten, langsung jalan.",
+      "say": "Nggak usah! <short pause> Simpan jadi Skills. Tinggal ketik slash riset konten, langsung jalan.",
+      "keywords": ["Skills", "/riset-konten"]
+    },
+    {
+      "id": "s06_1",
+      "shot": 6,
+      "speaker": "MURID",
+      "gemini_voice": "Kore",
+      "voice": "id-ID-GadisNeural",
+      "style": "casual curious Indonesian young woman speaking naturally to a friendly mentor, expressive rising intonation on questions, light amusement on funny moments, conversational pace",
+      "text": "Kalau lagi garap dua kerjaan beda, nggak takut ketuker?",
+      "say": "Kalau lagi garap dua kerjaan beda, nggak takut ketuker?",
+      "keywords": ["dua", "ketuker"]
+    },
+    {
+      "id": "s06_2",
+      "shot": 6,
+      "speaker": "MENTOR",
+      "gemini_voice": "Orus",
+      "voice": "id-ID-ArdiNeural",
+      "style": "warm friendly Indonesian male mentor explaining simply over a sketchpad, relaxed clear articulation, encouraging upbeat tone, crisp emphasis on key terms",
+      "text": "Pisahkan pakai Projects! Tiap folder punya memori dan file sendiri, jadi Proyek A nggak nyampur sama Proyek B.",
+      "say": "Pisahkan pakai Projects! <short pause> Tiap folder punya memori dan file sendiri, jadi Proyek A nggak nyampur sama Proyek B.",
+      "keywords": ["Projects", "memori", "Proyek"]
+    },
+    {
+      "id": "s07_1",
+      "shot": 7,
+      "speaker": "MURID",
+      "gemini_voice": "Kore",
+      "voice": "id-ID-GadisNeural",
+      "style": "casual curious Indonesian young woman speaking naturally to a friendly mentor, expressive rising intonation on questions, light amusement on funny moments, conversational pace",
+      "text": "Keren! Tapi tetap harus copy-paste manual ke email sama kalender, kan?",
+      "say": "Keren! <short pause> Tapi tetap harus copy paste manual ke email sama kalender, kan?",
+      "keywords": ["manual", "email", "kalender"]
+    },
+    {
+      "id": "s07_2",
+      "shot": 7,
+      "speaker": "MENTOR",
+      "gemini_voice": "Orus",
+      "voice": "id-ID-ArdiNeural",
+      "style": "warm friendly Indonesian male mentor explaining simply over a sketchpad, relaxed clear articulation, encouraging upbeat tone, crisp emphasis on key terms",
+      "text": "Nggak perlu lagi. Ada MCP dan Connectors, jembatan dua arah terenkripsi ke aplikasi harianmu.",
+      "say": "Nggak perlu lagi. <short pause> Ada M C P dan Konektors, jembatan dua arah terenkripsi ke aplikasi harianmu.",
+      "keywords": ["MCP", "Connectors", "terenkripsi"]
+    },
+    {
+      "id": "s08_1",
+      "shot": 8,
+      "speaker": "MENTOR",
+      "gemini_voice": "Orus",
+      "voice": "id-ID-ArdiNeural",
+      "style": "warm friendly Indonesian male mentor explaining simply over a sketchpad, relaxed clear articulation, encouraging upbeat tone, crisp emphasis on key terms",
+      "text": "Tanpa bagi password, AI bisa cek kalender, rapikan catatan, sampai siapkan draf email otomatis.",
+      "say": "Tanpa bagi password, AI bisa cek kalender, rapikan catatan, sampai siapkan draf email otomatis.",
+      "keywords": ["password", "kalender", "catatan", "otomatis"]
+    },
+    {
+      "id": "s08_2",
+      "shot": 8,
+      "speaker": "MURID",
+      "gemini_voice": "Kore",
+      "voice": "id-ID-GadisNeural",
+      "style": "casual curious Indonesian young woman speaking naturally to a friendly mentor, expressive rising intonation on questions, light amusement on funny moments, conversational pace",
+      "text": "Wah, keren banget! Berasa punya asisten pribadi beneran!",
+      "say": "Wah, keren banget! Berasa punya asisten pribadi beneran!",
+      "keywords": ["keren", "asisten", "pribadi"]
+    },
+    {
+      "id": "s09_1",
+      "shot": 9,
+      "speaker": "MENTOR",
+      "gemini_voice": "Orus",
+      "voice": "id-ID-ArdiNeural",
+      "style": "warm friendly Indonesian male mentor explaining simply over a sketchpad, relaxed clear articulation, encouraging upbeat tone, crisp emphasis on key terms",
+      "text": "Nah, itu empat jurus utamanya: Context, Skills, Projects, sama MCP. Kerjamu bakal 100 kali lipat lebih produktif, dijamin!",
+      "say": "Nah, itu empat jurus utamanya: Context, Skills, Projects, sama M C P. <short pause> Kerjamu bakal seratus kali lipat lebih produktif, dijamin!",
+      "keywords": ["Context", "Skills", "Projects", "MCP", "100", "produktif"]
+    },
+    {
+      "id": "s10_1",
+      "shot": 10,
+      "speaker": "MURID",
+      "gemini_voice": "Kore",
+      "voice": "id-ID-GadisNeural",
+      "style": "casual curious Indonesian young woman speaking naturally to a friendly mentor, expressive rising intonation on questions, light amusement on funny moments, conversational pace",
+      "text": "Oke, aku mau 200 kali lipat! Gimana caranya?",
+      "say": "Oke, aku mau dua ratus kali lipat! <short pause> Gimana caranya?",
+      "keywords": ["200", "caranya"]
+    },
+    {
+      "id": "s10_2",
+      "shot": 10,
+      "speaker": "MENTOR",
+      "gemini_voice": "Orus",
+      "voice": "id-ID-ArdiNeural",
+      "style": "warm friendly Indonesian male mentor explaining simply over a sketchpad, relaxed clear articulation, encouraging upbeat tone, crisp emphasis on key terms",
+      "text": "Dua ratus?! Tenang, obrolan depan aku kasih tahu caranya, bahkan sampai 2.000 kali lipat, lewat sistem dan pasukan agen sendiri. Sampai jumpa lagi!",
+      "say": "Dua ratus?! <laugh> Tenang! <short pause> Obrolan depan aku kasih tahu caranya, bahkan sampai dua ribu kali lipat, <short pause> lewat sistem dan pasukan agen sendiri. <short pause> Sampai jumpa lagi!",
+      "keywords": ["Dua", "ratus", "2.000", "sistem", "agen"]
+    }
+  ]
+}

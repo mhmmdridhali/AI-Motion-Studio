@@ -1,0 +1,212 @@
+{
+ "fps": 30,
+ "engine": "gemini (gemini-3.8-flash-tts)",
+ "total": 133.09,
+ "shots": [
+  {
+   "shot": 1,
+   "start": 0.0,
+   "end": 11.959,
+   "dur": 11.959,
+   "chapter": "HOOK"
+  },
+  {
+   "shot": 2,
+   "start": 11.959,
+   "end": 28.6,
+   "dur": 16.641,
+   "chapter": "3 AI UTAMA"
+  },
+  {
+   "shot": 3,
+   "start": 28.6,
+   "end": 39.54,
+   "dur": 10.94,
+   "chapter": "ANALOGI LAGU"
+  },
+  {
+   "shot": 4,
+   "start": 39.54,
+   "end": 51.939,
+   "dur": 12.399,
+   "chapter": "CONTEXT"
+  },
+  {
+   "shot": 5,
+   "start": 51.939,
+   "end": 65.501,
+   "dur": 13.562,
+   "chapter": "SKILLS"
+  },
+  {
+   "shot": 6,
+   "start": 65.501,
+   "end": 78.445,
+   "dur": 12.944,
+   "chapter": "PROJECTS"
+  },
+  {
+   "shot": 7,
+   "start": 78.445,
+   "end": 91.93,
+   "dur": 13.485,
+   "chapter": "MCP"
+  },
+  {
+   "shot": 8,
+   "start": 91.93,
+   "end": 103.983,
+   "dur": 12.053,
+   "chapter": "ASISTEN"
+  },
+  {
+   "shot": 9,
+   "start": 103.983,
+   "end": 115.867,
+   "dur": 11.884,
+   "chapter": "REKAP"
+  },
+  {
+   "shot": 10,
+   "start": 115.867,
+   "end": 133.094,
+   "dur": 17.227,
+   "chapter": "TEASER"
+  }
+ ],
+ "voice": [
+  {
+   "id": "s01_1",
+   "shot": 1,
+   "start": 0.3,
+   "dur": 5.702,
+   "end": 6.002
+  },
+  {
+   "id": "s01_2",
+   "shot": 1,
+   "start": 6.242,
+   "dur": 5.167,
+   "end": 11.409
+  },
+  {
+   "id": "s02_1",
+   "shot": 2,
+   "start": 12.259,
+   "dur": 11.19,
+   "end": 23.449
+  },
+  {
+   "id": "s02_2",
+   "shot": 2,
+   "start": 23.689,
+   "dur": 4.36,
+   "end": 28.05
+  },
+  {
+   "id": "s03_1",
+   "shot": 3,
+   "start": 28.9,
+   "dur": 6.023,
+   "end": 34.923
+  },
+  {
+   "id": "s03_2",
+   "shot": 3,
+   "start": 35.163,
+   "dur": 3.827,
+   "end": 38.99
+  },
+  {
+   "id": "s04_1",
+   "shot": 4,
+   "start": 39.84,
+   "dur": 5.11,
+   "end": 44.95
+  },
+  {
+   "id": "s04_2",
+   "shot": 4,
+   "start": 45.19,
+   "dur": 6.199,
+   "end": 51.389
+  },
+  {
+   "id": "s05_1",
+   "shot": 5,
+   "start": 52.239,
+   "dur": 6.993,
+   "end": 59.232
+  },
+  {
+   "id": "s05_2",
+   "shot": 5,
+   "start": 59.472,
+   "dur": 5.478,
+   "end": 64.951
+  },
+  {
+   "id": "s06_1",
+   "shot": 6,
+   "start": 65.801,
+   "dur": 4.725,
+   "end": 70.526
+  },
+  {
+   "id": "s06_2",
+   "shot": 6,
+   "start": 70.766,
+   "dur": 7.129,
+   "end": 77.895
+  },
+  {
+   "id": "s07_1",
+   "shot": 7,
+   "start": 78.745,
+   "dur": 5.752,
+   "end": 84.497
+  },
+  {
+   "id": "s07_2",
+   "shot": 7,
+   "start": 84.737,
+   "dur": 6.643,
+   "end": 91.38
+  },
+  {
+   "id": "s08_1",
+   "shot": 8,
+   "start": 92.23,
+   "dur": 6.467,
+   "end": 98.697
+  },
+  {
+   "id": "s08_2",
+   "shot": 8,
+   "start": 98.937,
+   "dur": 4.495,
+   "end": 103.433
+  },
+  {
+   "id": "s09_1",
+   "shot": 9,
+   "start": 104.283,
+   "dur": 10.734,
+   "end": 115.017
+  },
+  {
+   "id": "s10_1",
+   "shot": 10,
+   "start": 116.167,
+   "dur": 4.976,
+   "end": 121.143
+  },
+  {
+   "id": "s10_2",
+   "shot": 10,
+   "start": 121.383,
+   "dur": 10.311,
+   "end": 131.694
+  }
+ ]
+}
