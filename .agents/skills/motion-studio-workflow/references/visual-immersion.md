@@ -49,6 +49,7 @@ Pemilihan track ditentukan otomatis pada `BRIEF.md` sesuai karakteristik proyek:
 - **Match-Move Nyata (Bukan Janji Kertas):** Bila `SPEC.md`/`STORYLINES.md` menjanjikan transisi *object match-move* atau *curtain wipe*, wujudkan secara harfiah di timeline (jangan jatuh ke 80% *fade-out/in* seragam).
 - **Wajib Verifikasi Fisik Font Lokal & GSAP Lokal (`0` CDN Eksternal):** Taruh font (mis. `Inter`, `JetBrains Mono`) di `assets/fonts/` dengan `@font-face` nyata serta bundel `gsap.min.js` secara lokal. `studio-audit.mjs` mencatat `error` bila font `404` dan `warning` bila ada request ke CDN luar.
 - **Porting Aset Web Asli & Privasi Sensor:** Ketika mengadaptasi web/portofolio brand, porting komponen autentiknya (mis. *Verlet rope physics*, doodle SVG asli) dan blur-mask wajah, NIP, kode QR, serta teks instansi sensitif sesuai `BRIEF.md` dengan rapi tanpa memotong nama pemilik/label utama.
+- **Batas Aman Ilustrasi Canvas `9:16` (`y <= 1120px`) & Watermark:** Pada adegan Canvas `9:16`, jaga sketsa/diagram inti berada pada **`y <= 1120px`** agar pita subtitle *chip* (`y: 1184–1290px`) tidak pernah menimpa gambar. Terapkan **Watermark** persis sesuai `BRIEF.md` (`Tanpa Watermark` default; `End Card Only` pada kartu akhir; atau watermark halus `opacity 18–25%` di sudut atas aman `y >= 144px` sepanjang video).
 - **Karakter & Kepadatan Teks:** Gunakan figur manusia sesuai `BRIEF.md` (pakai *stickman* hanya untuk gaya `stick-explainer`). Maksimal **1 frasa judul jangkar (1–5 kata)** per shot kunci.
 
 ---
@@ -58,8 +59,9 @@ Pemilihan track ditentukan otomatis pada `BRIEF.md` sesuai karakteristik proyek:
 1. **Zona Aman `9:16` Mutlak (`y <= 1360px` / `<= 72%` tinggi frame):**
    - Seluruh subtitle *burn-in* wajib berada pada pita aman **`y: 1120px–1310px`** (dan `< 1360px` untuk baris terbawahnya, serta `>= 144px` dari tepi atas) agar bebas dari UI deskripsi/komentar Instagram Reels, TikTok, dan YouTube Shorts.
    - **Larangan Mutlak Bypass Validator:** Dilarang memasang `data-layout-allow-safe-zone` atau `data-layout-ignore` pada subtitle maupun kartu teks untuk mengakali batas `y > 1360px`.
-2. **Pemotongan Frasa Semantik (Berbasis `voice/words.json`):**
-   - Susun pengelompokan 1–3 kata dengan **kesadaran sintaksis & angka**: **dilarang memecah angka dari satuannya** (salah: `"dan hampir 3"` → `"ribu data"`; benar: `"dan hampir"` → `"3 ribu data"`).
+2. **Pemotongan Frasa Semantik (`KEEP_PAIRS`) & Lencana Pembicara (`Speaker Badge`):**
+   - Susun pengelompokan 1–3 kata dari `voice/words.json` dengan daftar penjaga pasangan frasa **`KEEP_PAIRS`** *(mis. `"1 stadion"`, `"3 ribu"`, `"AI Agent"`, `"dari nol"`)* agar **dilarang memecah angka dari satuannya maupun memotong frasa istilah**.
+   - Untuk format **Duet / Multi-Speaker**, tampilkan opsional **Speaker Badge** ringkas (`MURID` / `MENTOR`) tepat di atas pita subtitle sesuai gaya visualnya.
    - **Dilarang** menampilkan 1 paragraf/kalimat utuh sekaligus di satu shot. Matikan subtitle pada kartu penutup (*end card*).
 3. **Pilihan 4 Gaya Subtitle *Burn-In* (Sesuai `BRIEF.md`):**
    - **Short-Form / Viral Captions:** 1–3 kata per grup, kontras tinggi, sorot kata kunci (`kw`).
@@ -70,31 +72,32 @@ Pemilihan track ditentukan otomatis pada `BRIEF.md` sesuai karakteristik proyek:
 
 ---
 
-## 5. Disiplin Vision, Audit Cepat & Slot Wajib `REVIEW.md`
+## 5. Disiplin Konteks, Vision, Pemisahan Gate #2A → #2B & Slot Wajib `REVIEW.md`
 
-1. **Vision Batching (`<= 3` Gambar Aset Mentah):** Dilarang membaca 10+ gambar aset mentah satu per satu dengan `read_file`. Apabila ada banyak aset/masking untuk diperiksa, satukan menjadi **1 grid sheet** terlebih dahulu sebelum memanggil `read_file`.
-2. **Gate #2A (Stills + Audit Cepat — `0` Render Video):**
-   - **Track 1 & 2:** Jalankan auditor terpadu (1× Chrome, ~12 detik):
+1. **Disiplin Konteks & Handoff:** **Jangan membaca ulang skrip studio bersama (`tts_expressive.py`, `studio-audit.mjs`, `lemo-preview.mjs`) berkali-kali** dalam percakapan yang sama. Gabungkan sub-langkah yang menyatu menjadi 1 rencana per tahap *(target `≤ 8–10` handoff rencana per proyek)*.
+2. **Vision Batching (`<= 3` Gambar Aset Mentah):** Dilarang membaca 10+ gambar aset mentah satu per satu dengan `read_file`. Apabila ada banyak aset/masking untuk diperiksa, satukan menjadi **1 grid sheet** terlebih dahulu sebelum memanggil `read_file`.
+3. **Gate #2A (WAJIB STOP — Stills Saja, TANPA Link Live Preview):**
+   - **Track 1 & 2:** Jalankan auditor terpadu (1× Chrome, ~12–24 detik):
      ```powershell
      node .agents\skills\motion-studio-workflow\scripts\studio-audit.mjs projects\NN-slug
      ```
      Menghasilkan `boards/contact-sheet.jpg`, `boards/phone-360.jpg` (`360px`), `boards/seams.jpg`, dan `boards/audit-report.json`.
    - **Track 3:** Jalankan `check --snapshots --no-contrast` (Run #1).
-   - Baca **1 grid `boards/contact-sheet.jpg`** dulu (+ `phone-360.jpg`/`seams.jpg` bila perlu). Revisi memakai **Protokol Revisi 4 Langkah**.
-   - **Wajib cantumkan pengingat `/compact`** begitu user menyetujui Gate #2A sebelum lanjut ke polish/QA final.
-3. **Gate #2B (Live Preview Interaktif):**
-   - **Track 1 & 2:** `node .agents\skills\motion-studio-workflow\scripts\lemo-preview.mjs projects\NN-slug --port 3020` (`BypassSandbox: true`). Cek badge header hijau **`out/mix.wav (VO+BGM+SFX)`** bila BGM/SFX aktif.
+   - **Aturan Pemisahan Ketat Gate #2A vs #2B:** Buka `boards/contact-sheet.jpg` (+ `phone-360.jpg`/`seams.jpg` bila perlu), lalu sajikan **HANYA hasil Stills & Contact Sheet** di chat. **DILARANG menggabungkan Gate #2A dan Gate #2B atau mengirim tautan `http://127.0.0.1:3020/` pada tahap ini.** Revisi memakai **Protokol Revisi 4 Langkah**, dan setelah user menyetujui Gate #2A, ingatkan user untuk mengirim **`/compact` saja secara mandiri** lalu mengetik `"Lanjut"`.
+4. **Tahap 4B (*Procedural Foley* Sync) → Gate #2B (Live Preview Interaktif):**
+   - Bila proyek memakai foley berbasis gerak prosedural, pastikan `events.json` (`window.EV`) diekspor dan `mix.py` final sudah dijalankan sebelum membuka Gate #2B.
+   - **Track 1 & 2:** `node .agents\skills\motion-studio-workflow\scripts\lemo-preview.mjs projects\NN-slug --port 3020` (`BypassSandbox: true`, `IsDaemon: true`, `toolSummary: "Run live preview & audition server (daemon)"`). Cek badge header hijau **`out/mix.wav (VO+BGM+SFX)`** bila BGM/SFX aktif.
    - **Track 3:** `hyperframes play` (cepat) atau `hyperframes preview --foreground --port 3030` dengan `IsDaemon: true` agar server persisten tidak mati sendiri.
-4. **Gate #3 (QA Akhir):**
-   - **Track 1 & 2:** Jalankan `studio-audit.mjs projects\NN-slug --strict` (`0 errors`, `0 warnings`, 0 CDN luar, 0 404 font, 0 *dead-hold*, 0 pelanggaran zona aman `y > 1360px`).
+5. **Gate #3 (QA Akhir):**
+   - **Track 1 & 2:** Jalankan `studio-audit.mjs projects\NN-slug --strict` (`--thumb` bila cover terpisah aktif: `0 errors`, `0 warnings`, 0 CDN luar, 0 404 font, 0 *dead-hold*, 0 pelanggaran zona aman `y > 1360px`).
    - **Track 3:** Jalankan Run #2 `hyperframes check --json` + `snapshot --review` + cek playbook `impeccable` (`reference/craft-floor.md`).
 
 ### Slot Wajib `REVIEW.md` (Checklist Sebelum Render Penuh)
 Pastikan `REVIEW.md` mengisi status aktual seluruh item ini sebelum meminta izin render `.mp4`:
 - [ ] **`DEMO.md` + Min. 2 *Native Moves* *(Track 1)* / `hyperframes-registry` + Struktur Flat *(Track 2/3)***
 - [ ] **Font & GSAP Fisik Lokal Terverifikasi:** `@font-face` lokal aktif (`0` CDN eksternal, `0` 404 aset)
-- [ ] **Panggung Penuh, 0 *Dead-Hold > 2.2s*, & Zona Aman `9:16` (`y <= 1360px` tanpa bypass)**
-- [ ] **Audio Mix & Event-Synced SFX:** `out/mix.wav` aktif di Live Preview (`-14 LUFS`, 2–3 foley/shot, *punchline dips*)
-- [ ] **Subtitle Sesuai Pilihan `BRIEF.md`:** basis `words.json`, pemotongan semantik anti-pecah angka/satuan
+- [ ] **Panggung Penuh, 0 *Dead-Hold > 2.2s*, Kanvas `y <= 1120px`, Watermark Sesuai `BRIEF.md` & Zona Aman `9:16` (`y <= 1360px`)**
+- [ ] **Audio Mix & Event-Synced SFX:** `out/mix.wav` aktif di Live Preview (`-14 LUFS`, `events.json` / 2–3 foley per shot, `-50%` foley ducking, *punchline dips*)
+- [ ] **Subtitle Sesuai Pilihan `BRIEF.md`:** basis `words.json`, `KEEP_PAIRS` anti-pecah angka/istilah, *Speaker Badge* bila Duet
 - [ ] **Uji Teknis & Privasi:** `studio-audit.mjs --strict` / `hyperframes check --json` `PASS` · Phone `360px` · Seams · Masking Privasi
-- [ ] **Thumbnail Bersih Siap & Rencana Encoding `< 50 MB` (`libx264 yuv420p`, `48 kHz` stereo, FPS adaptif)**
+- [ ] **Thumbnail Bersih Siap & Rencana Encoding `< 50 MB` (`libx264` TV-range `yuv420p`, `48 kHz` stereo, FPS adaptif)**

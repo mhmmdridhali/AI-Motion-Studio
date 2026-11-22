@@ -19,13 +19,13 @@ Panduan praktis ini menjelaskan alur produksi video **dari sudut pandang Anda se
 ```mermaid
 flowchart TD
     U1["1. Buka Chat Baru<br/>Panggil /motion-studio-workflow + kirim ide/bahan"] --> A1["Agent: Subagent research (Flash) susun FACTS.md (<= 5 KB)<br/>Jalankan 4 Sesi Grill Me Terpisah (HANYA di awal!)"]
-    A1 --> U2["2. Jawab 4 Sesi Grill Me<br/>1) Konteks · 2) Pilih Gaya Visual & Subtitle (Engine Auto)<br/>3) Audio VO + BGM/SFX · 4) Output, Thumbnail & Privasi"]
+    A1 --> U2["2. Jawab 4 Sesi Grill Me<br/>1) Konteks · 2) Pilih Gaya Visual & Subtitle (Engine Auto)<br/>3) Audio VO + BGM/SFX · 4) Output, Thumbnail, Watermark & Privasi"]
     U2 --> A2["Agent: Tulis STORYLINES/SPEC atau TREATMENT + DEMO.md<br/>+ draf VO ekspresif (Humanizer)"]
     A2 --> U3["3. GATE #1 (Chat Biasa)<br/>Pilih struktur cerita & setujui draf naskah VO"]
     U3 --> A3["Agent: Gemini TTS + Audio Lock (tts_expressive.py)<br/>+ nyalakan localhost/audition & hyperlink audition.wav"]
-    A3 --> U4["4. Mini-Gate Audisi Audio<br/>Dengar & klik baris kalimat via /audition, lalu ketik /compact"]
-    U4 --> A4["Agent: Rakit BGM/SFX (mix.py vectorized) + studio-audit.mjs (~12s)<br/>+ siapkan contact-sheet, phone-360, & seams"]
-    A4 --> U5["5. GATE #2A (Stills + /compact) -> GATE #2B / #3 (Live Preview)<br/>Revisi pakai Protokol 4-Langkah; cukup Refresh browser!"]
+    A3 --> U4["4. Mini-Gate Audisi Audio<br/>Dengar via /audition, lalu kirim /compact saja -> Lanjut"]
+    U4 --> A4["Agent: Rakit BGM/SFX bed + studio-audit.mjs (~12s)<br/>+ sajikan ONLY Stills Contact Sheet di Gate #2A"]
+    A4 --> U5["5. GATE #2A (Stills + /compact) -> Sinkron events.json -> GATE #2B / #3 (Live Preview)<br/>Revisi pakai Protokol 4-Langkah; cukup Refresh browser!"]
     U5 -->|Revisi diskusi 4-langkah| A4
     U5 -->|Lampu hijau render| A5["Agent: Encode MP4 < 50 MB (-14 LUFS, 48 kHz) + Thumbnail bersih"]
     A5 --> U6["6. Human Audio/Video QA<br/>Tonton & dengarkan langsung file MP4 + cek Thumbnail"]
@@ -47,7 +47,7 @@ Jika bahan mentah panjang (repo/artikel/video), subagent `research` (**Model Fla
    - *(atau sidecar `.srt` saja tanpa burn-in)*
    > **Auto-Engine Routing:** Agent otomatis memilih jalur tercepat dan paling pas di balik layar — **Track 1 (`Lemo-Opuscar`)** untuk gaya artistik/esai, **Track 2 (`DOM/GSAP Hybrid`)** untuk editorial UI/web/data tanpa overhead berat, atau **Track 3 (`HyperFrames Lean`)** khusus bila menyematkan rekaman app `video-demo`/`<video>`. Anda tidak perlu memilih istilah teknis engine, namun bebas *override* kapan saja di chat.
 3. **Grill Me #3 — Audio, VO & Bentuk Delivery BGM/SFX:** Memilih persona suara (**utama: Gemini TTS `gemini-3.8-flash-tts`** dengan fallback otomatis **Edge TTS**, atau rekaman suara sendiri / tanpa VO), intonasi retoris/adlib, serta **bentuk *delivery* BGM & SFX** *(musik + foley sinkron aktif secara default)*.
-4. **Grill Me #4 — Output Akhir, Thumbnail & Privasi:** Mengunci rasio & durasi *(jika belum disebut di awal)*, FPS adaptif *(24/30 FPS untuk efisiensi render, atau 60 FPS untuk motion UI/scroll cepat)*, target **`< 50 MB`**, **opsi Thumbnail Publikasi** (*Dedicated Cover bersih tanpa subtitle + Strong First Frame*), serta **Privasi & Sensor** *(apakah ada wajah, NIP, kode QR, atau nama instansi yang harus diblur/disamarkan)*.
+4. **Grill Me #4 — Output Akhir, Thumbnail, Watermark & Privasi:** Mengunci rasio & durasi *(jika belum disebut di awal)*, FPS adaptif *(24/30 FPS untuk efisiensi render, atau 60 FPS untuk motion UI/scroll cepat)*, target **`< 50 MB`**, **opsi Thumbnail Publikasi** (*Dedicated Cover bersih tanpa subtitle + Strong First Frame*), **opsi Watermark** (*(Recommended) Tanpa Watermark* sebagai default · *Watermark Akhir Video / End Card Only* · *Watermark Halus Sepanjang Video opacity 18–25%*), serta **Privasi & Sensor** *(apakah ada wajah, NIP, kode QR, atau nama instansi yang harus diblur/disamarkan)*.
 
 > Begitu `BRIEF.md` selesai di Tahap 0, **widget Grill Me resmi berakhir**. Seluruh diskusi dari Gate #1 hingga selesai menggunakan **chat biasa**.
 
@@ -56,20 +56,20 @@ Jika bahan mentah panjang (repo/artikel/video), subagent `research` (**Model Fla
 - **Tugas Anda:** Pilih opsi alur, lalu koreksi istilah, nama resmi, sensor privasi, atau angka sebelum suara disintesis.
 
 ### Mini-Gate Audisi Audio *(Dilengkapi Pengunci Warna Suara / Audio Lock)*
-- Agent mensintesis `voice/audition.wav` memakai **Gemini TTS** (atau fallback Edge TTS) dalam 1–2 panggilan, lalu menyajikan:
+- Agent mensintesis `voice/audition.wav` memakai **Gemini TTS** (atau fallback Edge TTS) termasuk dukungan **Duet 2-Suara**, lalu menyajikan:
   1. **Link Audio Audition Studio (`http://127.0.0.1:3020/audition`)** — klik kalimat mana saja untuk mengulang, ubah speed `0.75x/1x/1.25x`.
   2. **Hyperlink file langsung (`file:///...`)** ke `voice/audition.wav`.
 - **Revisi VO Tanpa Merusak Suara Favorit Anda:** Jika warna suara sudah pas dan Anda hanya ingin memperlambat tempo (mis. `0.90x`), menambah jeda antar-shot, atau menghapus/mengedit 1 scene saja, agent memakai **`--tempo`** *(atempo tanpa mengubah pitch/akting suara)* dan cache per-klip **`--reuse-clips`** — jadi scene lain tetap 100% identik suaranya.
-- **WAJIB `/compact`:** Begitu audio disetujui, ketik **`/compact`** sebelum agent merakit BGM/SFX (`mix.py` *vectorized*) dan mulai mengoding visual agar kuota 5-jam tidak jebol.
+- **WAJIB `/compact` Mandiri:** Begitu audio disetujui, kirim **`/compact` saja sebagai pesan terpisah** *(jangan digabung dengan kata lain seperti `"Setuju, /compact"` agar perintah `/compact` terpicu!)*. Proses compaction selesai dalam `< 2 detik`, lalu ketik **`Lanjut`** agar agent merakit musik bed & mengoding visual.
 
-### Gate #2A (Stills + Audit Cepat) → Gate #2B / #3 (Live Preview Interaktif)
-- **Gate #2A:** Agent menjalankan `studio-audit.mjs` (~12 detik untuk Track 1/2) atau `check --snapshots` (Track 3) untuk menguji *0 font 404*, *0 *dead-hold* > 2 detik*, *zona aman Reels/TikTok `y <= 1360px`*, *kontras WCAG*, serta menghasilkan `boards/contact-sheet.jpg`, `phone-360.jpg`, dan `seams.jpg`.
-- **Ketik `/compact` lagi** apabila revisi visual cukup banyak sebelum masuk QA akhir.
-- **Gate #2B & #3 (Live Preview):** Agent menyalakan Live Preview (`http://127.0.0.1:3020/`). Pastikan badge bar atas berwarna hijau **`Audio: out/mix.wav (VO+BGM+SFX)`** bila musik/SFX aktif. Cukup **refresh browser** setiap selesai revisi.
+### Gate #2A (Stills Saja + `/compact`) → Gate #2B / #3 (Live Preview Interaktif)
+- **Gate #2A (Persetujuan Stills Terpisah):** Agent menjalankan `studio-audit.mjs` (~12–24 detik untuk Track 1/2) atau `check --snapshots` (Track 3) untuk menguji *0 font 404*, *0 *dead-hold* > 2 detik*, *zona aman Reels/TikTok `y <= 1360px` (`y <= 1120px` untuk ilustrasi Canvas)*, *kontras WCAG*, serta menyajikan **HANYA `boards/contact-sheet.jpg`**, `phone-360.jpg`, dan `seams.jpg` — **tautan Live Preview belum dibuka di tahap ini** agar revisi tata letak lebih cepat lewat storyboard/stills.
+- **Kirim `/compact` lagi secara mandiri**, lalu ketik **`Lanjut`** setelah Gate #2A disetujui.
+- **Sinkron Foley & Gate #2B / #3 (Live Preview):** Jika gaya memakai foley prosedural (seperti coretan pena), agent terlebih dahulu mengekspor `events.json` nyata dari animasi agar SFX sinkron sempurna dengan gambar (2-fase audio), lalu membuka Live Preview (`http://127.0.0.1:3020/`). Pastikan badge bar atas berwarna hijau **`Audio: out/mix.wav (VO+BGM+SFX)`** bila musik/SFX aktif. Cukup **refresh browser** setiap selesai revisi.
 
 ### Tahap 6 & 7 — Render Final `< 50 MB`, Thumbnail, Privacy Scan & Git
-- Agent mengekspor `.mp4` **`< 50 MB`**, `48 kHz` stereo, **`-14 LUFS`**, 0 frame hitam, + `output/<slug>-thumbnail.jpg`.
-- **Tugas Anda:** Tonton & dengarkan `.mp4` final serta cek thumbnail-nya. Setelah Anda menyatakan **lulus QA**, agent membersihkan file mezzanine berat, menjalankan **Privacy Scan** (memastikan NIP/wajah/nama instansi rahasia tidak bocor), membuat `preview/*.jpg` (`≤ 400 KB`), menulis `README.md`, membuat **1x local commit**, dan **meminta izin Anda sebelum `git push`**.
+- Di awal Tahap 6, agent **otomatis mematikan seluruh background daemon preview** sebelum mengekspor `.mp4` **`< 50 MB`** (`yuv420p` TV-range, `48 kHz` stereo, **`-14 LUFS`**, 0 frame hitam) + `output/<slug>-thumbnail.jpg`.
+- **Tugas Anda:** Tonton & dengarkan `.mp4` final serta cek thumbnail-nya. Setelah Anda menyatakan **lulus QA**, agent membersihkan file mezzanine berat, menjalankan **Privacy Scan** (memastikan NIP/wajah/nama instansi rahasia tidak bocor), membuat `preview/*.jpg` (`≤ 400 KB`), menulis `README.md`, membuat **1x local commit** (folder `boards/` diabaikan `.gitignore`), dan **meminta izin Anda sebelum `git push`**.
 
 ---
 
@@ -110,5 +110,5 @@ Selama produksi dan Live Preview, revisi berjalan lewat **chat biasa** (tanpa wi
 | **Tahap 0–1 (Grill Me, Konsep, *Storytelling*) & Desain Scene Inti** | **Model Pro / High** | Menjaga orisinalitas visual, kepatuhan gaya, akting animasi, & mencegah iterasi revisi berulang. |
 | **Subagent `research`, Tahap 2, 5, 6, 7 (TTS/Render/QA/`README.md`) & Revisi Terarah** | **Model Flash** | Menghemat hingga ~60–70% kuota limit 5-jam dan menjaga riset cepat tanpa mengorbankan hasil akhir. |
 
-- **Jangan lewatkan `/compact`** tepat setelah **Audisi Audio** dan **Gate #2A** agar pemakaian konteks tidak membengkak ke `300k+` token dan memicu Quota Limit di tengah jalan.
+- **Cara Benar Menggunakan `/compact`:** Kirim **`/compact` saja dalam 1 pesan tersendiri** tepat setelah **Audisi Audio** dan **Gate #2A** disetujui (jangan menulis `"Setuju, /compact"` dalam 1 pesan karena slash command bisa terabaikan). Setelah selesai (`< 2 detik`), ketik **`Lanjut`**. Catatan: bila server **Live Preview** masih menyala (ikon spinner task berputar), hal itu **bukan** tanda `/compact` macet — agent akan mematikan semua server preview otomatis saat masuk Tahap 6.
 - Jika terjadi **pivot total gaya**, buka **chat baru** membawa `FACTS.md` & `BRIEF.md` yang sudah ada.

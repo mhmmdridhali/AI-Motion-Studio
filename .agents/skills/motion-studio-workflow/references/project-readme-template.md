@@ -15,6 +15,7 @@
 | **Audio & Mastering** | `<VO + BGM + Event-Synced SFX via out/mix.wav · -14.0 LUFS · Peak <= -1.0 dBFS · 48 kHz stereo>` |
 | **Subtitle** | `<Short-Form Captions / Kinetic Typography / Creative Stylized / Tracking Integrated / SRT Only>` + `output/<slug>.srt` |
 | **Thumbnail** | `<output/<slug>-thumbnail.jpg (Dedicated Clean Cover) + Strong First Frame / First Frame Only>` |
+| **Watermark** | `<Tanpa Watermark / End Card Only / Halus Sepanjang Video (opacity 18–25%)>` |
 | **Privasi & Sensor** | `<Ringkasan masker blur/anonimisasi sesuai BRIEF.md / Tidak ada data sensitif>` |
 | **Status** | `<Draft / Preview Approved / Rendered & Human QA Verified>` |
 
@@ -64,13 +65,13 @@
   ```
 
 ### 3. Render Final MP4 (`-14 LUFS`, 48 kHz Stereo, `< 50 MB`) & Thumbnail
-- **Track 1 & 2 (Paralel Lemo Runner + FFmpeg `< 50 MB`):**
+- **Track 1 & 2 (Paralel Lemo Runner + FFmpeg TV-Range `< 50 MB`):**
   ```powershell
-  $env:PLAYWRIGHT_CHROME = "$env:USERPROFILE\AppData\Local\ms-playwright\chromium-1234\chrome-win64\chrome.exe"
+  $env:PLAYWRIGHT_CHROME = (Get-ChildItem "$env:USERPROFILE\AppData\Local\ms-playwright" -Recurse -Include chrome-headless-shell.exe,chrome.exe | Sort-Object FullName -Descending | Select-Object -First 1 -ExpandProperty FullName)
   Push-Location ..\..\lemo-opuscar
   node core/render/video.mjs ../projects/<NN-slug> --fps <fps> --workers 3 --size <WxH> --out ../projects/<NN-slug>/out/video.mp4
   Pop-Location
-  ffmpeg -y -i out\video.mp4 -i out\mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -preset medium -crf 19 -maxrate 6000k -bufsize 12000k -pix_fmt yuv420p -c:a aac -b:a 192k -ar 48000 -ac 2 -movflags +faststart output\<slug>.mp4
+  ffmpeg -y -i out\video.mp4 -i out\mix.wav -map 0:v:0 -map 1:a:0 -vf "scale=in_range=full:out_range=tv,format=yuv420p" -color_range tv -colorspace bt709 -c:v libx264 -preset medium -crf 19 -maxrate 6000k -bufsize 12000k -c:a aac -b:a 192k -ar 48000 -ac 2 -movflags +faststart output\<slug>.mp4
   Remove-Item -Force out\video.mp4
   ```
 - **Track 3 (HyperFrames 1-Pass `< 50 MB`):**

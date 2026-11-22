@@ -89,13 +89,18 @@ def resolve_gemini_voice(line_voice: str | None, default_voice: str, cli_gemini_
 
 def trim_silence(y: np.ndarray, bw: list[dict], sr: int = SR):
     peak = float(np.abs(y).max()) if len(y) else 0.0
-    nz = np.where(np.abs(y) > peak * 0.02)[0]
+    nz = np.where(np.abs(y) > peak * 0.008)[0]
     if len(nz):
-        s0 = max(0, int(nz[0]) - int(0.03 * sr))
-        s1 = min(len(y), int(nz[-1]) + int(0.10 * sr))
+        s0 = max(0, int(nz[0]) - int(0.06 * sr))
+        s1 = min(len(y), int(nz[-1]) + int(0.12 * sr))
         y = y[s0:s1]
     else:
         s0 = 0
+    ramp = min(int(0.005 * sr), len(y) // 4)
+    if ramp > 1:
+        y = y.copy()
+        y[:ramp] *= np.linspace(0.0, 1.0, ramp, dtype=np.float32)
+        y[-ramp:] *= np.linspace(1.0, 0.0, ramp, dtype=np.float32)
     off = s0 / sr
     dur_trim = len(y) / sr
     adj = [
@@ -645,8 +650,6 @@ def main() -> None:
     if not lines:
         sys.exit("tts_expressive.py: lines.json has no entries")
 
-    if not args.gemini_voice and cfg.get("gemini_voice"):
-        args.gemini_voice = cfg["gemini_voice"]
     engine = args.engine if args.engine != "auto" else (cfg.get("engine") or "auto")
     eff_tempo = float(args.tempo) if args.tempo > 0 else float(cfg.get("tempo", 1.0))
     if eff_tempo <= 0:

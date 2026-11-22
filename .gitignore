@@ -25,10 +25,10 @@ archive/
 sipelita-demo/
 projects/**/output/
 
-# Local-only raw third-party reference videos/frames, raw still frames, and full copy-pasted articles/PDFs
+# Local-only raw third-party reference videos/frames, QA inspection boards, and full copy-pasted articles/PDFs
 projects/**/ref/
 projects/**/source/
-projects/**/boards/stills/
+projects/**/boards/
 
 # Secrets & local environment variables (never commit real API keys)
 .env
