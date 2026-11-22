@@ -1,6 +1,6 @@
-# Standar Audio, Gemini TTS (Utama), Fallback & Sound Design (Tahap 2)
+# Standar Audio, Audio Lock, Gemini TTS & Sound Design (Tahap 2)
 
-Panduan ini mengatur produksi narasi ekspresif (*Voice-First*), antarmuka audisi browser, dan kewajiban desain suara (**VO + BGM + SFX**) sebelum kode animasi ditulis.
+Panduan ini mengatur produksi narasi ekspresif (*Voice-First*), penguncian performa suara (*Audio Lock*) saat revisi, antarmuka audisi browser, dan desain suara **VO + BGM + SFX** berbasis vektor cepat.
 
 ---
 
@@ -11,7 +11,7 @@ Panduan ini mengatur produksi narasi ekspresif (*Voice-First*), antarmuka audisi
 
 ---
 
-## 2. Mesin VO Baku: Gemini TTS (Utama) + Edge TTS (Fallback)
+## 2. Mesin VO Baku: Gemini TTS (Utama) + Edge TTS (Fallback) + Audio Lock
 
 Jalankan generator studio dengan `BypassSandbox: true`:
 
@@ -21,10 +21,16 @@ lemo-opuscar\.venv\Scripts\python.exe .agents\skills\motion-studio-workflow\scri
 
 - **Mode Utama (`gemini-3.8-flash-tts`):**
   - Membaca `GEMINI_API_KEY` secara diam-diam dari `.env` root workspace (dilindungi `.gitignore` — jangan pernah mencetak isi key).
-  - Mengirim naskah dalam **1–2 request *batched*** (`≤ 250` kata per batch) agar hemat kuota Free Tier (`2–3 RPM`, `10–50 RPD`) dan menyimpannya ke cache `voice/.cache/` (run ulang = `0` request).
+  - Mengirim hanya baris yang belum tersimpan dalam batch **≤ 250 kata** agar hemat kuota Free Tier (`2–3 RPM`, `10–50 RPD`).
   - Menyelaraskan timestamp per kata secara lokal via **`faster-whisper`** menghasilkan `voice/wav/<id>.wav`, `dur.json`, `schedule.json`, `words.json`, `cues.json`, dan `voice/audition.wav`.
+- **Per-Shot Audio Lock (`--reuse-clips`) & Non-Destructive Tempo (`--tempo`):**
+  - **Cache Per-Line (`voice/.cache/clips/`):** Secara bawaan (`--reuse-clips` aktif), setiap baris yang naskah (`say`) dan `style`-nya tidak berubah langsung diambil dari cache klip lokal **`[gemini (cached-clip)]`** — 0 request Gemini, dan **pitch, intonasi, serta *feels* kalimat lain tetap 100% identik** saat Anda menghapus 1 scene atau mengedit 1 kalimat!
+  - **Ubah Tempo Tanpa Merusak Suara (`--tempo`):** Bila user menyukai warna/intonasi audisi #1 tetapi ingin temponya lebih lambat atau cepat (mis. `0.90x`), jalankan ulang dengan **`--tempo 0.90`** (atau set `"tempo": 0.90` di `lines.json`). Skrip memproses *FFmpeg `atempo`* yang menjaga pitch & performa vokal asli **tanpa memanggil ulang Gemini TTS**.
+  - **Gunakan `--fresh`** hanya bila user secara eksplisit meminta regenerasi performa suara baru dari nol.
+- **Larangan Re-Sintesis Diam-Diam & Perubahan `style` Tersembunyi:**
+  - **Dilarang melakukan *re-plan* dan men-generate ulang VO sebelum user mendengar hasil sintesis #1 di Mini-Gate Audisi Audio.** Biarkan user menilai tempo/intonasi aslinya lebih dulu.
+  - **Dilarang mengubah prompt `style` (`lines.json`) secara diam-diam** saat user hanya meminta penghapusan scene atau penyesuaian tempo/jeda. Apabila perbaikan naskah menuntut regenerasi Gemini pada baris tertentu, wajib beri tahu user terlebih dahulu di Langkah 2 Protokol Revisi bahwa baris teredit berpotensi sedikit berubah intonasinya.
 - **Fallback Otomatis (`edge-tts`):** Apabila `.env` kosong, kena limit `429 RESOURCE_EXHAUSTED`, atau jaringan bermasalah, skrip otomatis beralih ke `edge-tts` (`WordBoundary`) dan membersihkan inline tag `<...>` agar tidak terbaca sebagai kata.
-- **Human Voiceover (Opsional):** Apabila user menyetor rekaman pribadi, transkrip memakai `faster-whisper` (`language="id"`) ke format jadwal JSON yang sama.
 
 ---
 
@@ -33,13 +39,13 @@ lemo-opuscar\.venv\Scripts\python.exe .agents\skills\motion-studio-workflow\scri
 | Aturan | Contoh Praktis | Alasan |
 | :--- | :--- | :--- |
 | **Pisahkan `text` vs `say`** | `"text": "Sudah sampai mana?"`<br>`"say": "Eh, jujur ya... <short pause> Sudah sampai mana?"` | `text` bersih untuk subtitle layar; `say` mendukung `<short pause>`, `<breath>`, `<sigh>`, `<laugh>` di Gemini TTS. |
-| **Gunakan `style` terstruktur** | Root/per-line `"style": "warm reflective Indonesian narrator, gentle sigh on endings, rising tone on questions"` | Dikirim sebagai `annotations: [{"type": "speech_metadata"}]` agar arahan akting suara tidak ikut dibaca. |
+| **Gunakan `style` terstruktur** | Root/per-line `"style": "warm reflective Indonesian narrator, gentle sigh on endings, rising tone on questions"` | Dikirim sebagai `annotations: [{"type": "speech_metadata"}]` agar arahan akting suara tidak ikut dibaca. Kunci teks `style` ini setelah disetujui. |
 | **Pilih Persona `gemini_voice`** | Pria hangat: `Orus` / `Charon` · Wanita hangat: `Kore` / `Aoede` · Dinamis: `Puck` | Menjaga konsistensi karakter suara sepanjang video. |
 | **Siap-Fallback Pertanyaan Retoris** | Akhiri kalimat tanya dengan **`?` murni** (hindari pola `'...?' .`), pecah frasa pendek, serta variasikan `rate` dan `pitch` (`-4Hz`..`+4Hz`). | Jika fallback ke `edge-tts`, intonasi tanya & jeda tetap alami. |
 
 ---
 
-## 4. Mini-Gate Audisi Audio (Hyperlink + Browser Player)
+## 4. Mini-Gate Audisi Audio (Hyperlink + Browser Player + `/compact`)
 
 Tepat setelah `tts_expressive.py` selesai dan **sebelum menulis kode animasi**:
 
@@ -51,13 +57,33 @@ Tepat setelah `tts_expressive.py` selesai dan **sebelum menulis kode animasi**:
 2. Berikan **keduanya** di chat ke user:
    - Link browser interaktif: **`http://127.0.0.1:3020/audition`** *(user bisa klik tiap baris naskah untuk lompat dan memutar ulang di `0.75x/1x/1.25x` maupun berganti track).*
    - **Clickable hyperlink file lokal**: `[audition.wav](file:///.../projects/NN-slug/voice/audition.wav)`.
-3. **STOP — Tunggu persetujuan user** (dan anjurkan mengetik `/compact` setelah suara disetujui).
+3. **STOP — Tunggu persetujuan user**, dan **wajib cantumkan baris pengingat eksplisit ini di penutup pesan**:
+   > *"Setelah suara disetujui, silakan jalankan `/compact` terlebih dahulu agar konteks percakapan tetap ringan dan hemat kuota sebelum masuk ke produksi visual."*
 
 ---
 
 ## 5. Produksi BGM, SFX & Mastering (`mix.py` → `out/mix.wav`)
 
-1. Apabila `BRIEF.md` mencatat `BGM/SFX: Aktif`, buat `projects/NN-slug/mix.py` membaca `voice/schedule.json` sebagai jangkar waktu cut, motif gerak, dan titik hening dramatis.
+1. Apabila `BRIEF.md` mencatat `BGM/SFX: Aktif`, buat `projects/NN-slug/mix.py` membaca `voice/schedule.json` & `voice/words.json`.
 2. Gunakan perkakas lokal di `lemo-opuscar/core/audio/` (`sfx.py`, `sampler.py`, `pluck.py`, sintesis NumPy) dan/atau audio berlisensi.
-3. Mix di **`48000 Hz` stereo** dengan **auto-ducking BGM ~ `-8 dB`** saat VO berbicara, lalu ekspor **`out/mix.wav`** memenuhi standar **`-14 LUFS` (±1.0 LU)** dan **True Peak `≤ -1.0 dBFS`**.
-4. Ekspor subtitle `.srt` via `lemo-opuscar\core\render\srt.py` (atau `hyperframes beats` di Mode A/C).
+3. **Wajib Event-Synced SFX & Punchline Dips (Bukan Sekadar Transisi Generik):**
+   - Pasang minimal **2–3 foley bermakna per shot** yang menempel tepat pada *micro-motion* visual (mis. klik tombol, ketikan keyboard, *gear spin*, coretan garis, pop kartu data, dering notifikasi), **bukan hanya mengulang `whoosh + click` di awal cut**.
+   - Terapkan **Punchline Silence Dips (`-18 dB` selama `~0.45s`)** berjangkar timestamp `words.json` tepat pada kata punchline untuk efek komedik/dramatis.
+4. **Wajib Vectorized Auto-Ducking (`< 2 detik`, DILARANG Loop Python Per-Sample):**
+   Gunakan `scipy.signal.lfilter` / `uniform_filter1d` untuk menghitung envelope *ducking* `~ -8 dB` (dilarang menulis `for i in range(len(active)):` per 48.000 sampel/detik):
+   ```python
+   from scipy.ndimage import uniform_filter1d
+   from scipy.signal import lfilter
+
+   rms = uniform_filter1d(np.abs(vo_mono).astype(np.float32), size=int(0.03 * SR))
+   active = (rms > 0.012).astype(np.float32)
+   # Single-pole attack/release smoothing via vectorized IIR (jauh lebih cepat dari loop Python)
+   alpha = 1.0 - float(np.exp(-1.0 / (0.14 * SR)))
+   env = np.maximum(
+       lfilter([alpha], [1.0, -(1.0 - alpha)], active),
+       lfilter([alpha], [1.0, -(1.0 - alpha)], active[::-1])[::-1] * 0.75,
+   ).clip(0.0, 1.0)
+   gain_curve = 1.0 - env * (1.0 - 0.398)  # -8 dB saat VO aktif
+   ```
+5. Mix di **`48000 Hz` stereo** lalu ekspor **`out/mix.wav`** *(cukup 1 file `out/mix.wav`, tidak perlu diduplikasi ke `assets/mix.wav` pada Track 1/2)* memenuhi standar **`-14 LUFS` (±1.0 LU)** dan **True Peak `≤ -1.0 dBFS`**.
+6. Ekspor subtitle `.srt` via `lemo-opuscar\core\render\srt.py` (atau `cues.json`).

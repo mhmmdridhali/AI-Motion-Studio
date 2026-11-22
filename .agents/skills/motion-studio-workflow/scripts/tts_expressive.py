@@ -1,6 +1,7 @@
 """Expressive multi-phrase Indonesian/multilingual VO synthesizer.
 
-Primary engine: Gemini TTS (gemini-3.8-flash-tts) + local faster-whisper word alignment.
+Primary engine: Gemini TTS (gemini-3.8-flash-tts) + per-shot audio lock (clips cache) + faster-whisper alignment.
+Non-destructive --tempo scaling via FFmpeg atempo (preserves pitch & voice feels).
 Automatic fallback: edge-tts (WordBoundary) when GEMINI_API_KEY is missing, quota-limited (429), or unreachable.
 
 Usage:
@@ -105,6 +106,41 @@ def trim_silence(y: np.ndarray, bw: list[dict], sr: int = SR):
         for b in bw
     ]
     return y, adj
+
+
+def apply_tempo(y: np.ndarray, bw: list[dict], tempo: float, sr: int = SR):
+    """Adjust speaking tempo cleanly with FFmpeg atempo without changing pitch or vocal acting."""
+    if abs(tempo - 1.0) < 1e-3 or len(y) == 0:
+        return y, bw
+    factors = []
+    rem = float(tempo)
+    while rem < 0.5:
+        factors.append(0.5)
+        rem /= 0.5
+    while rem > 2.0:
+        factors.append(2.0)
+        rem /= 2.0
+    factors.append(rem)
+    flt = ",".join(f"atempo={f:.6f}" for f in factors)
+
+    buf = io.BytesIO()
+    sf.write(buf, y, sr, format="WAV")
+    res = subprocess.run(
+        ["ffmpeg", "-y", "-loglevel", "error", "-i", "pipe:0", "-filter:a", flt, "-ar", str(sr), "-ac", "1", "-f", "wav", "-"],
+        input=buf.getvalue(),
+        capture_output=True,
+        check=True,
+    )
+    y2, _ = sf.read(io.BytesIO(res.stdout), dtype="float32")
+    old_dur = len(y) / sr
+    new_dur = len(y2) / sr
+    ratio = new_dur / max(1e-6, old_dur)
+    adj = []
+    for b in bw:
+        t0 = min(new_dur, max(0.0, b["t0"] * ratio))
+        t1 = min(new_dur, max(t0 + 0.02, b["t1"] * ratio))
+        adj.append({"w": b["w"], "t0": t0, "t1": t1})
+    return y2, adj
 
 
 def decode_audio_bytes(data: bytes, target_sr: int = SR) -> np.ndarray:
@@ -348,19 +384,52 @@ def split_batch_clips(y: np.ndarray, batch_lines: list[dict], whisper_words: lis
     return out
 
 
-def synthesize_with_gemini(lines: list[dict], cfg: dict, args, api_key: str, cache_dir: str) -> dict:
+def synthesize_with_gemini(lines: list[dict], cfg: dict, args, api_key: str, cache_dir: str) -> tuple[dict, dict]:
     lang = args.lang or cfg.get("lang") or "id"
     default_style = cfg.get("style") or (
         "warm natural conversational narrator, expressive intonation, clear rising inflection on questions, gentle breathing pauses"
     )
-    gemini_voice = resolve_gemini_voice(lines[0].get("gemini_voice") or lines[0].get("voice"), args.voice, args.gemini_voice)
+    gemini_voice = resolve_gemini_voice(
+        cfg.get("gemini_voice") or lines[0].get("gemini_voice") or lines[0].get("voice"),
+        args.voice,
+        args.gemini_voice,
+    )
     model = args.gemini_model
 
-    # Batch up to <= 250 words per request to respect Free Tier RPM/RPD limits
+    clips_cache_dir = os.path.join(cache_dir, "clips")
+    os.makedirs(clips_cache_dir, exist_ok=True)
+
+    clips = {}
+    sources = {}
+    line_keys = {}
+    missing_lines = []
+
+    for line in lines:
+        say = (line.get("say") or line["text"]).strip()
+        eff_style = (line.get("style") or default_style).strip()
+        line_key = hashlib.sha1(
+            json.dumps(["gemini_clip", model, gemini_voice, eff_style, lang, say], ensure_ascii=False).encode("utf-8")
+        ).hexdigest()[:16]
+        line_keys[line["id"]] = line_key
+        clip_wav = os.path.join(clips_cache_dir, f"{line_key}.wav")
+        clip_jsn = os.path.join(clips_cache_dir, f"{line_key}_words.json")
+        if (not args.fresh) and os.path.isfile(clip_wav) and os.path.isfile(clip_jsn):
+            ly, _ = sf.read(clip_wav, dtype="float32")
+            with open(clip_jsn, encoding="utf-8") as f:
+                lbw = json.load(f)
+            clips[line["id"]] = (ly, len(ly) / SR, lbw)
+            sources[line["id"]] = "cached-clip"
+        else:
+            missing_lines.append(line)
+
+    if not missing_lines:
+        return clips, sources
+
+    # Batch only uncached/edited lines (<= 250 words per request) to respect Free Tier RPM/RPD limits
     batches = []
     cur_batch = []
     cur_words = 0
-    for line in lines:
+    for line in missing_lines:
         say = line.get("say") or line["text"]
         wc = len(strip_tags(say).split())
         if cur_batch and (cur_words + wc > 250):
@@ -373,7 +442,6 @@ def synthesize_with_gemini(lines: list[dict], cfg: dict, args, api_key: str, cac
     if cur_batch:
         batches.append(cur_batch)
 
-    clips = {}
     for bi, batch in enumerate(batches):
         says = [(l.get("say") or l["text"]).strip() for l in batch]
         styles = [l.get("style") for l in batch if l.get("style")]
@@ -386,10 +454,11 @@ def synthesize_with_gemini(lines: list[dict], cfg: dict, args, api_key: str, cac
         wav_path = os.path.join(cache_dir, key + ".wav")
         jsn_path = os.path.join(cache_dir, key + "_whisper.json")
 
-        if os.path.isfile(wav_path) and os.path.isfile(jsn_path):
+        if (not args.fresh) and os.path.isfile(wav_path) and os.path.isfile(jsn_path):
             y, _ = sf.read(wav_path, dtype="float32")
             with open(jsn_path, encoding="utf-8") as f:
                 bw = json.load(f)
+            batch_src = "cached-batch"
         else:
             if bi > 0:
                 time.sleep(1.5)
@@ -398,11 +467,21 @@ def synthesize_with_gemini(lines: list[dict], cfg: dict, args, api_key: str, cac
             with open(jsn_path + ".part", "w", encoding="utf-8") as f:
                 json.dump(bw, f, ensure_ascii=False)
             os.replace(jsn_path + ".part", jsn_path)
+            batch_src = "new-synth"
 
         sliced = split_batch_clips(y, batch, bw)
         for line, (ly, lbw) in zip(batch, sliced):
+            lk = line_keys[line["id"]]
+            clip_wav = os.path.join(clips_cache_dir, f"{lk}.wav")
+            clip_jsn = os.path.join(clips_cache_dir, f"{lk}_words.json")
+            sf.write(clip_wav + ".part", ly, SR, format="WAV")
+            os.replace(clip_wav + ".part", clip_wav)
+            with open(clip_jsn + ".part", "w", encoding="utf-8") as f:
+                json.dump(lbw, f, ensure_ascii=False)
+            os.replace(clip_jsn + ".part", clip_jsn)
             clips[line["id"]] = (ly, len(ly) / SR, lbw)
-    return clips
+            sources[line["id"]] = batch_src
+    return clips, sources
 
 
 def align_words(display: list[str], bw: list[dict], dur: float):
@@ -446,6 +525,7 @@ def load_config(lines_path: str, cli_fps: int):
             "gemini_voice": "",
             "style": "",
             "lang": "id",
+            "tempo": 1.0,
             "lines": raw,
         }
     if isinstance(raw, dict) and isinstance(raw.get("lines"), list):
@@ -460,6 +540,7 @@ def load_config(lines_path: str, cli_fps: int):
             "gemini_voice": raw.get("gemini_voice", ""),
             "style": raw.get("style", ""),
             "lang": raw.get("lang", "id"),
+            "tempo": float(raw.get("tempo", 1.0)),
             "lines": raw["lines"],
         }
     sys.exit(f"tts_expressive.py: invalid lines.json format in {lines_path}")
@@ -476,6 +557,9 @@ def main() -> None:
     ap.add_argument("--gemini-model", default="gemini-3.8-flash-tts", help="Gemini TTS model ID")
     ap.add_argument("--gemini-voice", default="", help="Override Gemini voice (e.g. Orus, Kore, Charon, Puck)")
     ap.add_argument("--lang", default="", help="Language code for faster-whisper alignment (default: id)")
+    ap.add_argument("--tempo", type=float, default=0.0, help="Non-destructive FFmpeg atempo factor (e.g. 0.90), overrides lines.json tempo")
+    ap.add_argument("--reuse-clips", action="store_true", default=True, help="Reuse cached per-line Gemini clips when text/style unchanged (default: on)")
+    ap.add_argument("--fresh", action="store_true", help="Ignore clip and batch caches and re-synthesize everything fresh")
     args = ap.parse_args()
 
     proj = os.path.abspath(args.project_dir)
@@ -497,9 +581,13 @@ def main() -> None:
     if not args.gemini_voice and cfg.get("gemini_voice"):
         args.gemini_voice = cfg["gemini_voice"]
     engine = args.engine if args.engine != "auto" else (cfg.get("engine") or "auto")
+    eff_tempo = float(args.tempo) if args.tempo > 0 else float(cfg.get("tempo", 1.0))
+    if eff_tempo <= 0:
+        eff_tempo = 1.0
 
     api_key = load_gemini_api_key(proj)
     clips = None
+    sources = {}
     used_engine = "edge"
 
     if engine in ("auto", "gemini"):
@@ -510,7 +598,7 @@ def main() -> None:
             print(f"tts_expressive.py: {msg}; falling back to edge-tts", file=sys.stderr)
         else:
             try:
-                clips = synthesize_with_gemini(lines, cfg, args, api_key, cache_dir)
+                clips, sources = synthesize_with_gemini(lines, cfg, args, api_key, cache_dir)
                 used_engine = f"gemini ({args.gemini_model})"
             except Exception as exc:
                 safe_err = sanitize_secret(f"{type(exc).__name__}: {exc}", api_key)
@@ -523,13 +611,22 @@ def main() -> None:
         for line in lines:
             y, bw = get_edge_clip(line, cache_dir, args.voice)
             clips[line["id"]] = (y, len(y) / SR, bw)
+            sources[line["id"]] = "edge"
         used_engine = "edge-tts (fallback)" if engine == "auto" else "edge-tts"
+
+    # Apply non-destructive tempo consistently right before export & alignment
+    if abs(eff_tempo - 1.0) >= 1e-3:
+        for line in lines:
+            y, _, bw = clips[line["id"]]
+            y2, bw2 = apply_tempo(y, bw, eff_tempo, SR)
+            clips[line["id"]] = (y2, len(y2) / SR, bw2)
 
     for line in lines:
         y, dur, _ = clips[line["id"]]
         sf.write(os.path.join(wav_dir, f"{line['id']}.wav"), y, SR)
         clean_txt = strip_tags(line["text"])
-        print(f"[{used_engine}] {line['id']} {dur:.2f}s  {clean_txt}")
+        tag = f"gemini ({sources.get(line['id'], 'synth')})" if used_engine.startswith("gemini") else used_engine
+        print(f"[{tag}] {line['id']} {dur:.2f}s  {clean_txt}")
 
     with open(os.path.join(voice_dir, "dur.json"), "w", encoding="utf-8") as f:
         json.dump({k: round(v[1], 3) for k, v in clips.items()}, f, indent=1, ensure_ascii=False)
@@ -592,7 +689,11 @@ def main() -> None:
         a["t1"] = round(min(a["t1"], b["t0"] - 0.03), 3)
 
     total = round(cur, 2)
-    sched = {"fps": cfg["fps"], "engine": used_engine, "total": total, "shots": [shots[i] for i in shot_ids], "voice": placements}
+    sched = {"fps": cfg["fps"], "engine": used_engine, "total": total}
+    if abs(eff_tempo - 1.0) >= 1e-3:
+        sched["tempo"] = round(eff_tempo, 3)
+    sched["shots"] = [shots[i] for i in shot_ids]
+    sched["voice"] = placements
 
     with open(os.path.join(voice_dir, "schedule.json"), "w", encoding="utf-8") as f:
         json.dump(sched, f, indent=1, ensure_ascii=False)
@@ -616,11 +717,14 @@ def main() -> None:
     if args.audition_voice:
         parts = []
         for line in lines[: max(1, args.audition_lines)]:
-            y, _ = get_edge_clip(line, cache_dir, args.voice, voice_override=args.audition_voice)
+            y, bw_alt = get_edge_clip(line, cache_dir, args.voice, voice_override=args.audition_voice)
+            if abs(eff_tempo - 1.0) >= 1e-3:
+                y, _ = apply_tempo(y, bw_alt, eff_tempo, SR)
             parts.extend([y, np.zeros(int(0.35 * SR), dtype="float32")])
         sf.write(os.path.join(voice_dir, "audition-alt.wav"), np.concatenate(parts), SR)
 
-    print(f"TOTAL {total}s ({len(shot_ids)} shots, engine={used_engine}) -> voice/audition.wav ready")
+    tempo_note = f", tempo={eff_tempo:.2f}x" if abs(eff_tempo - 1.0) >= 1e-3 else ""
+    print(f"TOTAL {total}s ({len(shot_ids)} shots, engine={used_engine}{tempo_note}) -> voice/audition.wav ready")
 
 
 if __name__ == "__main__":

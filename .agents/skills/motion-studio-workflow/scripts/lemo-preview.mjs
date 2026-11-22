@@ -1,5 +1,5 @@
 /**
- * Reusable Interactive Live Preview Player for Mode B (Lemo-Opuscar) films.
+ * Reusable Interactive Live Preview Player for AI Motion Studio (Track 1 Canvas/WebGL & Track 2 DOM/GSAP).
  *
  * Drives a deterministic `window.render(t)` page inside a scaled preview frame,
  * synchronized with `out/mix.wav` or `voice/audition.wav`, shot jump markers from
@@ -121,7 +121,7 @@ function playerHtml(meta) {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Live Preview — ${meta.projectName}</title>
+<title>AI Motion Studio — Live Preview (${meta.projectName})</title>
 <style>
   :root {
     --bg: #0f1115;
@@ -269,7 +269,7 @@ function playerHtml(meta) {
 <body>
 <header>
   <div class="title">
-    <span>Lemo-Opuscar Live Preview</span>
+    <span>AI Motion Studio — Live Preview</span>
     <span class="badge">${meta.projectName}</span>
     <span class="${audioBadgeClass}">${audioBadgeText}</span>
     <a class="nav-pill" href="/audition">Audio Audition</a>
@@ -413,10 +413,20 @@ function initFilm() {
     setTimeout(initFilm, 80);
     return;
   }
+  const rootEl = doc ? doc.querySelector('#root, [data-width][data-height]') : null;
   const canvas = doc ? doc.querySelector('canvas') : null;
-  if (canvas && canvas.width && canvas.height) {
+  if (Number(win.WIDTH) > 0 && Number(win.HEIGHT) > 0) {
+    fw = Number(win.WIDTH);
+    fh = Number(win.HEIGHT);
+  } else if (rootEl && Number(rootEl.dataset.width) > 0 && Number(rootEl.dataset.height) > 0) {
+    fw = Number(rootEl.dataset.width);
+    fh = Number(rootEl.dataset.height);
+  } else if (canvas && canvas.width >= 320 && canvas.height >= 320) {
     fw = canvas.width;
     fh = canvas.height;
+  } else {
+    fw = 1920;
+    fh = 1080;
   }
   dur = Number(win.DUR) > 0 ? Number(win.DUR) : 1;
   scrubber.max = String(dur);
@@ -430,7 +440,7 @@ function initFilm() {
 async function loadSchedule() {
   if (!META.scheduleUrl) return;
   try {
-    const r = await fetch(META.scheduleUrl);
+    const r = await fetch(META.scheduleUrl + '?v=' + Date.now());
     if (!r.ok) return;
     schedule = await r.json();
     if (schedule.fps) fps = Number(schedule.fps) || 60;
@@ -466,6 +476,7 @@ muteBtn.onclick = () => {
 reloadBtn.onclick = () => {
   stopPlayback();
   statusBanner.style.display = 'flex';
+  loadSchedule();
   frame.src = '/@film/index.html?v=' + Date.now();
 };
 scrubber.oninput = () => {
@@ -864,7 +875,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
 
   const { port: boundPort, meta } = await startPreviewServer(projectDir, { port, audioRel });
   if (meta.hasIndex) {
-    console.log(`Lemo-Opuscar Live Preview: http://127.0.0.1:${boundPort}/`);
+    console.log(`AI Motion Studio Live Preview: http://127.0.0.1:${boundPort}/`);
   }
   console.log(`Audio Audition: http://127.0.0.1:${boundPort}/audition`);
   console.log(`Project: ${meta.projectName} | Audio: ${meta.audioLabel || 'none'}`);
