@@ -34,7 +34,8 @@ Informasi spesifikasi perangkat, aturan kerja workspace, dan konfigurasi lokal l
 | `03` | **Muhammad Ali Ridho: Math Brain, Lazy Automator** *(Video Perkenalan Portofolio)* | Mode A: HyperFrames (`v0.9.70` + GSAP 3.15 + Canvas 2D Verlet Lanyard) | `1080x1920 (9:16) @ 60 FPS` · `104.8s` | Selesai (Rendered) | [projects/03-ridho-intro/](projects/03-ridho-intro/README.md) |
 | `04` | **Belajar AI dari Nol — Part 1: Fundamental AI** *(Duet Explainer 4 Tangga AI)* | Track 1: Lemo-Opuscar (`ipad-sketch` — Canvas 2D) | `1080x1920 (9:16) @ 30 FPS` · `80.0s` | Selesai (Rendered) | [projects/04-bodoh-ke-mahir-ai/](projects/04-bodoh-ke-mahir-ai/README.md) |
 | `05` | **Belajar AI dari Nol — Part 2: AI Tools Mastery** *(Duet Explainer Context, Skills, Projects & MCP)* | Track 1: Lemo-Opuscar (`ipad-sketch` — Canvas 2D) | `1080x1920 (9:16) @ 30 FPS` · `133.1s` | Selesai (Rendered) | [projects/05-ai-tools-mastery/](projects/05-ai-tools-mastery/README.md) |
-| `06` | *Proyek Berikutnya* | - | - | Siap dimulai | [projects/](projects/README.md) |
+| `06` | **SI-PELITA Kemenag Kab. Banjar v2** *(3D Low-Poly Isometric Island Explainer)* | Track 1: Lemo-Opuscar (`lowpoly-island` — Three.js WebGL) | `1080x1920 (9:16) @ 30 FPS` · `81.85s` | Selesai (Rendered) | [projects/06-sipelita-explainer-v2/](projects/06-sipelita-explainer-v2/README.md) |
+| `07` | *Proyek Berikutnya* | - | - | Siap dimulai | [projects/](projects/README.md) |
 
 ---
 

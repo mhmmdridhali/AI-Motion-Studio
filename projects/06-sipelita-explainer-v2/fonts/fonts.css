@@ -1,0 +1,55 @@
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: block;
+  src: url('Jost-Variable.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: block;
+  src: url('Jost-Variable.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('PlusJakartaSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('PlusJakartaSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('PlusJakartaSans-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: block;
+  src: url('PlusJakartaSans-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: block;
+  src: url('f3.woff2') format('woff2');
+}

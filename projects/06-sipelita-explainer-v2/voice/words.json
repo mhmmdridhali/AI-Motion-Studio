@@ -1,0 +1,1076 @@
+[
+ {
+  "id": "s01",
+  "shot": 1,
+  "chapter": "SHOT 01",
+  "t0": 0.36,
+  "t1": 6.091,
+  "text": "Hmm, pernah lapor kendala data madrasah lewat chat, eh malah tenggelam?",
+  "words": [
+   {
+    "w": "Hmm,",
+    "t0": 0.4,
+    "t1": 0.92,
+    "kw": false
+   },
+   {
+    "w": "pernah",
+    "t0": 0.92,
+    "t1": 1.863,
+    "kw": false
+   },
+   {
+    "w": "lapor",
+    "t0": 1.863,
+    "t1": 2.056,
+    "kw": false
+   },
+   {
+    "w": "kendala",
+    "t0": 2.056,
+    "t1": 2.328,
+    "kw": false
+   },
+   {
+    "w": "data",
+    "t0": 2.328,
+    "t1": 2.508,
+    "kw": false
+   },
+   {
+    "w": "madrasah",
+    "t0": 2.508,
+    "t1": 3.18,
+    "kw": false
+   },
+   {
+    "w": "lewat",
+    "t0": 3.18,
+    "t1": 3.485,
+    "kw": false
+   },
+   {
+    "w": "chat,",
+    "t0": 3.485,
+    "t1": 4.712,
+    "kw": false
+   },
+   {
+    "w": "eh",
+    "t0": 4.712,
+    "t1": 4.771,
+    "kw": false
+   },
+   {
+    "w": "malah",
+    "t0": 4.771,
+    "t1": 4.947,
+    "kw": false
+   },
+   {
+    "w": "tenggelam?",
+    "t0": 4.947,
+    "t1": 5.841,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s02",
+  "shot": 1,
+  "chapter": "SHOT 01",
+  "t0": 6.351,
+  "t1": 14.185,
+  "text": "Mana link formulirnya pisah-pisah, susah dipantau, salah dikit ketik ulang lagi.",
+  "words": [
+   {
+    "w": "Mana",
+    "t0": 7.039,
+    "t1": 7.165,
+    "kw": false
+   },
+   {
+    "w": "link",
+    "t0": 7.165,
+    "t1": 7.291,
+    "kw": false
+   },
+   {
+    "w": "formulirnya",
+    "t0": 7.291,
+    "t1": 7.886,
+    "kw": false
+   },
+   {
+    "w": "pisah-pisah,",
+    "t0": 7.886,
+    "t1": 9.275,
+    "kw": false
+   },
+   {
+    "w": "susah",
+    "t0": 9.275,
+    "t1": 9.486,
+    "kw": false
+   },
+   {
+    "w": "dipantau,",
+    "t0": 9.486,
+    "t1": 11.822,
+    "kw": false
+   },
+   {
+    "w": "salah",
+    "t0": 11.822,
+    "t1": 12.039,
+    "kw": false
+   },
+   {
+    "w": "dikit",
+    "t0": 12.039,
+    "t1": 12.685,
+    "kw": false
+   },
+   {
+    "w": "ketik",
+    "t0": 12.685,
+    "t1": 12.986,
+    "kw": false
+   },
+   {
+    "w": "ulang",
+    "t0": 12.986,
+    "t1": 13.293,
+    "kw": false
+   },
+   {
+    "w": "lagi.",
+    "t0": 13.293,
+    "t1": 13.759,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s03",
+  "shot": 1,
+  "chapter": "SHOT 01",
+  "t0": 14.295,
+  "t1": 22.463,
+  "text": "Nah, Seksi Penmad Kemenag Kabupaten Banjar punya SI-PELITA, Sistem Pelaporan Informasi dan Data satu pintu.",
+  "words": [
+   {
+    "w": "Nah,",
+    "t0": 14.602,
+    "t1": 14.938,
+    "kw": false
+   },
+   {
+    "w": "Seksi",
+    "t0": 14.938,
+    "t1": 15.841,
+    "kw": false
+   },
+   {
+    "w": "Penmad",
+    "t0": 15.841,
+    "t1": 16.175,
+    "kw": false
+   },
+   {
+    "w": "Kemenag",
+    "t0": 16.175,
+    "t1": 16.541,
+    "kw": false
+   },
+   {
+    "w": "Kabupaten",
+    "t0": 16.541,
+    "t1": 17.028,
+    "kw": false
+   },
+   {
+    "w": "Banjar",
+    "t0": 17.028,
+    "t1": 17.626,
+    "kw": false
+   },
+   {
+    "w": "punya",
+    "t0": 17.626,
+    "t1": 18.156,
+    "kw": false
+   },
+   {
+    "w": "SI-PELITA,",
+    "t0": 18.156,
+    "t1": 19.576,
+    "kw": false
+   },
+   {
+    "w": "Sistem",
+    "t0": 19.576,
+    "t1": 19.761,
+    "kw": false
+   },
+   {
+    "w": "Pelaporan",
+    "t0": 19.761,
+    "t1": 20.203,
+    "kw": false
+   },
+   {
+    "w": "Informasi",
+    "t0": 20.203,
+    "t1": 20.877,
+    "kw": false
+   },
+   {
+    "w": "dan",
+    "t0": 20.877,
+    "t1": 21.115,
+    "kw": false
+   },
+   {
+    "w": "Data",
+    "t0": 21.115,
+    "t1": 21.449,
+    "kw": false
+   },
+   {
+    "w": "satu",
+    "t0": 21.449,
+    "t1": 21.728,
+    "kw": false
+   },
+   {
+    "w": "pintu.",
+    "t0": 21.728,
+    "t1": 22.213,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s04",
+  "shot": 1,
+  "chapter": "SHOT 01",
+  "t0": 22.523,
+  "t1": 28.968,
+  "text": "Siswa salah tingkat atau butuh reaktivasi? Langsung beres lewat jalur EMIS empat titik nol.",
+  "words": [
+   {
+    "w": "Siswa",
+    "t0": 22.563,
+    "t1": 23.549,
+    "kw": false
+   },
+   {
+    "w": "salah",
+    "t0": 23.549,
+    "t1": 23.857,
+    "kw": false
+   },
+   {
+    "w": "tingkat",
+    "t0": 23.857,
+    "t1": 24.18,
+    "kw": false
+   },
+   {
+    "w": "atau",
+    "t0": 24.18,
+    "t1": 24.417,
+    "kw": false
+   },
+   {
+    "w": "butuh",
+    "t0": 24.417,
+    "t1": 24.651,
+    "kw": false
+   },
+   {
+    "w": "reaktivasi?",
+    "t0": 24.651,
+    "t1": 25.539,
+    "kw": false
+   },
+   {
+    "w": "Langsung",
+    "t0": 25.539,
+    "t1": 26.188,
+    "kw": false
+   },
+   {
+    "w": "beres",
+    "t0": 26.188,
+    "t1": 26.589,
+    "kw": false
+   },
+   {
+    "w": "lewat",
+    "t0": 26.589,
+    "t1": 26.911,
+    "kw": false
+   },
+   {
+    "w": "jalur",
+    "t0": 26.911,
+    "t1": 27.177,
+    "kw": false
+   },
+   {
+    "w": "EMIS",
+    "t0": 27.177,
+    "t1": 27.385,
+    "kw": false
+   },
+   {
+    "w": "empat",
+    "t0": 27.385,
+    "t1": 27.621,
+    "kw": false
+   },
+   {
+    "w": "titik",
+    "t0": 27.621,
+    "t1": 27.882,
+    "kw": false
+   },
+   {
+    "w": "nol.",
+    "t0": 27.882,
+    "t1": 28.453,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s05",
+  "shot": 1,
+  "chapter": "SHOT 01",
+  "t0": 29.028,
+  "t1": 34.395,
+  "text": "Pusing soal NISN atau NIK ganda dan data belum muncul? Tinggal pakai jalur Verval PD.",
+  "words": [
+   {
+    "w": "Pusing",
+    "t0": 29.458,
+    "t1": 29.458,
+    "kw": false
+   },
+   {
+    "w": "soal",
+    "t0": 29.458,
+    "t1": 29.712,
+    "kw": false
+   },
+   {
+    "w": "NISN",
+    "t0": 29.712,
+    "t1": 29.986,
+    "kw": false
+   },
+   {
+    "w": "atau",
+    "t0": 29.986,
+    "t1": 30.288,
+    "kw": false
+   },
+   {
+    "w": "NIK",
+    "t0": 30.288,
+    "t1": 30.406,
+    "kw": false
+   },
+   {
+    "w": "ganda",
+    "t0": 30.406,
+    "t1": 30.696,
+    "kw": false
+   },
+   {
+    "w": "dan",
+    "t0": 30.696,
+    "t1": 30.885,
+    "kw": false
+   },
+   {
+    "w": "data",
+    "t0": 30.885,
+    "t1": 31.152,
+    "kw": false
+   },
+   {
+    "w": "belum",
+    "t0": 31.152,
+    "t1": 31.391,
+    "kw": false
+   },
+   {
+    "w": "muncul?",
+    "t0": 31.391,
+    "t1": 31.901,
+    "kw": false
+   },
+   {
+    "w": "Tinggal",
+    "t0": 31.901,
+    "t1": 32.649,
+    "kw": false
+   },
+   {
+    "w": "pakai",
+    "t0": 32.649,
+    "t1": 33.011,
+    "kw": false
+   },
+   {
+    "w": "jalur",
+    "t0": 33.011,
+    "t1": 33.323,
+    "kw": false
+   },
+   {
+    "w": "Verval",
+    "t0": 33.323,
+    "t1": 33.567,
+    "kw": false
+   },
+   {
+    "w": "PD.",
+    "t0": 33.567,
+    "t1": 34.145,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s06",
+  "shot": 1,
+  "chapter": "SHOT 01",
+  "t0": 34.555,
+  "t1": 41.851,
+  "text": "Capek lapor satu-satu? Tenang, ada jalur kolektif lewat Excel, plus otomatis nolak tiket ganda.",
+  "words": [
+   {
+    "w": "Capek",
+    "t0": 35.079,
+    "t1": 35.304,
+    "kw": false
+   },
+   {
+    "w": "lapor",
+    "t0": 35.304,
+    "t1": 35.542,
+    "kw": false
+   },
+   {
+    "w": "satu-satu?",
+    "t0": 35.542,
+    "t1": 36.714,
+    "kw": false
+   },
+   {
+    "w": "Tenang,",
+    "t0": 36.714,
+    "t1": 37.28,
+    "kw": false
+   },
+   {
+    "w": "ada",
+    "t0": 37.28,
+    "t1": 37.833,
+    "kw": false
+   },
+   {
+    "w": "jalur",
+    "t0": 37.833,
+    "t1": 38.162,
+    "kw": false
+   },
+   {
+    "w": "kolektif",
+    "t0": 38.162,
+    "t1": 38.469,
+    "kw": false
+   },
+   {
+    "w": "lewat",
+    "t0": 38.469,
+    "t1": 38.77,
+    "kw": false
+   },
+   {
+    "w": "Excel,",
+    "t0": 38.77,
+    "t1": 39.488,
+    "kw": false
+   },
+   {
+    "w": "plus",
+    "t0": 39.488,
+    "t1": 39.962,
+    "kw": false
+   },
+   {
+    "w": "otomatis",
+    "t0": 39.962,
+    "t1": 40.643,
+    "kw": false
+   },
+   {
+    "w": "nolak",
+    "t0": 40.643,
+    "t1": 40.872,
+    "kw": false
+   },
+   {
+    "w": "tiket",
+    "t0": 40.872,
+    "t1": 41.105,
+    "kw": false
+   },
+   {
+    "w": "ganda.",
+    "t0": 41.105,
+    "t1": 41.579,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s07",
+  "shot": 1,
+  "chapter": "SHOT 01",
+  "t0": 41.961,
+  "t1": 50.364,
+  "text": "Kalau mau cek progres, tinggal masukkan tiket. Lupa nomornya? Pakai nomor WhatsApp aja, status tiket terlihat sampai selesai.",
+  "words": [
+   {
+    "w": "Kalau",
+    "t0": 42.001,
+    "t1": 42.318,
+    "kw": false
+   },
+   {
+    "w": "mau",
+    "t0": 42.318,
+    "t1": 42.497,
+    "kw": false
+   },
+   {
+    "w": "cek",
+    "t0": 42.497,
+    "t1": 42.612,
+    "kw": false
+   },
+   {
+    "w": "progres,",
+    "t0": 42.612,
+    "t1": 43.202,
+    "kw": false
+   },
+   {
+    "w": "tinggal",
+    "t0": 43.202,
+    "t1": 43.74,
+    "kw": false
+   },
+   {
+    "w": "masukkan",
+    "t0": 43.74,
+    "t1": 44.171,
+    "kw": false
+   },
+   {
+    "w": "tiket.",
+    "t0": 44.171,
+    "t1": 44.919,
+    "kw": false
+   },
+   {
+    "w": "Lupa",
+    "t0": 44.919,
+    "t1": 45.386,
+    "kw": false
+   },
+   {
+    "w": "nomornya?",
+    "t0": 45.386,
+    "t1": 45.982,
+    "kw": false
+   },
+   {
+    "w": "Pakai",
+    "t0": 45.982,
+    "t1": 46.667,
+    "kw": false
+   },
+   {
+    "w": "nomor",
+    "t0": 46.667,
+    "t1": 46.864,
+    "kw": false
+   },
+   {
+    "w": "WhatsApp",
+    "t0": 46.864,
+    "t1": 47.14,
+    "kw": false
+   },
+   {
+    "w": "aja,",
+    "t0": 47.14,
+    "t1": 47.399,
+    "kw": false
+   },
+   {
+    "w": "status",
+    "t0": 47.399,
+    "t1": 48.393,
+    "kw": false
+   },
+   {
+    "w": "tiket",
+    "t0": 48.393,
+    "t1": 48.758,
+    "kw": false
+   },
+   {
+    "w": "terlihat",
+    "t0": 48.758,
+    "t1": 49.322,
+    "kw": false
+   },
+   {
+    "w": "sampai",
+    "t0": 49.322,
+    "t1": 49.58,
+    "kw": false
+   },
+   {
+    "w": "selesai.",
+    "t0": 49.58,
+    "t1": 50.058,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s08",
+  "shot": 1,
+  "chapter": "SHOT 01",
+  "t0": 50.524,
+  "t1": 56.87,
+  "text": "Eh, berkasnya keliru? Klik aja Perbaiki Data di tiket itu, bebas drama ketik ulang.",
+  "words": [
+   {
+    "w": "Eh,",
+    "t0": 50.564,
+    "t1": 51.291,
+    "kw": false
+   },
+   {
+    "w": "berkasnya",
+    "t0": 51.291,
+    "t1": 51.729,
+    "kw": false
+   },
+   {
+    "w": "keliru?",
+    "t0": 51.729,
+    "t1": 52.353,
+    "kw": false
+   },
+   {
+    "w": "Klik",
+    "t0": 52.353,
+    "t1": 52.848,
+    "kw": false
+   },
+   {
+    "w": "aja",
+    "t0": 52.848,
+    "t1": 53.157,
+    "kw": false
+   },
+   {
+    "w": "Perbaiki",
+    "t0": 53.157,
+    "t1": 53.622,
+    "kw": false
+   },
+   {
+    "w": "Data",
+    "t0": 53.622,
+    "t1": 53.933,
+    "kw": false
+   },
+   {
+    "w": "di",
+    "t0": 53.933,
+    "t1": 54.095,
+    "kw": false
+   },
+   {
+    "w": "tiket",
+    "t0": 54.095,
+    "t1": 54.315,
+    "kw": false
+   },
+   {
+    "w": "itu,",
+    "t0": 54.315,
+    "t1": 54.707,
+    "kw": false
+   },
+   {
+    "w": "bebas",
+    "t0": 54.707,
+    "t1": 55.468,
+    "kw": false
+   },
+   {
+    "w": "drama",
+    "t0": 55.468,
+    "t1": 55.722,
+    "kw": false
+   },
+   {
+    "w": "ketik",
+    "t0": 55.722,
+    "t1": 56.094,
+    "kw": false
+   },
+   {
+    "w": "ulang.",
+    "t0": 56.094,
+    "t1": 56.469,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s09",
+  "shot": 1,
+  "chapter": "SHOT 01",
+  "t0": 56.98,
+  "t1": 63.851,
+  "text": "Buka dua puluh empat jam, ratusan laporan masuk dan lebih dari sembilan puluh lima persen tuntas.",
+  "words": [
+   {
+    "w": "Buka",
+    "t0": 57.72,
+    "t1": 57.847,
+    "kw": false
+   },
+   {
+    "w": "dua",
+    "t0": 57.847,
+    "t1": 58.035,
+    "kw": false
+   },
+   {
+    "w": "puluh",
+    "t0": 58.035,
+    "t1": 58.794,
+    "kw": false
+   },
+   {
+    "w": "empat",
+    "t0": 58.794,
+    "t1": 59.408,
+    "kw": false
+   },
+   {
+    "w": "jam,",
+    "t0": 59.408,
+    "t1": 59.479,
+    "kw": false
+   },
+   {
+    "w": "ratusan",
+    "t0": 59.479,
+    "t1": 59.655,
+    "kw": false
+   },
+   {
+    "w": "laporan",
+    "t0": 59.655,
+    "t1": 59.859,
+    "kw": false
+   },
+   {
+    "w": "masuk",
+    "t0": 59.859,
+    "t1": 60.091,
+    "kw": false
+   },
+   {
+    "w": "dan",
+    "t0": 60.091,
+    "t1": 60.267,
+    "kw": false
+   },
+   {
+    "w": "lebih",
+    "t0": 60.267,
+    "t1": 60.667,
+    "kw": false
+   },
+   {
+    "w": "dari",
+    "t0": 60.667,
+    "t1": 60.898,
+    "kw": false
+   },
+   {
+    "w": "sembilan",
+    "t0": 60.898,
+    "t1": 61.184,
+    "kw": false
+   },
+   {
+    "w": "puluh",
+    "t0": 61.184,
+    "t1": 61.46,
+    "kw": false
+   },
+   {
+    "w": "lima",
+    "t0": 61.46,
+    "t1": 61.923,
+    "kw": false
+   },
+   {
+    "w": "persen",
+    "t0": 61.923,
+    "t1": 62.699,
+    "kw": false
+   },
+   {
+    "w": "tuntas.",
+    "t0": 62.699,
+    "t1": 63.12,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s10",
+  "shot": 1,
+  "chapter": "SHOT 01",
+  "t0": 63.961,
+  "t1": 69.868,
+  "text": "Beberapa operator madrasah merasakan sendiri layanan yang cepat, sigap, dan tanpa ribet.",
+  "words": [
+   {
+    "w": "Beberapa",
+    "t0": 64.711,
+    "t1": 65.071,
+    "kw": false
+   },
+   {
+    "w": "operator",
+    "t0": 65.071,
+    "t1": 65.398,
+    "kw": false
+   },
+   {
+    "w": "madrasah",
+    "t0": 65.398,
+    "t1": 65.872,
+    "kw": false
+   },
+   {
+    "w": "merasakan",
+    "t0": 65.872,
+    "t1": 66.339,
+    "kw": false
+   },
+   {
+    "w": "sendiri",
+    "t0": 66.339,
+    "t1": 66.636,
+    "kw": false
+   },
+   {
+    "w": "layanan",
+    "t0": 66.636,
+    "t1": 67.091,
+    "kw": false
+   },
+   {
+    "w": "yang",
+    "t0": 67.091,
+    "t1": 67.168,
+    "kw": false
+   },
+   {
+    "w": "cepat,",
+    "t0": 67.168,
+    "t1": 67.687,
+    "kw": false
+   },
+   {
+    "w": "sigap,",
+    "t0": 67.687,
+    "t1": 68.486,
+    "kw": false
+   },
+   {
+    "w": "dan",
+    "t0": 68.486,
+    "t1": 68.736,
+    "kw": false
+   },
+   {
+    "w": "tanpa",
+    "t0": 68.736,
+    "t1": 69.078,
+    "kw": false
+   },
+   {
+    "w": "ribet.",
+    "t0": 69.078,
+    "t1": 69.618,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s11",
+  "shot": 1,
+  "chapter": "SHOT 01",
+  "t0": 69.978,
+  "t1": 74.768,
+  "text": "Sekarang, urusan data madrasah se-Kabupaten Banjar jadi jauh lebih ringan.",
+  "words": [
+   {
+    "w": "Sekarang,",
+    "t0": 70.184,
+    "t1": 71.007,
+    "kw": false
+   },
+   {
+    "w": "urusan",
+    "t0": 71.007,
+    "t1": 71.292,
+    "kw": false
+   },
+   {
+    "w": "data",
+    "t0": 71.292,
+    "t1": 71.519,
+    "kw": false
+   },
+   {
+    "w": "madrasah",
+    "t0": 71.519,
+    "t1": 71.936,
+    "kw": false
+   },
+   {
+    "w": "se-Kabupaten",
+    "t0": 71.936,
+    "t1": 72.428,
+    "kw": false
+   },
+   {
+    "w": "Banjar",
+    "t0": 72.428,
+    "t1": 72.854,
+    "kw": false
+   },
+   {
+    "w": "jadi",
+    "t0": 72.854,
+    "t1": 73.481,
+    "kw": false
+   },
+   {
+    "w": "jauh",
+    "t0": 73.481,
+    "t1": 73.837,
+    "kw": false
+   },
+   {
+    "w": "lebih",
+    "t0": 73.837,
+    "t1": 74.07,
+    "kw": false
+   },
+   {
+    "w": "ringan.",
+    "t0": 74.07,
+    "t1": 74.484,
+    "kw": false
+   }
+  ]
+ },
+ {
+  "id": "s12",
+  "shot": 1,
+  "chapter": "SHOT 01",
+  "t0": 74.828,
+  "t1": 81.196,
+  "text": "SI-PELITA Kemenag Banjar. Lapor gampang, lacak tenang, data beres.",
+  "words": [
+   {
+    "w": "SI-PELITA",
+    "t0": 75.407,
+    "t1": 75.907,
+    "kw": false
+   },
+   {
+    "w": "Kemenag",
+    "t0": 75.907,
+    "t1": 76.287,
+    "kw": false
+   },
+   {
+    "w": "Banjar.",
+    "t0": 76.287,
+    "t1": 77.407,
+    "kw": false
+   },
+   {
+    "w": "Lapor",
+    "t0": 77.407,
+    "t1": 77.687,
+    "kw": false
+   },
+   {
+    "w": "gampang,",
+    "t0": 77.687,
+    "t1": 78.707,
+    "kw": false
+   },
+   {
+    "w": "lacak",
+    "t0": 78.707,
+    "t1": 79.087,
+    "kw": false
+   },
+   {
+    "w": "tenang,",
+    "t0": 79.087,
+    "t1": 80.047,
+    "kw": false
+   },
+   {
+    "w": "data",
+    "t0": 80.047,
+    "t1": 80.267,
+    "kw": false
+   },
+   {
+    "w": "beres.",
+    "t0": 80.267,
+    "t1": 80.747,
+    "kw": false
+   }
+  ]
+ }
+]

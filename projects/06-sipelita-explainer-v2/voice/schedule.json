@@ -1,0 +1,33 @@
+{
+ "fps": 60,
+ "engine": "gemini (gemini-3.8-flash-tts)",
+ "total": 81.85,
+ "shots": [
+  { "shot": 1,  "start": 0.0,    "end": 6.10,   "dur": 6.10,  "chapter": "SHOT 01 - CHAT TENGGELAM" },
+  { "shot": 2,  "start": 6.10,   "end": 14.15,  "dur": 8.05,  "chapter": "SHOT 02 - LINK TERPISAH" },
+  { "shot": 3,  "start": 14.15,  "end": 22.40,  "dur": 8.25,  "chapter": "SHOT 03 - PULAU SI-PELITA" },
+  { "shot": 4,  "start": 22.40,  "end": 28.95,  "dur": 6.55,  "chapter": "SHOT 04 - DERMAGA EMIS 4.0" },
+  { "shot": 5,  "start": 28.95,  "end": 34.45,  "dur": 5.50,  "chapter": "SHOT 05 - DERMAGA VERVAL PD" },
+  { "shot": 6,  "start": 34.45,  "end": 41.85,  "dur": 7.40,  "chapter": "SHOT 06 - JALUR KOLEKTIF EXCEL" },
+  { "shot": 7,  "start": 41.85,  "end": 50.40,  "dur": 8.55,  "chapter": "SHOT 07 - MENARA LACAK TIKET & WA" },
+  { "shot": 8,  "start": 50.40,  "end": 56.85,  "dur": 6.45,  "chapter": "SHOT 08 - MEJA PUTAR PERBAIKI DATA" },
+  { "shot": 9,  "start": 56.85,  "end": 63.85,  "dur": 7.00,  "chapter": "SHOT 09 - MERCUSUAR 24 JAM" },
+  { "shot": 10, "start": 63.85,  "end": 69.85,  "dur": 6.00,  "chapter": "SHOT 10 - MONUMEN TESTIMONI 5 BINTANG" },
+  { "shot": 11, "start": 69.85,  "end": 74.70,  "dur": 4.85,  "chapter": "SHOT 11 - KEPULAUAN MADRASAH BANJAR" },
+  { "shot": 12, "start": 74.70,  "end": 81.85,  "dur": 7.15,  "chapter": "SHOT 12 - END CARD KEMENAG BANJAR" }
+ ],
+ "voice": [
+  { "id": "s01", "shot": 1,  "start": 0.4,    "dur": 5.441, "end": 5.841 },
+  { "id": "s02", "shot": 2,  "start": 6.391,  "dur": 7.544, "end": 13.935 },
+  { "id": "s03", "shot": 3,  "start": 14.335, "dur": 7.879, "end": 22.213 },
+  { "id": "s04", "shot": 4,  "start": 22.563, "dur": 6.154, "end": 28.718 },
+  { "id": "s05", "shot": 5,  "start": 29.068, "dur": 5.078, "end": 34.145 },
+  { "id": "s06", "shot": 6,  "start": 34.595, "dur": 7.006, "end": 41.601 },
+  { "id": "s07", "shot": 7,  "start": 42.001, "dur": 8.113, "end": 50.114 },
+  { "id": "s08", "shot": 8,  "start": 50.564, "dur": 6.056, "end": 56.62 },
+  { "id": "s09", "shot": 9,  "start": 57.02,  "dur": 6.582, "end": 63.601 },
+  { "id": "s10", "shot": 10, "start": 64.001, "dur": 5.616, "end": 69.618 },
+  { "id": "s11", "shot": 11, "start": 70.018, "dur": 4.501, "end": 74.518 },
+  { "id": "s12", "shot": 12, "start": 74.868, "dur": 6.078, "end": 80.946 }
+ ]
+}

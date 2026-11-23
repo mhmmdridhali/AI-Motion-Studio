@@ -1,0 +1,105 @@
+{
+  "voice": "id-ID-ArdiNeural",
+  "gemini_voice": "Orus",
+  "style": "warm empathetic Indonesian male colleague and public service storyteller, conversational and natural pacing, relatable gentle concern on opening questions, bright relieved energy when introducing SI-PELITA, crisp clarity on the three service lanes, warm proud resolution at the close",
+  "lead": 0.40,
+  "tail": 1.00,
+  "lines": [
+    {
+      "id": "s01",
+      "text": "Hmm, pernah lapor kendala data madrasah lewat chat, eh malah tenggelam?",
+      "say": "Hmm... <short pause> pernah lapor kendala data madrasah lewat chat, <short pause> eh malah tenggelam?",
+      "rate": "+3%",
+      "pitch": "+2Hz",
+      "gap": 0.40
+    },
+    {
+      "id": "s02",
+      "text": "Mana link formulirnya pisah-pisah, susah dipantau, salah dikit ketik ulang lagi.",
+      "say": "Mana link formulirnya pisah-pisah, susah dipantau, <sigh> salah dikit ketik ulang lagi.",
+      "rate": "+2%",
+      "pitch": "-1Hz",
+      "gap": 0.55
+    },
+    {
+      "id": "s03",
+      "text": "Nah, Seksi Penmad Kemenag Kabupaten Banjar punya SI-PELITA, Sistem Pelaporan Informasi dan Data satu pintu.",
+      "say": "Nah, <short pause> Seksi Penmad Kemenag Kabupaten Banjar punya SI-PELITA, <short pause> Sistem Pelaporan Informasi dan Data satu pintu.",
+      "rate": "+4%",
+      "pitch": "+3Hz",
+      "gap": 0.40
+    },
+    {
+      "id": "s04",
+      "text": "Siswa salah tingkat atau butuh reaktivasi? Langsung beres lewat jalur EMIS empat titik nol.",
+      "say": "Siswa salah tingkat atau butuh reaktivasi? <short pause> Langsung beres lewat jalur EMIS empat titik nol.",
+      "rate": "+5%",
+      "pitch": "+2Hz",
+      "gap": 0.35
+    },
+    {
+      "id": "s05",
+      "text": "Pusing soal NISN atau NIK ganda dan data belum muncul? Tinggal pakai jalur Verval PD.",
+      "say": "Pusing soal NISN atau NIK ganda dan data belum muncul? <short pause> Tinggal pakai jalur Verval PD.",
+      "rate": "+5%",
+      "pitch": "+2Hz",
+      "gap": 0.35
+    },
+    {
+      "id": "s06",
+      "text": "Capek lapor satu-satu? Tenang, ada jalur kolektif lewat Excel, plus otomatis nolak tiket ganda.",
+      "say": "Capek lapor satu-satu? <short pause> Tenang, ada jalur kolektif lewat Excel, plus otomatis nolak tiket ganda.",
+      "rate": "+5%",
+      "pitch": "+3Hz",
+      "gap": 0.45
+    },
+    {
+      "id": "s07",
+      "text": "Kalau mau cek progres, tinggal masukkan tiket. Lupa nomornya? Pakai nomor WhatsApp aja, status tiket terlihat sampai selesai.",
+      "say": "Kalau mau cek progres, tinggal masukkan tiket. <short pause> Lupa nomornya? Pakai nomor WhatsApp aja, status tiket terlihat sampai selesai.",
+      "rate": "+4%",
+      "pitch": "+3Hz",
+      "gap": 0.40
+    },
+    {
+      "id": "s08",
+      "text": "Eh, berkasnya keliru? Klik aja Perbaiki Data di tiket itu, bebas drama ketik ulang.",
+      "say": "Eh, berkasnya keliru? <short pause> Klik aja Perbaiki Data di tiket itu, bebas drama ketik ulang.",
+      "rate": "+4%",
+      "pitch": "+2Hz",
+      "gap": 0.45
+    },
+    {
+      "id": "s09",
+      "text": "Buka dua puluh empat jam, ratusan laporan masuk dan lebih dari sembilan puluh lima persen tuntas.",
+      "say": "Buka dua puluh empat jam, <short pause> ratusan laporan masuk dan lebih dari sembilan puluh lima persen tuntas.",
+      "rate": "+3%",
+      "pitch": "+3Hz",
+      "gap": 0.40
+    },
+    {
+      "id": "s10",
+      "text": "Beberapa operator madrasah merasakan sendiri layanan yang cepat, sigap, dan tanpa ribet.",
+      "say": "Beberapa operator madrasah merasakan sendiri layanan yang cepat, <short pause> sigap, dan tanpa ribet.",
+      "rate": "+3%",
+      "pitch": "+2Hz",
+      "gap": 0.40
+    },
+    {
+      "id": "s11",
+      "text": "Sekarang, urusan data madrasah se-Kabupaten Banjar jadi jauh lebih ringan.",
+      "say": "Sekarang, <short pause> urusan data madrasah se-Kabupaten Banjar jadi jauh lebih ringan.",
+      "rate": "+2%",
+      "pitch": "+1Hz",
+      "gap": 0.40
+    },
+    {
+      "id": "s12",
+      "text": "SI-PELITA Kemenag Banjar. Lapor gampang, lacak tenang, data beres.",
+      "say": "SI-PELITA Kemenag Banjar. <short pause> Lapor gampang, lacak tenang, data beres.",
+      "rate": "-1%",
+      "pitch": "+1Hz",
+      "gap": 0.35
+    }
+  ]
+}
